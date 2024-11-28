@@ -1,0 +1,102 @@
+# Dependencies
+/node_modules
+/front-end/node_modules
+/back-end/node_modules
+/.pnp
+.pnp.js
+.pnp.*
+.npm
+
+# Testing
+/coverage
+/front-end/coverage
+/back-end/coverage
+.vscode-test
+
+# Production
+/build
+/dist
+/out
+/front-end/build
+/front-end/dist
+/back-end/build
+/back-end/dist
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+/front-end/.env
+/front-end/.env.local
+/front-end/.env.development
+/front-end/.env.production
+/back-end/.env
+/back-end/.env.local
+/back-end/.env.development
+/back-end/.env.production
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vite
+.vite
+
+# Yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.yarn-integrity
+
+# Optional caches
+.eslintcache
+.node_repl_history
+
+# React / Next.js specific
+.next/
+/front-end/.next/
+out/
+.cache/
+public/dist/
+/front-end/out/
+/front-end/.cache/
+/front-end/public/dist/
+
+# Express / Backend specific
+uploads/
+tmp/
+temp/
+*.pid
+*.seed
+*.pid.lock
+/back-end/uploads/
+/back-end/tmp/
+/back-end/temp/

@@ -77,7 +77,9 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
   };
 
   const clearNotification = (id: number) => {
-    setNotifications(notifications.filter((notification) => notification.id !== id));
+    setNotifications(
+      notifications.filter((notification) => notification.id !== id)
+    );
   };
 
   const navItems = [
@@ -92,59 +94,73 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
       path: "/credit-report",
     },
     {
-      label: "Chat",
-      icon: <MessageSquare className="h-4 w-4" />,
-      path: "/chat",
-    },
-    {
       label: "Todo",
       icon: <ListTodo className="h-4 w-4" />,
       path: "/todo",
+    },
+    {
+      label: "Chat",
+      icon: <MessageSquare className="h-4 w-4" />,
+      path: "/chat",
     },
   ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-[2000px] mx-auto">
-        <div className="flex h-16 items-center px-4 md:px-6">
-          <Button
-            variant="ghost"
-            className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          >
-            <Menu className="h-6 w-6" />
-            <span className="sr-only">Toggle sidebar</span>
-          </Button>
-          <Link
-            to="/"
-            className="mr-6 flex items-center space-x-2"
-            aria-label="CTOS Care"
-          >
-            <span className="hidden font-bold sm:inline-block">CTOS Care</span>
-          </Link>
-          <div className="flex items-center space-x-4 md:space-x-6">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`hidden items-center space-x-2 md:flex ${
-                  location.pathname === item.path
-                    ? "text-primary"
-                    : "text-gray-500 hover:text-gray-900"
-                }`}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-              </Link>
-            ))}
+        <div className="flex h-16 items-center justify-between px-4 md:px-6">
+          {/* Left section with logo and mobile menu */}
+          <div className="flex items-center">
+            <Button
+              variant="ghost"
+              className="mr-2 px-2 text-base hover:bg-gray-100 lg:hidden"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            >
+              {isSidebarOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+            <Link
+              to="/"
+              className="flex items-center space-x-2"
+              aria-label="CTOS Care"
+            >
+              <span className="font-bold">CTOS Care</span>
+            </Link>
           </div>
-          <div className="ml-auto flex items-center space-x-4">
+
+          {/* Center section - Desktop Navigation */}
+          <div className="hidden lg:flex flex-1 justify-center">
+            <div className="flex items-center space-x-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
+                    location.pathname === item.path
+                      ? "bg-primary/10 text-primary"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Right section - User actions */}
+          <div className="flex items-center space-x-3">
+            {/* Notifications */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-gray-500 hover:text-gray-900 relative"
+                  className="relative hover:bg-gray-100"
                 >
                   <Bell className="h-5 w-5" />
                   {unreadCount > 0 && (
@@ -152,7 +168,6 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
                       {unreadCount}
                     </span>
                   )}
-                  <span className="sr-only">View notifications</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-80">
@@ -173,10 +188,16 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
                         >
                           <div className="flex justify-between items-start">
                             <div className="flex-1">
-                              <h4 className="text-sm font-medium">{notification.title}</h4>
-                              <p className="text-xs text-gray-500">{notification.message}</p>
+                              <h4 className="text-sm font-medium">
+                                {notification.title}
+                              </h4>
+                              <p className="text-xs text-gray-500">
+                                {notification.message}
+                              </p>
                               <span className="text-xs text-gray-400">
-                                {new Date(notification.timestamp).toLocaleString()}
+                                {new Date(
+                                  notification.timestamp
+                                ).toLocaleString()}
                               </span>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -195,9 +216,13 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
                                 variant="ghost"
                                 size="icon"
                                 className="h-6 w-6 text-red-500 hover:text-red-600"
-                                onClick={() => clearNotification(notification.id)}
+                                onClick={() =>
+                                  clearNotification(notification.id)
+                                }
                               >
-                                <span className="sr-only">Remove notification</span>
+                                <span className="sr-only">
+                                  Remove notification
+                                </span>
                                 <X className="h-4 w-4" />
                               </Button>
                             </div>
@@ -228,7 +253,10 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600">
+                <DropdownMenuItem
+                  onClick={handleSignOut}
+                  className="cursor-pointer text-red-600"
+                >
                   <LogOut className="mr-2 h-4 w-4" />
                   Sign out
                 </DropdownMenuItem>

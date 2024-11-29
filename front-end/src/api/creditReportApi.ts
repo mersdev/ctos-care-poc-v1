@@ -16,10 +16,12 @@ export const fetchIdVerification = () => simulateApiCall({
 });
 
 export const fetchCreditInfoAtAGlance = () => simulateApiCall({
-  litigation: "None",
-  tradeReference: "Good",
-  bankingPaymentHistory: "Excellent",
-  dishonouredCheques: "None"
+  creditScore: 750,
+  creditUtilization: 30,
+  totalAccounts: 5,
+  totalDebt: 50000,
+  paymentHistory: 98,
+  creditMix: 85
 });
 
 export const fetchDirectorshipsBusinessInterests = () => simulateApiCall([
@@ -33,97 +35,107 @@ export const fetchDirectorshipsBusinessInterests = () => simulateApiCall([
     appointedDate: "01/01/2010",
     address: "456 Tech St, Kuala Lumpur, Malaysia",
     paidUpShares: "1,000,000"
-  },
-  // Add more companies here...
+  }
 ]);
 
 export const fetchCTOSScore = () => simulateApiCall({
   score: 740,
   factors: [
-    "Lack of recently established credit accounts",
-    "No recent retail balance reported",
-    "Too few loan and revolving/charge accounts with recent payment information"
+    "Excellent payment history",
+    "Low credit utilization",
+    "Long credit history"
   ]
 });
 
 export const fetchCTOSLitigationIndex = () => simulateApiCall({
-  index: 8712,
-  description: "Civil Suit/Summon 1 > 96 months 2 Number of records"
+  index: 750,
+  description: "Low risk - No significant legal issues found"
 });
 
 export const fetchAddressRecords = () => simulateApiCall([
-  { address: "123 Main St, Kuala Lumpur, Malaysia", source: "CCRIS" },
-  { address: "456 Tech St, Kuala Lumpur, Malaysia", source: "SSM" },
-  { address: "789 Park Ave, Kuala Lumpur, Malaysia", source: "CTOS User ID" },
+  {
+    address: "123 Main St, Kuala Lumpur",
+    dateReported: "2023-01-01",
+    source: "Bank Statement"
+  }
 ]);
 
 export const fetchBankingPaymentHistory = () => simulateApiCall({
-  approvedFacilities: 3,
-  pendingFacilities: 1,
-  totalOutstanding: 500000,
-  totalLimit: 1000000,
-  foreignExchangeContract: 0
+  accounts: [
+    {
+      bank: "Maybank",
+      accountType: "Credit Card",
+      status: "Active",
+      paymentHistory: "Excellent"
+    }
+  ]
 });
 
 export const fetchDishonouredCheques = () => simulateApiCall([
-  { date: "01/05/2023", amount: 5000, reason: "Insufficient funds" },
-]);
-
-export const fetchCCRISSubjectComments = () => simulateApiCall([
-  "No negative remarks",
+  {
+    date: "2023-01-01",
+    amount: 5000,
+    bank: "CIMB",
+    reason: "Insufficient funds"
+  }
 ]);
 
 export const fetchCCRISDerivatives = () => simulateApiCall({
-  earliestKnownFacility: "01/01/2015",
-  securedFacilities: ["Housing Loan", "Car Loan"],
-  unsecuredFacilities: ["Personal Loan", "Credit Card"]
+  items: [
+    {
+      type: "Credit Card",
+      details: "No overdue payments"
+    }
+  ]
 });
 
-export const fetchLegalCasesDefendant = () => simulateApiCall([
-  {
-    caseType: "Civil Suit",
-    status: "Settled",
-    petitioner: "XYZ Bank",
-    caseNumber: "CS-123-2022",
-    petitionDate: "01/03/2022",
-    amount: 50000,
-    comments: "Case settled out of court"
-  },
-]);
+export const fetchCCRISSubjectComments = () => simulateApiCall({
+  comments: [
+    "Good payment history",
+    "No defaults recorded"
+  ]
+});
 
-export const fetchLegalCasesPlaintiff = () => simulateApiCall([
-  {
-    caseType: "Small Claims",
-    status: "Pending",
-    petitioner: "John Doe",
-    defendant: "ABC Company",
-    caseNumber: "SC-456-2023",
-    petitionDate: "01/06/2023",
-    amount: 10000,
-    comments: "Awaiting court date"
-  },
-]);
+export const fetchLegalCases = () => simulateApiCall({
+  asPlaintiff: [
+    {
+      caseNumber: "CV-2023-001",
+      defendant: "XYZ Corp",
+      details: "Contract dispute",
+      status: "Pending"
+    }
+  ],
+  asDefendant: [
+    {
+      caseNumber: "CV-2023-002",
+      plaintiff: "ABC Bank",
+      details: "Loan default",
+      status: "Settled"
+    }
+  ]
+});
 
 export const fetchAMLA = () => simulateApiCall({
-  inquiries: 2,
-  matches: []
+  data: {
+    inquiries: 0,
+    matches: []
+  }
 });
 
-export const fetchHistoricalEnquiry = () => simulateApiCall({
-  financial: 5,
-  nonFinancial: 2,
-  lawyer: 1,
-  others: 0
-});
-
-export const fetchTradeRefereeListing = () => simulateApiCall([
+export const fetchHistoricalEnquiry = () => simulateApiCall([
   {
-    companyName: "Supplier Co.",
-    dateSubmitted: "01/07/2023",
-    creditLimit: 100000,
-    outstandingAmount: 50000,
-    paymentBehavior: "Prompt"
-  },
+    date: "2023-12-01",
+    enquirer: "Bank A",
+    purpose: "Loan Application"
+  }
+]);
+
+export const fetchTradeReferee = () => simulateApiCall([
+  {
+    company: "XYZ Trading",
+    rating: "A",
+    details: "Excellent payment record"
+  }
 ]);
 
 export const fetchCreditReportData = async (): Promise<CreditReportData> => {
@@ -136,13 +148,12 @@ export const fetchCreditReportData = async (): Promise<CreditReportData> => {
     addressRecords,
     bankingPaymentHistory,
     dishonouredCheques,
-    ccrisSubjectComments,
     ccrisDerivatives,
-    legalCasesDefendant,
-    legalCasesPlaintiff,
+    ccrisSubjectComments,
+    legalCases,
     amla,
     historicalEnquiry,
-    tradeRefereeListing
+    tradeReferee
   ] = await Promise.all([
     fetchIdVerification(),
     fetchCreditInfoAtAGlance(),
@@ -152,13 +163,12 @@ export const fetchCreditReportData = async (): Promise<CreditReportData> => {
     fetchAddressRecords(),
     fetchBankingPaymentHistory(),
     fetchDishonouredCheques(),
-    fetchCCRISSubjectComments(),
     fetchCCRISDerivatives(),
-    fetchLegalCasesDefendant(),
-    fetchLegalCasesPlaintiff(),
+    fetchCCRISSubjectComments(),
+    fetchLegalCases(),
     fetchAMLA(),
     fetchHistoricalEnquiry(),
-    fetchTradeRefereeListing()
+    fetchTradeReferee()
   ]);
 
   return {
@@ -170,12 +180,11 @@ export const fetchCreditReportData = async (): Promise<CreditReportData> => {
     addressRecords,
     bankingPaymentHistory,
     dishonouredCheques,
-    ccrisSubjectComments,
     ccrisDerivatives,
-    legalCasesDefendant,
-    legalCasesPlaintiff,
+    ccrisSubjectComments,
+    legalCases,
     amla,
     historicalEnquiry,
-    tradeRefereeListing
+    tradeReferee
   };
 };

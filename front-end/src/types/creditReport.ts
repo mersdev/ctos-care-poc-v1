@@ -7,10 +7,12 @@ export interface IDVerification {
 }
 
 export interface CreditInfoAtAGlance {
-  litigation: string;
-  tradeReference: string;
-  bankingPaymentHistory: string;
-  dishonouredCheques: string;
+  creditScore: number;
+  creditUtilization: number;
+  totalAccounts: number;
+  totalDebt: number;
+  paymentHistory: number;
+  creditMix: number;
 }
 
 export interface DirectorshipBusinessInterest {
@@ -37,57 +39,75 @@ export interface CTOSLitigationIndex {
 
 export interface AddressRecord {
   address: string;
+  dateReported: string;
   source: string;
 }
 
+export interface BankingAccount {
+  bank: string;
+  accountType: string;
+  status: string;
+  paymentHistory: string;
+}
+
 export interface BankingPaymentHistory {
-  approvedFacilities: number;
-  pendingFacilities: number;
-  totalOutstanding: number;
-  totalLimit: number;
-  foreignExchangeContract: number;
+  accounts: BankingAccount[];
 }
 
 export interface DishonouredCheque {
   date: string;
   amount: number;
+  bank: string;
   reason: string;
 }
 
-export interface CCRISDerivatives {
-  earliestKnownFacility: string;
-  securedFacilities: string[];
-  unsecuredFacilities: string[];
+export interface CCRISDerivative {
+  type: string;
+  details: string;
+}
+
+export interface CCRISData {
+  items: CCRISDerivative[];
+}
+
+export interface CCRISSubjectComments {
+  comments: string[];
 }
 
 export interface LegalCase {
-  caseType: string;
-  status: string;
-  petitioner: string;
   caseNumber: string;
-  petitionDate: string;
-  amount: number;
-  comments: string;
+  details: string;
+  status: string;
+}
+
+export interface LegalCasePlaintiff extends LegalCase {
+  defendant: string;
+}
+
+export interface LegalCaseDefendant extends LegalCase {
+  plaintiff: string;
 }
 
 export interface AMLA {
-  inquiries: number;
-  matches: { name: string; icNumber: string }[];
+  data: {
+    inquiries: number;
+    matches: Array<{
+      name: string;
+      icNumber: string;
+    }>;
+  };
 }
 
 export interface HistoricalEnquiry {
-  financial: number;
-  nonFinancial: number;
-  lawyer: number;
-  others: number;
+  date: string;
+  enquirer: string;
+  purpose: string;
 }
 
 export interface TradeReferee {
-  companyName: string;
-  dateSubmitted: string;
-  creditLimit: number;
-  outstandingAmount: number;
-  paymentBehavior: string;
+  company: string;
+  rating: string;
+  details: string;
 }
 
 export interface CreditReportData {
@@ -99,12 +119,13 @@ export interface CreditReportData {
   addressRecords: AddressRecord[];
   bankingPaymentHistory: BankingPaymentHistory;
   dishonouredCheques: DishonouredCheque[];
-  ccrisSubjectComments: string[];
-  ccrisDerivatives: CCRISDerivatives;
-  legalCasesDefendant: LegalCase[];
-  legalCasesPlaintiff: LegalCase[];
+  ccrisDerivatives: CCRISData;
+  ccrisSubjectComments: CCRISSubjectComments;
+  tradeReferee: TradeReferee[];
+  historicalEnquiry: HistoricalEnquiry[];
   amla: AMLA;
-  historicalEnquiry: HistoricalEnquiry;
-  tradeRefereeListing: TradeReferee[];
+  legalCases: {
+    asPlaintiff: LegalCasePlaintiff[];
+    asDefendant: LegalCaseDefendant[];
+  };
 }
-

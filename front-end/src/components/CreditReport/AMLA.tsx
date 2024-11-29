@@ -1,33 +1,43 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 interface AMLAProps {
   data: {
-    inquiries: number
-    matches: {
-      name: string
-      icNumber: string
-    }[]
-  }
+    inquiries: number;
+    matches: Array<{
+      name: string;
+      icNumber: string;
+    }>;
+  };
 }
 
 const AMLA: React.FC<AMLAProps> = ({ data }) => {
   return (
-    <section className="bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-semibold mb-4">AMLA (Anti Money Laundering Act)</h2>
-      <p><strong>Total Inquiries (past 24 months):</strong> {data.inquiries}</p>
-      {data.matches.length > 0 && (
-        <div className="mt-4">
-          <h3 className="text-xl font-semibold mb-2">Matches in Money Laundering Database:</h3>
-          <ul className="list-disc list-inside">
+    <Card>
+      <CardHeader>
+        <CardTitle>AMLA Status</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground mb-4">
+          Total inquiries: {data.inquiries}
+        </p>
+        
+        {data.matches.length > 0 ? (
+          <div className="space-y-4">
+            <h3 className="font-semibold">Potential Matches</h3>
             {data.matches.map((match, index) => (
-              <li key={index}>
-                Name: {match.name}, IC Number: {match.icNumber}
-              </li>
+              <div key={index} className="border-b pb-4 last:border-b-0">
+                <p className="font-medium">{match.name}</p>
+                <p className="text-sm text-muted-foreground">IC: {match.icNumber}</p>
+              </div>
             ))}
-          </ul>
-        </div>
-      )}
-    </section>
-  )
-}
+          </div>
+        ) : (
+          <p className="text-green-600">No matches found in AMLA database.</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
 
-export default AMLA
-
+export default AMLA;

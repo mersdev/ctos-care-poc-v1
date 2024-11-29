@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import { profileApi } from "@/api/authApi";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { ProfileData, ProfileRequest } from "@/types/profile";
-import { extractInfoFromImage } from "@/services/ollamaService";
+import { extractInfoFromImage } from "@/services/ollamaProfileService";
 import { KeyManagementService } from "@/services/keyManagementService";
 import PersonalInformation from "./PersonalInformation";
 import ConsentForm from "./ConsentForm";

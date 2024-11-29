@@ -63,13 +63,13 @@ const Chatbox: React.FC = () => {
   };
 
   return (
-    <div className="p-8">
-      <Card className="w-full">
+    <div className="h-[90vh] p-4">
+      <Card className="w-full h-full flex flex-col">
         <CardHeader>
           <CardTitle>Chat with CTOS Report Assistant</CardTitle>
         </CardHeader>
-        <CardContent>
-          <ScrollArea className="h-[600px] w-full pr-4">
+        <CardContent className="flex-1 flex flex-col">
+          <ScrollArea className="flex-1 w-full pr-4">
             {messages.map((message) => (
               <div
                 key={message.id}

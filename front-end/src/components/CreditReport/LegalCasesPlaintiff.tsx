@@ -1,41 +1,58 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 interface LegalCase {
-  caseType: string
-  status: string
-  defendant: string
-  caseNumber: string
-  filingDate: string
-  amount: number
-  comments: string
+  caseNumber: string;
+  defendant: string;
+  details: string;
+  status: string;
 }
 
 interface LegalCasesPlaintiffProps {
-  data: LegalCase[]
+  data?: LegalCase[];
 }
 
-const LegalCasesPlaintiff: React.FC<LegalCasesPlaintiffProps> = ({ data }) => {
+const LegalCasesPlaintiff: React.FC<LegalCasesPlaintiffProps> = ({ data = [] }) => {
+  if (!data.length) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Legal Cases (as Plaintiff)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">No legal cases found where you are the plaintiff.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
-    <section className="bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-semibold mb-4">Legal Cases (Subject as Plaintiff)</h2>
-      {data.length > 0 ? (
-        <div className="space-y-6">
+    <Card>
+      <CardHeader>
+        <CardTitle>Legal Cases (as Plaintiff)</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
           {data.map((legalCase, index) => (
-            <div key={index} className="border-b pb-4">
-              <h3 className="text-xl font-semibold">{legalCase.caseType}</h3>
-              <p><strong>Status:</strong> {legalCase.status}</p>
-              <p><strong>Defendant:</strong> {legalCase.defendant}</p>
-              <p><strong>Case Number:</strong> {legalCase.caseNumber}</p>
-              <p><strong>Filing Date:</strong> {legalCase.filingDate}</p>
-              <p><strong>Amount:</strong> RM {legalCase.amount.toLocaleString()}</p>
-              <p><strong>Comments:</strong> {legalCase.comments}</p>
+            <div key={index} className="border-b pb-4 last:border-b-0">
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="font-semibold text-lg">Case #{legalCase.caseNumber}</h3>
+                <span className={`px-2 py-1 rounded text-sm ${
+                  legalCase.status === 'Resolved' ? 'bg-green-100 text-green-800' :
+                  legalCase.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-red-100 text-red-800'
+                }`}>
+                  {legalCase.status}
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">Defendant: {legalCase.defendant}</p>
+              <p className="text-muted-foreground">{legalCase.details}</p>
             </div>
           ))}
         </div>
-      ) : (
-        <p>No legal cases found where the subject is a plaintiff.</p>
-      )}
-    </section>
-  )
-}
+      </CardContent>
+    </Card>
+  );
+};
 
-export default LegalCasesPlaintiff
-
+export default LegalCasesPlaintiff;

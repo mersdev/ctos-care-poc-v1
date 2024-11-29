@@ -1,31 +1,24 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { extractInfoFromImage } from "@/services/ollamaService";
-import {
-  Loader2,
-  Info,
-  User,
-  Mail,
-  Phone,
-  Calendar,
-  MapPin,
-  Flag,
-  CreditCard,
-} from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
-import { ProfileService } from "@/services/profileService";
+import { Loader2 } from "lucide-react";
+import { profileApi } from "@/api/authApi";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { ProfileData } from "@/types/profile";
-import sampleMyKad from "/assets/sample-mykad.png";
+import { ProfileData, ProfileRequest } from "@/types/profile";
+import { extractInfoFromImage } from "@/services/ollamaService";
+import { KeyManagementService } from "@/services/keyManagementService";
+import PersonalInformation from "./PersonalInformation";
+import ConsentForm from "./ConsentForm";
+
+type Consents = NonNullable<ProfileData["consents"]>;
+
+const defaultConsents: Consents = {
+  banks: [],
+  ssm: true,
+  courtRecords: true,
+  dcheqs: true,
+  tradeReferees: true,
+};
 
 const Profile: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -35,413 +28,269 @@ const Profile: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
   const { user } = useAuthContext();
   const [profileData, setProfileData] = useState<ProfileData>({
-    name: "",
     email: user?.email || "",
-    phone: "",
+    encrypted_data: "",
+    encryption_enabled: true,
+    consents: defaultConsents,
+    name: "",
+    identity_card_number: "",
+    date_of_birth: "",
     address: "",
-    identityCardNumber: "",
-    dateOfBirth: "",
     nationality: "",
+    phone: "",
   });
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { toast } = useToast();
+
   const navigate = useNavigate();
+
+  const handleConsentChange = (field: keyof Consents) => (checked: boolean) => {
+    setProfileData((prev) => ({
+      ...prev,
+      consents: {
+        ...(prev.consents || defaultConsents),
+        [field]: checked,
+      },
+    }));
+  };
+
+  const handleBankToggle = (bank: string) => {
+    setProfileData((prev) => {
+      const currentConsents = prev.consents || defaultConsents;
+      const currentBanks = currentConsents.banks;
+      const updatedBanks = currentBanks.includes(bank)
+        ? currentBanks.filter((b) => b !== bank)
+        : [...currentBanks, bank];
+
+      return {
+        ...prev,
+        consents: {
+          ...currentConsents,
+          banks: updatedBanks,
+        },
+      };
+    });
+  };
 
   useEffect(() => {
     const fetchProfile = async () => {
+      if (!user) return;
+
       try {
-        const profile = await ProfileService.getProfile();
-        console.log("Fetched profile:", profile);
-        if (profile) {
+        const profile = await profileApi.getProfile();
+        const privateKey = KeyManagementService.get_private_key();
+
+        if (profile && profile.encrypted_data && privateKey) {
+          const decryptedData = await KeyManagementService.decrypt_profile_data(
+            profile.encrypted_data,
+            privateKey
+          );
+
           setProfileData({
-            ...profile,
+            ...decryptedData,
             email: user?.email || profile.email,
+            encrypted_data: profile.encrypted_data,
+            encryption_enabled: true,
+            public_key: profile.public_key,
+            consents: profile.consents || defaultConsents,
           });
           setIsEditing(false);
+        } else {
+          setProfileData({
+            email: user?.email || "",
+            encrypted_data: "",
+            encryption_enabled: true,
+            consents: defaultConsents,
+          });
+          setIsEditing(isSetup);
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
-        if (isSetup) {
-          setIsEditing(true);
-        }
+        setProfileData({
+          email: user?.email || "",
+          encrypted_data: "",
+          encryption_enabled: true,
+          consents: defaultConsents,
+        });
+        setIsEditing(isSetup);
       }
     };
 
     fetchProfile();
-  }, [user?.email, isSetup]);
+  }, [user?.email, isSetup, user]);
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // Validate file type
-    if (!file.type.startsWith("image/")) {
-      toast({
-        variant: "destructive",
-        title: "Invalid file type",
-        description: "Please upload an image file.",
-      });
-      return;
-    }
-
-    // Validate file size (max 5MB)
-    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-    if (file.size > maxSize) {
-      toast({
-        variant: "destructive",
-        title: "File too large",
-        description: "Please upload an image smaller than 5MB.",
-      });
-      return;
-    }
-
-    setIsProcessing(true);
     try {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        console.error("Invalid file type:", file.type);
+        return;
+      }
+
+      setIsProcessing(true);
       const reader = new FileReader();
 
-      reader.onerror = () => {
-        setIsProcessing(false);
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Failed to read the image file.",
-        });
-      };
-
-      reader.onloadend = async () => {
+      reader.onload = async (e) => {
         try {
-          const base64Image = reader.result as string;
-          const extractedInfo = await extractInfoFromImage(base64Image);
+          const base64Image = e.target?.result as string;
+          if (!base64Image) {
+            throw new Error("Failed to read image file");
+          }
 
+          const extractedInfo = await extractInfoFromImage(base64Image);
           setProfileData((prev) => ({
             ...prev,
-            name: extractedInfo.fullName || prev.name,
-            identityCardNumber:
-              extractedInfo.identityCardNumber || prev.identityCardNumber,
-            dateOfBirth: extractedInfo.dateOfBirth || prev.dateOfBirth,
-            address: extractedInfo.address || prev.address,
-            nationality: extractedInfo.nationality || prev.nationality,
+            name: extractedInfo.full_name,
+            identity_card_number: extractedInfo.identity_card_number,
+            date_of_birth: extractedInfo.date_of_birth,
+            address: extractedInfo.address,
+            nationality: extractedInfo.nationality,
+            // Store the original data as encrypted_data for submission
+            encrypted_data: JSON.stringify({
+              name: extractedInfo.full_name,
+              identity_card_number: extractedInfo.identity_card_number,
+              date_of_birth: extractedInfo.date_of_birth,
+              address: extractedInfo.address,
+              nationality: extractedInfo.nationality,
+            }),
           }));
-
-          toast({
-            title: "Success",
-            description: "Identity card information extracted successfully.",
-          });
         } catch (error) {
           console.error("Error processing image:", error);
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description:
-              error instanceof Error
-                ? error.message
-                : "Failed to process the image.",
-          });
         } finally {
           setIsProcessing(false);
         }
       };
 
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+        setIsProcessing(false);
+      };
+
       reader.readAsDataURL(file);
     } catch (error) {
+      console.error("Error in handleImageUpload:", error);
       setIsProcessing(false);
-      console.error("Error handling image upload:", error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to process the image file.",
-      });
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validate required fields with type-safe field access
-    const requiredFields: (keyof ProfileData)[] = ["name", "email"];
-    const missingFields = requiredFields.filter((field) => !profileData[field]);
-
-    if (missingFields.length > 0) {
-      toast({
-        title: "Required Fields Missing",
-        description: `Please fill in all required fields: ${missingFields.join(
-          ", "
-        )}`,
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Format IC number if present
-    if (profileData.identityCardNumber) {
-      const formattedIC = profileData.identityCardNumber.replace(/[-\s]/g, "");
-      if (formattedIC.length === 12) {
-        const updatedProfileData = {
-          ...profileData,
-          identityCardNumber: `${formattedIC.slice(0, 6)}-${formattedIC.slice(
-            6,
-            8
-          )}-${formattedIC.slice(8)}`,
-        };
-        setProfileData(updatedProfileData);
-      }
-    }
+    if (!profileData.consents?.banks.length) return;
 
     setIsSaving(true);
     try {
-      const updatedProfile = await ProfileService.updateProfile({
-        ...profileData,
-        onboardingCompleted: true,
-      });
+      const publicKey = KeyManagementService.get_public_key();
+      if (!publicKey) {
+        throw new Error("Public key not found");
+      }
 
-      setProfileData(updatedProfile);
-      toast({
-        title: "Success",
-        description: "Profile updated successfully",
-      });
+      console.log("Profile Data:", profileData);
+
+      // Encrypt the profile data
+      const encryptedData = await KeyManagementService.encrypt_profile_data(
+        profileData,
+        publicKey
+      );
+
+      // Prepare the profile request according to the ProfileRequest interface
+      const profileRequest: ProfileRequest = {
+        email: profileData.email,
+        encrypted_data: encryptedData,
+        encryption_enabled: true,
+        public_key: publicKey,
+        consents: profileData.consents || defaultConsents,
+      };
+
+      // Create or update the profile
+      const updatedProfile = await (profileData.id
+        ? profileApi.updateProfile(profileRequest)
+        : profileApi.createProfile(profileRequest));
+
+      // Update the local state with the response
+      setProfileData((prev) => ({
+        ...prev,
+        ...updatedProfile,
+      }));
+
       setIsEditing(false);
+
       if (isSetup) {
         navigate("/dashboard");
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error saving profile:", error);
-      toast({
-        title: "Error",
-        description:
-          error.message || "Failed to save profile. Please try again.",
-        variant: "destructive",
-      });
     } finally {
       setIsSaving(false);
     }
   };
 
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    if (isSetup) {
+      navigate("/login");
+    } else {
+      setIsEditing(false);
+    }
+  };
+
   return (
-    <div className="container mx-auto p-6 max-w-4xl">
-      <Card className="shadow-lg">
-        <CardHeader className="space-y-1">
-          <div className="flex justify-between items-center">
-            <div>
-              <CardTitle className="text-2xl">Profile Settings</CardTitle>
-              <CardDescription>
-                {isSetup
-                  ? "Please complete your profile to continue"
-                  : "Manage your personal information and contact details"}
-              </CardDescription>
-            </div>
-            {!isEditing && !isSetup && (
-              <Button
-                onClick={() => setIsEditing(true)}
-                className="flex items-center gap-2"
-              >
-                <User className="h-4 w-4" />
-                Edit
-              </Button>
-            )}
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {isEditing && (
-            <div className="space-y-4">
-              <div className="flex justify-center">
+    <div className="container mx-auto p-4 max-w-2xl">
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h1 className="text-2xl font-bold mb-6">
+          {isSetup ? "Complete Your Profile" : "Profile"}
+        </h1>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <PersonalInformation
+            profileData={profileData}
+            setProfileData={setProfileData}
+            isEditing={isEditing}
+            isProcessing={isProcessing}
+            handleImageUpload={handleImageUpload}
+          />
+
+          <ConsentForm
+            consents={profileData.consents || defaultConsents}
+            onConsentChange={handleConsentChange}
+            onBankToggle={handleBankToggle}
+            isEditing={isEditing}
+          />
+
+          <div className="flex justify-end space-x-4 mt-6">
+            {isEditing ? (
+              <>
                 <Button
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={isProcessing}
-                  className="w-full md:w-auto"
-                  size="lg"
-                >
-                  {isProcessing ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Extracting Information...
-                    </>
-                  ) : (
-                    <>
-                      <CreditCard className="mr-2 h-5 w-5" />
-                      Upload Identity Card
-                    </>
-                  )}
-                </Button>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleImageUpload}
-                  accept="image/*"
-                  className="hidden"
-                />
-              </div>
-
-              <div className="bg-muted/50 p-6 rounded-lg space-y-3">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Info className="h-5 w-5" />
-                  <h3 className="font-medium">Sample Identity Card Format</h3>
-                </div>
-                <img
-                  src={sampleMyKad}
-                  alt="Sample Malaysian Identity Card"
-                  className="rounded-lg border border-border shadow-sm max-w-md mx-auto"
-                />
-              </div>
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <User className="h-4 w-4 text-muted-foreground" />
-                Full Name *
-              </label>
-              <Input
-                value={profileData.name}
-                onChange={(e) =>
-                  setProfileData({ ...profileData, name: e.target.value })
-                }
-                placeholder="Full Name (as per IC)"
-                required
-                readOnly={!isEditing}
-                className={!isEditing ? "bg-muted/50" : ""}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <Mail className="h-4 w-4 text-muted-foreground" />
-                Email *
-              </label>
-              <Input
-                type="email"
-                value={profileData.email}
-                readOnly
-                required
-                className="bg-muted/50"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <Phone className="h-4 w-4 text-muted-foreground" />
-                Phone Number
-              </label>
-              <Input
-                value={profileData.phone || ""}
-                onChange={(e) =>
-                  setProfileData({ ...profileData, phone: e.target.value })
-                }
-                placeholder="Phone Number"
-                readOnly={!isEditing}
-                className={!isEditing ? "bg-muted/50" : ""}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <CreditCard className="h-4 w-4 text-muted-foreground" />
-                Identity Card Number *
-              </label>
-              <Input
-                value={profileData.identityCardNumber || ""}
-                onChange={(e) =>
-                  setProfileData({
-                    ...profileData,
-                    identityCardNumber: e.target.value,
-                  })
-                }
-                placeholder="IC Number"
-                required
-                readOnly={!isEditing}
-                className={!isEditing ? "bg-muted/50" : ""}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-                Date of Birth *
-              </label>
-              <Input
-                value={profileData.dateOfBirth || ""}
-                onChange={(e) =>
-                  setProfileData({
-                    ...profileData,
-                    dateOfBirth: e.target.value,
-                  })
-                }
-                placeholder="YYYY-MM-DD"
-                required
-                readOnly={!isEditing}
-                className={!isEditing ? "bg-muted/50" : ""}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <Flag className="h-4 w-4 text-muted-foreground" />
-                Nationality *
-              </label>
-              <Input
-                value={profileData.nationality || ""}
-                onChange={(e) =>
-                  setProfileData({
-                    ...profileData,
-                    nationality: e.target.value,
-                  })
-                }
-                placeholder="Nationality"
-                required
-                readOnly={!isEditing}
-                className={!isEditing ? "bg-muted/50" : ""}
-              />
-            </div>
-
-            <div className="space-y-2 md:col-span-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-                Address *
-              </label>
-              <Input
-                value={profileData.address || ""}
-                onChange={(e) =>
-                  setProfileData({ ...profileData, address: e.target.value })
-                }
-                placeholder="Full Address"
-                required
-                readOnly={!isEditing}
-                className={!isEditing ? "bg-muted/50" : ""}
-              />
-            </div>
-          </div>
-
-          {isEditing && (
-            <div className="flex justify-end space-x-4 pt-4">
-              {!isSetup && (
-                <Button
+                  type="button"
                   variant="outline"
-                  onClick={() => setIsEditing(false)}
+                  onClick={handleCancel}
                   disabled={isSaving}
                 >
                   Cancel
                 </Button>
-              )}
-              <Button
-                onClick={handleSubmit}
-                disabled={isSaving}
-                className="min-w-[100px]"
-              >
-                {isSaving ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
-                  </>
-                ) : (
-                  "Save"
-                )}
+                <Button type="submit" disabled={isSaving}>
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    "Save"
+                  )}
+                </Button>
+              </>
+            ) : (
+              <Button type="button" onClick={handleEdit}>
+                Edit Profile
               </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+            )}
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

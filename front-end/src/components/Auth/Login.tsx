@@ -5,7 +5,7 @@ import { Input } from '../ui/input';
 import { Card } from '../ui/card';
 import { useToast } from '../ui/use-toast';
 import { useAuthContext } from '@/contexts/AuthContext';
-import { ProfileService } from '@/services/profileService';
+import { profileApi } from '@/api/authApi';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -13,33 +13,33 @@ export function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { signIn } = useAuthContext();
+  const { sign_in } = useAuthContext();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handle_submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
       // Sign in using AuthContext
-      await signIn(email, password);
+      await sign_in(email, password);
       
-      // Check if user has completed onboarding
-      const hasCompletedOnboarding = await ProfileService.hasCompletedOnboarding();
-      
-      if (!hasCompletedOnboarding) {
-        // Redirect to profile completion flow
-        toast({
-          title: 'Welcome!',
-          description: 'Please complete your profile setup to continue.',
-        });
-        navigate('/profile?setup=true');
-      } else {
-        // User has completed onboarding, proceed to dashboard
+      try {
+        // Try to get user profile - if it fails, user needs to complete onboarding
+        await profileApi.getProfile();
+        
+        // User has a profile, proceed to dashboard
         toast({
           title: 'Success',
           description: 'Successfully logged in!',
         });
         navigate('/dashboard');
+      } catch (error) {
+        // Profile doesn't exist, redirect to profile setup
+        toast({
+          title: 'Welcome!',
+          description: 'Please complete your profile setup to continue.',
+        });
+        navigate('/profile?setup=true');
       }
     } catch (error) {
       toast({
@@ -59,7 +59,7 @@ export function Login() {
           <h2 className="text-2xl font-bold">Login</h2>
           <p className="text-sm text-gray-500">Enter your credentials to access your account</p>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handle_submit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
               Email

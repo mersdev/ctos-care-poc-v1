@@ -1,9 +1,9 @@
 import axios from "axios";
 
 interface ExtractedInfo {
-  fullName: string;
-  identityCardNumber: string;
-  dateOfBirth: string;
+  full_name: string;
+  identity_card_number: string;
+  date_of_birth: string;
   address: string;
   nationality: string;
 }
@@ -19,18 +19,18 @@ const ollamaApi = axios.create({
 
 const cleanMarkdownText = (text: string): string => {
   return text
-    .replace(/[*_]/g, '') // Remove asterisks and underscores
-    .split('\n')
-    .map(line => line.trim())
-    .filter(line => line.length > 0)
-    .join('\n');
+    .replace(/[*_]/g, "") // Remove asterisks and underscores
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+    .join("\n");
 };
 
 const extractJsonFromText = (text: string): Record<string, string> => {
   try {
     // Clean the text first
     const cleanedText = cleanMarkdownText(text);
-    
+
     // Try to parse the text directly first
     try {
       const parsed = JSON.parse(cleanedText);
@@ -98,9 +98,9 @@ const extractJsonFromText = (text: string): Record<string, string> => {
 const extractDOBFromIC = (icNumber: string): string => {
   try {
     // Remove any non-numeric characters from the first 6 digits
-    const dobDigits = icNumber.replace(/\D/g, '').substring(0, 6);
+    const dobDigits = icNumber.replace(/\D/g, "").substring(0, 6);
     if (dobDigits.length !== 6) {
-      return '';
+      return "";
     }
 
     // Extract year, month, and day
@@ -111,21 +111,23 @@ const extractDOBFromIC = (icNumber: string): string => {
     // Convert 2-digit year to 4-digit year
     const currentYear = new Date().getFullYear();
     const century = currentYear - (currentYear % 100);
-    const fullYear = parseInt(year) + (parseInt(year) > (currentYear % 100) ? century - 100 : century);
+    const fullYear =
+      parseInt(year) +
+      (parseInt(year) > currentYear % 100 ? century - 100 : century);
 
     // Create and format the date
     const date = new Date(fullYear, parseInt(month) - 1, parseInt(day));
-    
+
     // Validate the date
     if (isNaN(date.getTime())) {
-      return '';
+      return "";
     }
 
     // Format the date as DD-MM-YYYY
     return `${day}-${month}-${fullYear}`;
   } catch (error) {
-    console.error('Error extracting DOB from IC:', error);
-    return '';
+    console.error("Error extracting DOB from IC:", error);
+    return "";
   }
 };
 
@@ -232,7 +234,6 @@ export const extractInfoFromImage = async (
         "Include the following fields exactly:\n" +
         "- Full Name\n" +
         "- Identity Card Number\n" +
-        "- Date of Birth\n" +
         "- Address\n" +
         "- Nationality\n",
       images: [compressedImage],
@@ -248,16 +249,17 @@ export const extractInfoFromImage = async (
     }
 
     const extractedText = visionResponse.data.response;
-    console.log("Extracted text:", extractedText);
 
     // Try to parse the response
     const parsedInfo = extractJsonFromText(extractedText);
 
     // Validate and clean the extracted data
     const result: ExtractedInfo = {
-      fullName: parsedInfo.fullName?.trim() || "",
-      identityCardNumber: parsedInfo.identityCardNumber?.trim() || "",
-      dateOfBirth: parsedInfo.dateOfBirth?.trim() || "",
+      full_name: parsedInfo.fullName?.trim() || "",
+      identity_card_number: parsedInfo.identityCardNumber?.trim() || "",
+      date_of_birth: extractDOBFromIC(
+        parsedInfo.identityCardNumber?.trim() || ""
+      ),
       address: parsedInfo.address?.trim() || "",
       nationality: parsedInfo.nationality?.trim() || "",
     };

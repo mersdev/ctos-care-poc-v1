@@ -1,13 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { supabase } from "../config/supabase.js";
+import { supabase } from "../config/supabase";
 
+// Add custom type declaration for Request
 declare global {
   namespace Express {
     interface Request {
-      user?: {
-        id: string;
-        email: string;
-      };
+      user?: any;
     }
   }
 }
@@ -17,14 +15,14 @@ export const authMiddleware = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-      res.status(401).json({ error: "No authorization header" });
-      return;
-    }
+  const token = req.headers.authorization?.split(" ")[1];
 
-    const token = authHeader.split(" ")[1];
+  if (!token) {
+    res.status(401).json({ error: "No token provided" });
+    return;
+  }
+
+  try {
     const {
       data: { user },
       error,
@@ -35,15 +33,9 @@ export const authMiddleware = async (
       return;
     }
 
-    // Attach user to request object
-    req.user = {
-      id: user.id,
-      email: user.email!,
-    };
-
+    req.user = user;
     next();
   } catch (error) {
-    console.error("Auth middleware error:", error);
     res.status(401).json({ error: "Authentication failed" });
   }
 };

@@ -5,7 +5,6 @@ import Dashboard from "./components/Dashboard/CentralizedFinancialDashboard";
 import CreditReport from "./components/CreditReport/CreditReport";
 import TodoList from "./components/Todo/TodoList";
 import Profile from "./components/Profile/Profile";
-import ConsentForm from "./components/ConsentForm/ConsentForm";
 import { Toaster } from "./components/ui/toaster";
 import { Login } from "./components/Auth/Login";
 import { Register } from "./components/Auth/Register";
@@ -65,14 +64,6 @@ const App: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <ProtectedRoute>
-                  <ConsentForm />
                 </ProtectedRoute>
               }
             />

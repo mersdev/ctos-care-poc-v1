@@ -13,9 +13,9 @@ export function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { signUp } = useAuthContext();
+  const { sign_up } = useAuthContext();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handle_submit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
@@ -39,12 +39,12 @@ export function Register() {
     setIsLoading(true);
 
     try {
-      await signUp(email, password);
+      await sign_up(email, password);
       toast({
-        title: 'Success',
-        description: 'Account created successfully! Please sign in to continue.',
+        title: 'Welcome!',
+        description: 'Please complete your profile setup to continue.',
       });
-      navigate('/login');
+      navigate('/profile?setup=true');
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -63,7 +63,7 @@ export function Register() {
           <h2 className="text-2xl font-bold">Create Account</h2>
           <p className="text-sm text-gray-500">Enter your details to create a new account</p>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handle_submit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
               Email
@@ -104,18 +104,16 @@ export function Register() {
               required
             />
           </div>
-          <div className="space-y-4">
-            <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading ? 'Creating account...' : 'Register'}
-            </Button>
-            <div className="text-center">
-              <p className="text-sm text-gray-500">
-                Already have an account?{' '}
-                <Link to="/login" className="text-primary hover:underline">
-                  Sign in here
-                </Link>
-              </p>
-            </div>
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? 'Creating account...' : 'Create account'}
+          </Button>
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-500">
+              Already have an account?{' '}
+              <Link to="/login" className="text-primary hover:underline">
+                Sign in here
+              </Link>
+            </p>
           </div>
         </form>
       </Card>

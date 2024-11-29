@@ -1,123 +1,55 @@
 import { Request, Response } from "express";
-import { supabase } from "../config/supabase.js";
+import { supabase } from "../config/supabase";
 
-export const AuthController = {
-  // Sign up new user
-  signUp: async (req: Request, res: Response): Promise<void> => {
+export const authController = {
+  async signUp(req: Request, res: Response) {
+    const { email, password } = req.body;
     try {
-      const { email, password } = req.body;
-
-      if (!email || !password) {
-        res.status(400).json({ error: "Email and password are required" });
-        return;
-      }
-
-      const { data: { user }, error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
-      if (error) {
-        res.status(400).json({ error: error.message });
-        return;
-      }
-
-      if (!user) {
-        res.status(400).json({ error: "User creation failed" });
-        return;
-      }
-
-      res.status(201).json({
-        user: {
-          id: user.id,
-          email: user.email,
-        }
-      });
+      if (error) throw error;
+      res.status(201).json(data);
     } catch (error) {
-      console.error("Signup error:", error);
-      res.status(500).json({ error: "Registration failed" });
+      res.status(400).json({ error: error.message });
     }
   },
 
-  // Sign in user
-  signIn: async (req: Request, res: Response): Promise<void> => {
+  async signIn(req: Request, res: Response) {
+    const { email, password } = req.body;
     try {
-      const { email, password } = req.body;
-
-      if (!email || !password) {
-        res.status(400).json({ error: "Email and password are required" });
-        return;
-      }
-
-      const { data: { user, session }, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      if (error) {
-        res.status(401).json({ error: error.message });
-        return;
-      }
-
-      if (!user || !session) {
-        res.status(401).json({ error: "Sign in failed" });
-        return;
-      }
-
-      res.status(200).json({
-        user: {
-          id: user.id,
-          email: user.email,
-        },
-        token: session.access_token
-      });
+      if (error) throw error;
+      res.json(data);
     } catch (error) {
-      console.error("Signin error:", error);
-      res.status(500).json({ error: "Authentication failed" });
+      res.status(401).json({ error: error.message });
     }
   },
 
-  // Sign out user
-  signOut: async (req: Request, res: Response): Promise<void> => {
+  async signOut(req: Request, res: Response) {
     try {
       const { error } = await supabase.auth.signOut();
-
-      if (error) {
-        res.status(500).json({ error: error.message });
-        return;
-      }
-
-      res.status(200).json({ message: "Successfully signed out" });
+      if (error) throw error;
+      res.status(200).json({ message: "Signed out successfully" });
     } catch (error) {
-      console.error("Signout error:", error);
-      res.status(500).json({ error: "Sign out failed" });
+      res.status(500).json({ error: error.message });
     }
   },
 
-  // Get current user
-  getCurrentUser: async (req: Request, res: Response): Promise<void> => {
+  async resetPassword(req: Request, res: Response) {
+    const { email } = req.body;
     try {
-      const { data: { user }, error } = await supabase.auth.getUser();
-
-      if (error) {
-        res.status(401).json({ error: error.message });
-        return;
-      }
-
-      if (!user) {
-        res.status(401).json({ error: "No user found" });
-        return;
-      }
-
-      res.status(200).json({
-        user: {
-          id: user.id,
-          email: user.email,
-        }
-      });
+      const { error } = await supabase.auth.resetPasswordForEmail(email);
+      if (error) throw error;
+      res.json({ message: "Password reset email sent" });
     } catch (error) {
-      console.error("Get user error:", error);
-      res.status(500).json({ error: "Failed to get user information" });
+      res.status(400).json({ error: error.message });
     }
-  }
+  },
 };

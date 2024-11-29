@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
@@ -12,14 +12,9 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-
-interface ConsentData {
-  banks: string[];
-  ssm: boolean;
-  courtRecords: boolean;
-  dcheqs: boolean;
-  tradeReferees: boolean;
-}
+import { Loader2 } from "lucide-react";
+import { ConsentData } from "@/types/profile";
+import { ProfileService } from "@/services/profileService";
 
 const banksList = [
   "CIMB Bank",
@@ -34,8 +29,11 @@ const banksList = [
 ];
 
 const ConsentForm: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const isSetup = searchParams.get('setup') === 'true';
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [consentData, setConsentData] = useState<ConsentData>({
     banks: [],
     ssm: false,
@@ -45,6 +43,28 @@ const ConsentForm: React.FC = () => {
   });
   const [showDialog, setShowDialog] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const profile = await ProfileService.getProfile();
+        if (profile?.consents) {
+          setConsentData(profile.consents);
+        }
+      } catch (error) {
+        console.error('Error loading profile:', error);
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: 'Failed to load consent data',
+        });
+      }
+    };
+
+    if (!isSetup) {
+      loadProfile();
+    }
+  }, [isSetup, toast]);
 
   const handleBankChange = (bank: string) => {
     setConsentData((prev) => ({
@@ -65,177 +85,212 @@ const ConsentForm: React.FC = () => {
     return { hasBank, hasAllOtherSources };
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const { hasBank, hasAllOtherSources } = validateConsent();
     
-    // Show warning if not all consents are given
-    if (!hasAllOtherSources || !hasBank) {
+    if (isSetup && (!hasAllOtherSources || !hasBank)) {
       toast({
-        title: "Limited Data Access",
-        description: "Consenting to all data sources will provide better financial insights and recommendations.",
-        variant: "warning",
+        variant: "destructive",
+        title: "Required Consents",
+        description: "Please consent to all data sources to proceed.",
       });
+      return;
     }
 
-    // Always save the preferences
-    setIsSuccess(true);
-    setShowDialog(true);
-    toast({
-      title: "Success",
-      description: "Your data consent preferences have been saved successfully.",
-      variant: "default",
-    });
-    
-    // Redirect to dashboard after 1.5 seconds
-    setTimeout(() => {
-      navigate('/');
-      setShowDialog(false);
-    }, 1500);
-  };
+    setIsLoading(true);
+    try {
+      // Get current profile first
+      const currentProfile = await ProfileService.getProfile();
+      if (!currentProfile) {
+        throw new Error('Profile not found');
+      }
 
-  const handleUpdate = () => {
-    setShowDialog(false);
-    toast({
-      title: "Recommendation",
-      description: "Consider providing all consents for better financial insights and recommendations.",
-      variant: "warning",
-    });
+      // Update profile with new consent data
+      const updatedProfile = {
+        ...currentProfile,
+        consents: consentData,
+        onboardingCompleted: isSetup ? true : currentProfile.onboardingCompleted,
+      };
+
+      await ProfileService.updateProfile(updatedProfile);
+
+      setIsSuccess(true);
+      setShowDialog(true);
+      
+      toast({
+        title: "Success",
+        description: isSetup 
+          ? "Setup completed! Redirecting to dashboard..." 
+          : "Your data consent preferences have been saved successfully.",
+      });
+      
+      // Redirect after successful save
+      setTimeout(() => {
+        navigate(isSetup ? '/dashboard' : '/');
+        setShowDialog(false);
+      }, 1500);
+    } catch (error) {
+      console.error('Error saving consents:', error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to save consent preferences",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Consent Form</h1>
-
-      {/* Banks and E-Wallets */}
-      <Card className="mb-6 bank-section">
-        <CardHeader>
-          <CardTitle>Banks and E-Wallets</CardTitle>
+    <div className="container mx-auto p-6 max-w-4xl">
+      <Card className="shadow-lg">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Data Consent Settings</CardTitle>
+          <CardDescription>
+            {isSetup 
+              ? "Please provide necessary consents to complete your account setup"
+              : "Manage your data sharing preferences"}
+          </CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {banksList.map((bank) => (
-            <div key={bank} className="flex items-center space-x-2">
-              <Checkbox
-                id={bank}
-                checked={consentData.banks.includes(bank)}
-                onCheckedChange={() => handleBankChange(bank)}
-              />
-              <label htmlFor={bank} className="text-sm font-medium">
-                {bank}
-              </label>
+        <CardContent className="space-y-6">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium">Bank Account Information</h3>
+            <p className="text-sm text-muted-foreground">
+              Select the banks you want to share information from:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {banksList.map((bank) => (
+                <div key={bank} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={bank}
+                    checked={consentData.banks.includes(bank)}
+                    onCheckedChange={() => handleBankChange(bank)}
+                  />
+                  <label
+                    htmlFor={bank}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {bank}
+                  </label>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium">Additional Data Sources</h3>
+            <p className="text-sm text-muted-foreground">
+              Select additional sources to enhance your financial profile:
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="ssm"
+                  checked={consentData.ssm}
+                  onCheckedChange={(checked) =>
+                    setConsentData((prev) => ({ ...prev, ssm: checked as boolean }))
+                  }
+                />
+                <label
+                  htmlFor="ssm"
+                  className="text-sm font-medium leading-none"
+                >
+                  Companies Commission of Malaysia (SSM)
+                </label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="courtRecords"
+                  checked={consentData.courtRecords}
+                  onCheckedChange={(checked) =>
+                    setConsentData((prev) => ({
+                      ...prev,
+                      courtRecords: checked as boolean,
+                    }))
+                  }
+                />
+                <label
+                  htmlFor="courtRecords"
+                  className="text-sm font-medium leading-none"
+                >
+                  Court Records
+                </label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="dcheqs"
+                  checked={consentData.dcheqs}
+                  onCheckedChange={(checked) =>
+                    setConsentData((prev) => ({
+                      ...prev,
+                      dcheqs: checked as boolean,
+                    }))
+                  }
+                />
+                <label
+                  htmlFor="dcheqs"
+                  className="text-sm font-medium leading-none"
+                >
+                  Dishonoured Cheques Information System (DCHEQS)
+                </label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="tradeReferees"
+                  checked={consentData.tradeReferees}
+                  onCheckedChange={(checked) =>
+                    setConsentData((prev) => ({
+                      ...prev,
+                      tradeReferees: checked as boolean,
+                    }))
+                  }
+                />
+                <label
+                  htmlFor="tradeReferees"
+                  className="text-sm font-medium leading-none"
+                >
+                  Trade Referees
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-4">
+            <Button
+              onClick={handleSave}
+              disabled={isLoading}
+              className="min-w-[120px]"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                'Save Preferences'
+              )}
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
-      {/* Other Data Sources */}
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Other Data Sources</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="ssm"
-              checked={consentData.ssm}
-              onCheckedChange={(checked) =>
-                setConsentData((prev) => ({ ...prev, ssm: checked as boolean }))
-              }
-            />
-            <label htmlFor="ssm" className="text-sm font-medium">
-              Companies Commission of Malaysia (SSM)
-            </label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="court"
-              checked={consentData.courtRecords}
-              onCheckedChange={(checked) =>
-                setConsentData((prev) => ({
-                  ...prev,
-                  courtRecords: checked as boolean,
-                }))
-              }
-            />
-            <label htmlFor="court" className="text-sm font-medium">
-              Court Records
-            </label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="dcheqs"
-              checked={consentData.dcheqs}
-              onCheckedChange={(checked) =>
-                setConsentData((prev) => ({
-                  ...prev,
-                  dcheqs: checked as boolean,
-                }))
-              }
-            />
-            <label htmlFor="dcheqs" className="text-sm font-medium">
-              DCHEQS System (Dishonored Checks)
-            </label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="trade"
-              checked={consentData.tradeReferees}
-              onCheckedChange={(checked) =>
-                setConsentData((prev) => ({
-                  ...prev,
-                  tradeReferees: checked as boolean,
-                }))
-              }
-            />
-            <label htmlFor="trade" className="text-sm font-medium">
-              Trade Referees
-            </label>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Button onClick={handleSave} className="w-full py-6" size="lg">
-        Save Consent Preferences
-      </Button>
-
-      {/* Confirmation Dialog */}
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {isSuccess
-                ? "Thank you for your consent!"
-                : "Consider Full Consent"}
+              {isSuccess ? "Success!" : "Warning"}
             </DialogTitle>
             <DialogDescription>
               {isSuccess
-                ? "Your data consent preferences have been saved successfully. We'll use this information to provide you with better financial insights."
-                : "For the best financial insights and recommendations, consider consenting to all data sources. This helps us provide more accurate and comprehensive analysis."}
+                ? "Your preferences have been saved successfully."
+                : "Limited data access may affect the quality of our services."}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            {isSuccess ? (
-              <Button onClick={() => setShowDialog(false)} size="lg">
-                Close
-              </Button>
-            ) : (
-              <div className="flex space-x-4">
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setShowDialog(false);
-                  }}
-                  size="lg"
-                >
-                  Keep Current Selection
-                </Button>
-                <Button 
-                  onClick={handleUpdate}
-                  size="lg"
-                >
-                  Update Selections
-                </Button>
-              </div>
-            )}
+            <Button onClick={() => setShowDialog(false)}>Close</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "@shadcn/ui": "^0.0.4",
+    "@supabase/supabase-js": "^2.46.2",
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",

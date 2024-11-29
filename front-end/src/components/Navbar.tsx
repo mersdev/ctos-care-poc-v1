@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Menu,
@@ -8,6 +8,7 @@ import {
   CheckSquare,
   MessageSquare,
   User,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,8 +16,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/components/ui/use-toast";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 interface NavbarProps {
   isSidebarOpen: boolean;
@@ -25,12 +28,31 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { toast } = useToast();
+  const { signOut } = useAuthContext();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/signin');
+      toast({
+        title: "Success",
+        description: "You have been signed out successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const navItems = [
     {
       title: "Financial Dashboard",
-      href: "/",
+      href: "/dashboard",
       icon: LayoutDashboard,
     },
     {
@@ -51,121 +73,78 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
   ];
 
   return (
-    <>
-      {/* Desktop Navigation */}
-      <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
-        <div className="px-3 py-3 lg:px-5 lg:pl-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center justify-start">
-              <Button
-                variant="ghost"
-                className="inline-flex items-center p-2 text-sm rounded-lg lg:hidden"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+      <div className="max-w-[2000px] mx-auto">
+        <div className="flex h-16 items-center px-4 md:px-6">
+          <Button
+            variant="ghost"
+            className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            <Menu className="h-6 w-6" />
+            <span className="sr-only">Toggle sidebar</span>
+          </Button>
+          <Link
+            to="/"
+            className="mr-6 flex items-center space-x-2"
+            aria-label="CTOS Care"
+          >
+            <span className="hidden font-bold sm:inline-block">CTOS Care</span>
+          </Link>
+          <div className="flex items-center space-x-4 md:space-x-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={`hidden items-center space-x-2 md:flex ${
+                  location.pathname === item.href
+                    ? "text-primary"
+                    : "text-gray-500 hover:text-gray-900"
+                }`}
               >
-                <Menu className="w-6 h-6" />
-              </Button>
-              <Link to="/" className="flex items-center">
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-primary">
-                  CTOS Care
-                </span>
+                <item.icon className="h-4 w-4" />
+                <span>{item.title}</span>
               </Link>
-            </div>
-
-            <div className="hidden lg:flex lg:items-center lg:ml-6 lg:space-x-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={`flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                    location.pathname === item.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-primary hover:bg-primary/10"
-                  }`}
-                >
-                  <item.icon className="w-5 h-5 mr-2" />
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-2">
-              {/* Notifications */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() =>
-                  toast({
-                    title: "No new notifications",
-                  })
-                }
-              >
-                <Bell className="h-5 w-5" />
-              </Button>
-
-              {/* User menu */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <User className="h-5 w-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <Link to="/profile">
-                    <DropdownMenuItem>
-                      Profile
-                    </DropdownMenuItem>
-                  </Link>
-                  <Link to="/settings">
-                    <DropdownMenuItem>
-                      Data Consent
-                    </DropdownMenuItem>
-                  </Link>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            ))}
           </div>
-        </div>
-      </nav>
-
-      {/* Mobile Navigation Sidebar */}
-      {isSidebarOpen && (
-        <>
-          <div className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50">
-            <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-lg">
-              <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                <span className="text-xl font-semibold text-primary">
-                  CTOS Care
-                </span>
+          <div className="ml-auto flex items-center space-x-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-500 hover:text-gray-900"
+            >
+              <Bell className="h-5 w-5" />
+              <span className="sr-only">View notifications</span>
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => setIsSidebarOpen(false)}
+                  className="text-gray-500 hover:text-gray-900"
                 >
-                  <Menu className="h-6 w-6" />
+                  <User className="h-5 w-5" />
+                  <span className="sr-only">Toggle user menu</span>
                 </Button>
-              </div>
-              <nav className="p-4">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className={`flex items-center px-3 py-2 text-sm font-medium rounded-md mb-1 ${
-                      location.pathname === item.href
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-primary hover:bg-primary/10"
-                    }`}
-                    onClick={() => setIsSidebarOpen(false)}
-                  >
-                    <item.icon className="w-5 h-5 mr-2" />
-                    {item.title}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link to="/profile" className="cursor-pointer">
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
                   </Link>
-                ))}
-              </nav>
-            </div>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-        </>
-      )}
-    </>
+        </div>
+      </div>
+    </nav>
   );
 };
 

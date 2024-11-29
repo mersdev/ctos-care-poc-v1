@@ -1,25 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Bar, BarChart, Line, LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
-
-const data = [
-  { name: "Jan", total: 1000 },
-  { name: "Feb", total: 1200 },
-  { name: "Mar", total: 900 },
-  { name: "Apr", total: 1500 },
-  { name: "May", total: 1800 },
-  { name: "Jun", total: 2000 },
-]
-
-const spendingData = [
-  { category: "Housing", amount: 1000 },
-  { category: "Food", amount: 500 },
-  { category: "Transportation", amount: 300 },
-  { category: "Utilities", amount: 200 },
-  { category: "Entertainment", amount: 150 },
-]
+import { DashboardService, DashboardData } from '../../services/dashboardService'
+import { useToast } from '@/components/ui/use-toast'
 
 const CentralizedFinancialDashboard: React.FC = () => {
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await DashboardService.getDashboardData();
+        setDashboardData(data);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load dashboard data. Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [toast]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+      </div>
+    );
+  }
+
+  if (!dashboardData) {
+    return (
+      <div className="container mx-auto p-6">
+        <h1 className="text-3xl font-bold mb-6">Error loading dashboard</h1>
+        <p>Please try refreshing the page.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Centralized Financial Dashboard</h1>
@@ -27,58 +53,62 @@ const CentralizedFinancialDashboard: React.FC = () => {
         <Card>
           <CardContent className="pt-6">
             <CardTitle className="text-sm font-medium">Total Balance</CardTitle>
-            <div className="text-2xl font-bold">$5,231.89</div>
+            <div className="text-2xl font-bold">${dashboardData.totalBalance.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+20.1% from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
             <CardTitle className="text-sm font-medium">Total Spending</CardTitle>
-            <div className="text-2xl font-bold">$3,352.40</div>
+            <div className="text-2xl font-bold">${dashboardData.totalSpending.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+4.5% from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
             <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
-            <div className="text-2xl font-bold">$1,879.49</div>
+            <div className="text-2xl font-bold">${dashboardData.totalSavings.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+8.2% from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
             <CardTitle className="text-sm font-medium">Credit Score</CardTitle>
-            <div className="text-2xl font-bold">742</div>
-            <p className="text-xs text-muted-foreground">+12 points from last month</p>
+            <div className="text-2xl font-bold">{dashboardData.creditScore}</div>
+            <p className="text-xs text-muted-foreground">Good</p>
           </CardContent>
         </Card>
       </div>
+
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="col-span-1">
+        <Card>
           <CardHeader>
-            <CardTitle>Cash Flow</CardTitle>
+            <CardTitle>Monthly Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={350}>
-              <BarChart data={data}>
-                <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
-                <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
-              </BarChart>
+              <LineChart data={dashboardData.monthlyData}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="total" stroke="#0ea5e9" />
+              </LineChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
-        <Card className="col-span-1">
+
+        <Card>
           <CardHeader>
             <CardTitle>Spending by Category</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={350}>
-              <LineChart data={spendingData}>
-                <XAxis dataKey="category" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
-                <Line type="monotone" dataKey="amount" stroke="#8884d8" strokeWidth={2} />
-              </LineChart>
+              <BarChart data={dashboardData.spendingData}>
+                <XAxis dataKey="category" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="amount" fill="#0ea5e9" />
+              </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>

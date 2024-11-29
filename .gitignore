@@ -31,11 +31,11 @@
 .env.test.local
 .env.production
 .env.production.local
-/front-end/.env
+# /front-end/.env
 /front-end/.env.local
 /front-end/.env.development
 /front-end/.env.production
-/back-end/.env
+# /back-end/.env
 /back-end/.env.local
 /back-end/.env.development
 /back-end/.env.production

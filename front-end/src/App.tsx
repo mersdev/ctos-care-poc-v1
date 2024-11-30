@@ -18,6 +18,7 @@ import Chatbox from "./components/Chat/Chatbox";
 import FullTodoList from "./components/Todo/FullTodoList";
 import JobMarketTrend from "./components/JobMarketTrend/jobMarketTrend";
 import FtosReport from "./components/FTOSReport/ftosReport";
+import Promo from "./components/Promo/Promo";
 
 const App: React.FC = () => {
   // const [reportData] = React.useState(mockData);
@@ -86,6 +87,14 @@ const App: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <FullTodoList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/promotion"
+              element={
+                <ProtectedRoute>
+                  <Promo />
                 </ProtectedRoute>
               }
             />

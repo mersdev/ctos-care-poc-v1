@@ -15,13 +15,17 @@ import {
   DashboardData,
 } from "../../services/dashboardService";
 import { useToast } from "@/components/ui/use-toast";
-import TodoList from "../Todo/TodoList";
+import TodoListDash from "../Todo/TodoListDash";
 import {
-  IconBasketDollar,
   IconFileAnalytics,
   IconBuildingBank,
   IconPigMoney,
   IconStars,
+  IconTargetArrow,
+  IconCalendarMonth,
+  IconCreditCardPay,
+  IconChartBar,
+  IconMessageChatbot,
 } from "@tabler/icons-react";
 
 const recommendations = [
@@ -151,7 +155,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
         <div className="col-span-10 md:col-span-6">
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mb-6">
+          <div className="grid gap-5  lg:grid-cols-3 mb-6">
             {cardData.map((item) => (
               <Card key={item.id}>
                 <CardContent className="pt-6 flex-col">
@@ -181,7 +185,10 @@ const CentralizedFinancialDashboard: React.FC = () => {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle>Monthly Overview</CardTitle>
+                <CardTitle className="flex gap-2 items-start md:items-center  justify-start">
+                  <IconCalendarMonth className="flex-shrink-0" />
+                  <span className="leading-none"> Monthly Overview</span>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={350}>
@@ -198,19 +205,22 @@ const CentralizedFinancialDashboard: React.FC = () => {
           <div className="mt-5">
             <Card>
               <CardHeader>
-                <CardTitle>Outstanding Loan</CardTitle>
+                <CardTitle className="flex gap-2 items-start md:items-center justify-start">
+                  <IconCreditCardPay className="flex-shrink-0" />
+                  <span className="leading-none">Outstanding Loan</span>
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="divide-y divide-gray-300">
+                <div className="md:divide-y md:divide-gray-300">
                   {loanData.map((loan, index) => (
                     <div
                       key={index}
-                      className="flex md:items-center  items-start md:flex-row flex-col justify-between py-2"
+                      className="flex md:items-center items-start md:flex-row flex-col justify-between py-2"
                     >
-                      <div className="flex items-center justify-center ml-4 md:ml-4 w-8 h-8 rounded-md bg-black text-white text-lg font-bold">
+                      <div className="flex items-center justify-center ml-0 md:ml-4 w-8 h-8 rounded-md bg-black text-white text-lg font-bold">
                         {loan.avatar}
                       </div>
-                      <div className="flex ml-4 items-start md:items-center w-full md:gap-2 flex-col md:flex-row justify-between py-4">
+                      <div className="flex md:ml-4 ml-0 items-start md:items-center w-full md:gap-2 flex-col md:flex-row justify-between py-4">
                         <div>
                           <p className="text-sm font-semibold text-gray-800">
                             {loan.title} - {loan.amount}
@@ -234,14 +244,18 @@ const CentralizedFinancialDashboard: React.FC = () => {
         <div className="col-span-10 md:col-span-4">
           <div className="w-full">
             <div className="w-full flex justify-end">
-              <button className="flex items-center text-gray-400 text-sm">
+              <button
+                // onClick={() => navigate("/todo-list")}
+                className="flex items-center text-sm hover-focus-effect"
+              >
                 DOWNLOAD FULL REPORT <IconFileAnalytics />
               </button>
             </div>
             <div className="bg-[#1a1a1a] mt-1 rounded-xl shadow-md p-4 mb-5">
               <div className="flex justify-between items-center mb-2">
-                <h3 className="text-white font-semibold text-lg">
-                  Goal Status
+                <h3 className="text-lg font-bold flex gap-2 text-white items-start md:items-center justify-start">
+                  <IconTargetArrow className="flex-shrink-0" />
+                  <span className="leading-none"> Goal Status</span>
                 </h3>
               </div>
               <p className="text-gray-400 text-sm mb-5">In progress</p>
@@ -259,9 +273,13 @@ const CentralizedFinancialDashboard: React.FC = () => {
               </button>
             </div>
           </div>
-          <TodoList />
+          <TodoListDash />
           <div className="bg-black text-white rounded-lg shadow-lg p-6 mb-6 mt-5">
-            <h3 className="text-lg font-bold">AI-Powered Recommendations</h3>
+            <h3 className="text-lg font-bold flex gap-2 items-start md:items-center justify-start">
+              <IconMessageChatbot className="flex-shrink-0" />
+              <span className="leading-none">AI-Powered Recommendations</span>
+            </h3>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
               <ul className="list-disc list-inside space-y-2">
                 {leftColumn.map((item: any) => (
@@ -281,7 +299,10 @@ const CentralizedFinancialDashboard: React.FC = () => {
           </div>
           <Card>
             <CardHeader>
-              <CardTitle>Spending by Category</CardTitle>
+              <CardTitle className="flex gap-2 items-start md:items-center  justify-start">
+                <IconChartBar className="flex-shrink-0" />
+                <span className="leading-none"> Spending by Category</span>
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={350}>

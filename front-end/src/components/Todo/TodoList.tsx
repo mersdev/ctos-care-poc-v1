@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { IconChecklist, IconTrash } from "@tabler/icons-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { initialTodos } from "./TodoListDash";
 
 interface Todo {
   id: number;
@@ -13,31 +14,31 @@ interface Todo {
 }
 
 const TodoList: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
   const [newTodo, setNewTodo] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setTodos([
-      { id: 1, text: "Pay credit card bill on time", completed: false },
-      {
-        id: 2,
-        text: "Reduce credit utilization to below 30%",
-        completed: false,
-      },
-      {
-        id: 3,
-        text: "Dispute any inaccuracies in credit report",
-        completed: false,
-      },
-      {
-        id: 4,
-        text: "Set up automatic payments for recurring bills",
-        completed: false,
-      },
-      { id: 5, text: "Apply for a credit limit increase", completed: false },
-    ]);
-  }, []);
+  // useEffect(() => {
+  //   setTodos([
+  //     { id: 1, text: "Pay credit card bill on time", completed: false },
+  //     {
+  //       id: 2,
+  //       text: "Reduce credit utilization to below 30%",
+  //       completed: false,
+  //     },
+  //     {
+  //       id: 3,
+  //       text: "Dispute any inaccuracies in credit report",
+  //       completed: false,
+  //     },
+  //     {
+  //       id: 4,
+  //       text: "Set up automatic payments for recurring bills",
+  //       completed: false,
+  //     },
+  //     { id: 5, text: "Apply for a credit limit increase", completed: false },
+  //   ]);
+  // }, []);
 
   const addTodo = () => {
     if (newTodo.trim()) {
@@ -59,25 +60,26 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <div className="bg-transparent">
+    <div className="container mx-auto p-2">
+      <div className="flex justify-between mb-6">
+        <h1 className="text-3xl font-bold ">
+          Tasks to Improve Your Credit Score
+        </h1>{" "}
+        {location.pathname !== "/dashboard" && (
+          <button
+            onClick={() => navigate("/todo-list")}
+            className="flex items-center text-sm hover-focus-effect"
+          >
+            VIEW ALL RECORD
+          </button>
+        )}
+      </div>
       {/* <h1 className="text-3xl font-bold mb-6">
         CTOS Score Improvement Todo List
       </h1> */}
       <Card>
-        <CardHeader className="flex justify-between flex-row items-center">
-          <CardTitle>Tasks to Improve Your Credit Score</CardTitle>{" "}
-          {location.pathname !== "/dashboard" && (
-            <button
-              onClick={() => navigate("/todo-list")}
-              className="flex items-center text-sm hover-focus-effect"
-            >
-              VIEW ALL RECORD
-            </button>
-          )}
-        </CardHeader>
-
         <CardContent>
-          <div className="flex mb-4 items-center pr-2">
+          <div className="flex mb-4 mt-8 items-center pr-2">
             <Input
               type="text"
               placeholder="Add a new task"

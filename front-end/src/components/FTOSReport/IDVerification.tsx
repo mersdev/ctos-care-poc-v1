@@ -7,6 +7,7 @@ interface IDVerificationData {
   dob?: string;
   nationality?: string;
   address?: string;
+  occupation?: string;
 }
 
 interface IDVerificationProps {
@@ -20,6 +21,7 @@ const IDVerification: React.FC<IDVerificationProps> = ({ data = {} }) => {
     dob = "Not Available",
     nationality = "Not Available",
     address = "Not Available",
+    occupation = "Not Available",
   } = data;
 
   return (
@@ -51,6 +53,10 @@ const IDVerification: React.FC<IDVerificationProps> = ({ data = {} }) => {
             <div>
               <p className="text-sm font-medium">Address</p>
               <p className="text-base">{address}</p>
+            </div>
+            <div>
+              <p className="text-sm font-medium">Occupation</p>
+              <p className="text-base">{occupation}</p>
             </div>
           </div>
         </div>

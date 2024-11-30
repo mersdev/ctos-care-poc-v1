@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard/CentralizedFinancialDashboard";
-import CreditReport from "./components/CreditReport/CreditReport";
 import TodoList from "./components/Todo/TodoList";
 import Profile from "./components/Profile/Profile";
 import { Toaster } from "./components/ui/toaster";
@@ -17,6 +16,8 @@ import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import Chatbox from "./components/Chat/Chatbox";
 import FullTodoList from "./components/Todo/FullTodoList";
+import JobMarketTrend from "./components/JobMarketTrend/jobMarketTrend";
+import FtosReport from "./components/FTOSReport/ftosReport";
 
 const App: React.FC = () => {
   // const [reportData] = React.useState(mockData);
@@ -41,10 +42,18 @@ const App: React.FC = () => {
               }
             />
             <Route
+              path="/jobs"
+              element={
+                <ProtectedRoute>
+                  <JobMarketTrend />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/credit-report"
               element={
                 <ProtectedRoute>
-                  <CreditReport />
+                  <FtosReport />
                 </ProtectedRoute>
               }
             />

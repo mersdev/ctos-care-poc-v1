@@ -1,0 +1,44 @@
+{
+  "tradings": [
+    {
+      "id": 1,
+      "code": 5285,
+      "name": "Maybank",
+      "invested_price": 500,
+      "current_price": 520,
+      "type": "stock"
+    },
+    {
+      "id": 2,
+      "code": 5099,
+      "name": "AirAsia",
+      "invested_price": 300,
+      "current_price": 280,
+      "type": "stock"
+    },
+    {
+      "id": 3,
+      "code": 1001,
+      "name": "Bitcoin",
+      "invested_price": 200,
+      "current_price": 250,
+      "type": "crypto"
+    },
+    {
+      "id": 4,
+      "code": 2001,
+      "name": "Public Gold Bar (1g)",
+      "invested_price": 250,
+      "current_price": 270,
+      "type": "gold"
+    },
+    {
+      "id": 5,
+      "code": 1002,
+      "name": "Ethereum",
+      "invested_price": 150,
+      "current_price": 140,
+      "type": "crypto"
+    }
+  ]
+}

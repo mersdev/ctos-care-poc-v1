@@ -1,0 +1,1004 @@
+{
+  "data": [
+    {
+      "projectId": 1001,
+      "job_title": "Senior Full Stack Developer - E-commerce Platform",
+      "job_description": "Looking for an experienced full stack developer to build a modern e-commerce platform using React and Node.js. Must have experience with payment gateway integration and responsive design.",
+      "tags": ["react", "nodejs", "typescript", "mongodb", "payment-integration"],
+      "client_state": "Klang Valley",
+      "min_price": "3000",
+      "max_price": "8000",
+      "avg_price": "5500"
+    },
+    {
+      "projectId": 1002,
+      "job_title": "Data Scientist - Market Analysis Project",
+      "job_description": "Seeking a data scientist to analyze customer behavior patterns and provide actionable insights. Experience with Python and machine learning required.",
+      "tags": "['python', 'machine-learning', 'data-analysis', 'statistics']",
+      "client_state": "Penang",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1003,
+      "job_title": "UI/UX Designer for Mobile App",
+      "job_description": "Design intuitive and engaging user interfaces for a new mobile application. Must have experience with Figma and mobile-first design principles.",
+      "tags": "['ui-design', 'ux-design', 'figma', 'mobile-design', 'prototyping']",
+      "client_state": "Johor",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1004,
+      "job_title": "SEO Specialist - Digital Marketing",
+      "job_description": "Optimize website content and implement SEO strategies to improve search engine rankings. Experience with Google Analytics and SEO tools required.",
+      "tags": "['seo', 'digital-marketing', 'google-analytics', 'content-optimization']",
+      "client_state": "Klang Valley",
+      "min_price": "2000",
+      "max_price": "5000",
+      "avg_price": "3500"
+    },
+    {
+      "projectId": 1005,
+      "job_title": "Mobile App Developer - iOS",
+      "job_description": "Develop a native iOS application using Swift. Experience with SwiftUI and Core Data required.",
+      "tags": "['ios', 'swift', 'swiftui', 'mobile-development', 'core-data']",
+      "client_state": "Penang",
+      "min_price": "3500",
+      "max_price": "7500",
+      "avg_price": "5500"
+    },
+    {
+      "projectId": 1006,
+      "job_title": "Content Writer - Tech Blog",
+      "job_description": "Create engaging technical content for our blog. Knowledge of SEO and technology trends required.",
+      "tags": "['content-writing', 'seo', 'technical-writing', 'blogging']",
+      "client_state": "Johor",
+      "min_price": "1500",
+      "max_price": "4000",
+      "avg_price": "2750"
+    },
+    {
+      "projectId": 1007,
+      "job_title": "Backend Developer - API Development",
+      "job_description": "Design and implement RESTful APIs using Node.js and Express. Experience with MongoDB required.",
+      "tags": "['nodejs', 'express', 'mongodb', 'api-development', 'backend']",
+      "client_state": "Klang Valley",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1008,
+      "job_title": "Video Editor - Marketing Content",
+      "job_description": "Edit promotional videos for social media platforms. Experience with Adobe Premiere Pro required.",
+      "tags": "['video-editing', 'adobe-premiere', 'social-media', 'content-creation']",
+      "client_state": "Penang",
+      "min_price": "2000",
+      "max_price": "5000",
+      "avg_price": "3500"
+    },
+    {
+      "projectId": 1009,
+      "job_title": "Frontend Developer - React",
+      "job_description": "Develop responsive web applications using React and TypeScript. Experience with Redux required.",
+      "tags": "['react', 'typescript', 'redux', 'frontend', 'responsive-design']",
+      "client_state": "Johor",
+      "min_price": "2800",
+      "max_price": "6500",
+      "avg_price": "4650"
+    },
+    {
+      "projectId": 1010,
+      "job_title": "DevOps Engineer",
+      "job_description": "Implement and maintain CI/CD pipelines. Experience with Docker and Kubernetes required.",
+      "tags": "['devops', 'docker', 'kubernetes', 'ci-cd', 'aws']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1011,
+      "job_title": "Graphic Designer - Brand Identity",
+      "job_description": "Create brand identity materials including logos and style guides. Proficiency in Adobe Creative Suite required.",
+      "tags": "['graphic-design', 'adobe-creative-suite', 'branding', 'logo-design']",
+      "client_state": "Penang",
+      "min_price": "2000",
+      "max_price": "5000",
+      "avg_price": "3500"
+    },
+    {
+      "projectId": 1012,
+      "job_title": "Python Developer - Data Processing",
+      "job_description": "Develop data processing scripts using Python. Experience with Pandas and NumPy required.",
+      "tags": "['python', 'pandas', 'numpy', 'data-processing', 'scripting']",
+      "client_state": "Johor",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1013,
+      "job_title": "Social Media Manager",
+      "job_description": "Manage social media presence across multiple platforms. Experience with content planning and analytics required.",
+      "tags": "['social-media', 'content-planning', 'analytics', 'digital-marketing']",
+      "client_state": "Klang Valley",
+      "min_price": "2000",
+      "max_price": "5000",
+      "avg_price": "3500"
+    },
+    {
+      "projectId": 1014,
+      "job_title": "Mobile App Developer - Android",
+      "job_description": "Develop native Android applications using Kotlin. Experience with Jetpack Compose required.",
+      "tags": "['android', 'kotlin', 'jetpack-compose', 'mobile-development']",
+      "client_state": "Penang",
+      "min_price": "3500",
+      "max_price": "7500",
+      "avg_price": "5500"
+    },
+    {
+      "projectId": 1015,
+      "job_title": "Technical Writer - Documentation",
+      "job_description": "Create technical documentation for software products. Experience with API documentation required.",
+      "tags": "['technical-writing', 'documentation', 'api-documentation', 'markdown']",
+      "client_state": "Johor",
+      "min_price": "2000",
+      "max_price": "5000",
+      "avg_price": "3500"
+    },
+    {
+      "projectId": 1016,
+      "job_title": "Database Administrator",
+      "job_description": "Manage and optimize database performance. Experience with PostgreSQL and MySQL required.",
+      "tags": "['database', 'postgresql', 'mysql', 'optimization', 'administration']",
+      "client_state": "Klang Valley",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1017,
+      "job_title": "UI Designer - Web Applications",
+      "job_description": "Design user interfaces for web applications. Experience with Adobe XD and Sketch required.",
+      "tags": "['ui-design', 'adobe-xd', 'sketch', 'web-design']",
+      "client_state": "Penang",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1018,
+      "job_title": "Full Stack JavaScript Developer",
+      "job_description": "Develop full stack applications using MERN stack. Experience with GraphQL required.",
+      "tags": "['javascript', 'react', 'nodejs', 'mongodb', 'graphql']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1019,
+      "job_title": "Digital Marketing Specialist",
+      "job_description": "Implement digital marketing strategies across multiple channels. Experience with PPC and email marketing required.",
+      "tags": "['digital-marketing', 'ppc', 'email-marketing', 'analytics']",
+      "client_state": "Klang Valley",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1020,
+      "job_title": "Cloud Solutions Architect",
+      "job_description": "Design and implement cloud-based solutions. Experience with AWS and Azure required.",
+      "tags": "['cloud', 'aws', 'azure', 'architecture', 'solutions-design']",
+      "client_state": "Penang",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    },
+    {
+      "projectId": 1021,
+      "job_title": "Motion Graphics Designer",
+      "job_description": "Create engaging motion graphics for digital content. Experience with After Effects required.",
+      "tags": "['motion-graphics', 'after-effects', 'animation', 'video']",
+      "client_state": "Johor",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1022,
+      "job_title": "Security Engineer",
+      "job_description": "Implement and maintain security measures. Experience with penetration testing required.",
+      "tags": "['security', 'penetration-testing', 'cybersecurity', 'network-security']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1023,
+      "job_title": "Business Intelligence Analyst",
+      "job_description": "Analyze business data and create reports. Experience with Power BI required.",
+      "tags": "['business-intelligence', 'power-bi', 'data-analysis', 'reporting']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1024,
+      "job_title": "WordPress Developer",
+      "job_description": "Develop and customize WordPress themes and plugins. Experience with PHP required.",
+      "tags": "['wordpress', 'php', 'web-development', 'cms']",
+      "client_state": "Johor",
+      "min_price": "2000",
+      "max_price": "5000",
+      "avg_price": "3500"
+    },
+    {
+      "projectId": 1025,
+      "job_title": "Machine Learning Engineer",
+      "job_description": "Develop and implement machine learning models. Experience with TensorFlow required.",
+      "tags": "['machine-learning', 'tensorflow', 'python', 'ai']",
+      "client_state": "Klang Valley",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1026,
+      "job_title": "Content Strategist",
+      "job_description": "Develop content strategies for digital platforms. Experience with content marketing required.",
+      "tags": "['content-strategy', 'content-marketing', 'seo', 'digital-marketing']",
+      "client_state": "Penang",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1027,
+      "job_title": "React Native Developer",
+      "job_description": "Develop cross-platform mobile applications. Experience with React Native required.",
+      "tags": "['react-native', 'mobile-development', 'javascript', 'cross-platform']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1028,
+      "job_title": "Quality Assurance Engineer",
+      "job_description": "Develop and execute test plans for software applications. Experience with automated testing required.",
+      "tags": "['qa', 'testing', 'automation', 'selenium']",
+      "client_state": "Klang Valley",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1029,
+      "job_title": "UX Researcher",
+      "job_description": "Conduct user research and usability testing. Experience with user research methodologies required.",
+      "tags": "['ux-research', 'user-testing', 'research-methods', 'analysis']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1030,
+      "job_title": "Backend Developer - Java",
+      "job_description": "Develop backend services using Java Spring Boot. Experience with microservices required.",
+      "tags": "['java', 'spring-boot', 'microservices', 'backend']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1031,
+      "job_title": "Frontend Developer - Vue.js",
+      "job_description": "Develop web applications using Vue.js. Experience with Vuex required.",
+      "tags": "['vue', 'javascript', 'frontend', 'vuex']",
+      "client_state": "Klang Valley",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1032,
+      "job_title": "Data Engineer",
+      "job_description": "Design and implement data pipelines. Experience with ETL processes required.",
+      "tags": "['data-engineering', 'etl', 'python', 'sql']",
+      "client_state": "Penang",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1033,
+      "job_title": "Product Designer",
+      "job_description": "Design user-centered digital products. Experience with design systems required.",
+      "tags": "['product-design', 'ui-design', 'ux-design', 'design-systems']",
+      "client_state": "Johor",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1034,
+      "job_title": "Systems Administrator",
+      "job_description": "Manage and maintain IT infrastructure. Experience with Linux systems required.",
+      "tags": "['systems-administration', 'linux', 'networking', 'security']",
+      "client_state": "Klang Valley",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1035,
+      "job_title": "Email Marketing Specialist",
+      "job_description": "Design and implement email marketing campaigns. Experience with marketing automation required.",
+      "tags": "['email-marketing', 'marketing-automation', 'campaign-management']",
+      "client_state": "Penang",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1036,
+      "job_title": "Flutter Developer",
+      "job_description": "Develop cross-platform mobile applications using Flutter. Experience with Dart required.",
+      "tags": "['flutter', 'dart', 'mobile-development', 'cross-platform']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1037,
+      "job_title": "Performance Marketing Specialist",
+      "job_description": "Optimize digital marketing campaigns. Experience with Google Ads required.",
+      "tags": "['performance-marketing', 'google-ads', 'analytics', 'optimization']",
+      "client_state": "Klang Valley",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1038,
+      "job_title": "Unity Game Developer",
+      "job_description": "Develop mobile games using Unity. Experience with C# required.",
+      "tags": "['unity', 'c#', 'game-development', 'mobile-games']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1039,
+      "job_title": "Technical Project Manager",
+      "job_description": "Manage software development projects. Experience with Agile methodologies required.",
+      "tags": "['project-management', 'agile', 'scrum', 'technical-leadership']",
+      "client_state": "Johor",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1040,
+      "job_title": "Blockchain Developer",
+      "job_description": "Develop blockchain applications. Experience with Solidity required.",
+      "tags": "['blockchain', 'solidity', 'smart-contracts', 'ethereum']",
+      "client_state": "Klang Valley",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1041,
+      "job_title": "3D Artist",
+      "job_description": "Create 3D models and animations. Experience with Maya or Blender required.",
+      "tags": "['3d-modeling', 'animation', 'maya', 'blender']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1042,
+      "job_title": "AR/VR Developer",
+      "job_description": "Develop augmented and virtual reality applications. Experience with Unity or Unreal required.",
+      "tags": "['ar', 'vr', 'unity', 'unreal-engine']",
+      "client_state": "Johor",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1043,
+      "job_title": "Network Engineer",
+      "job_description": "Design and implement network solutions. Experience with Cisco networking required.",
+      "tags": "['networking', 'cisco', 'network-security', 'infrastructure']",
+      "client_state": "Klang Valley",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1044,
+      "job_title": "Growth Hacker",
+      "job_description": "Implement growth strategies for digital products. Experience with A/B testing required.",
+      "tags": "['growth-hacking', 'marketing', 'analytics', 'a-b-testing']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1045,
+      "job_title": "Ruby on Rails Developer",
+      "job_description": "Develop web applications using Ruby on Rails. Experience with Ruby required.",
+      "tags": "['ruby', 'rails', 'web-development', 'backend']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1046,
+      "job_title": "Salesforce Developer",
+      "job_description": "Develop and customize Salesforce solutions. Experience with Apex required.",
+      "tags": "['salesforce', 'apex', 'lightning', 'crm']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1047,
+      "job_title": "Information Security Analyst",
+      "job_description": "Implement and monitor security measures. Experience with security tools required.",
+      "tags": "['information-security', 'cybersecurity', 'security-analysis']",
+      "client_state": "Penang",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1048,
+      "job_title": "Laravel Developer",
+      "job_description": "Develop web applications using Laravel. Experience with PHP required.",
+      "tags": "['laravel', 'php', 'web-development', 'mysql']",
+      "client_state": "Johor",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1049,
+      "job_title": "Embedded Systems Engineer",
+      "job_description": "Develop embedded systems software. Experience with C/C++ required.",
+      "tags": "['embedded-systems', 'c++', 'firmware', 'iot']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1050,
+      "job_title": "AI Research Engineer",
+      "job_description": "Conduct research in artificial intelligence. Experience with deep learning required.",
+      "tags": "['ai', 'deep-learning', 'research', 'python']",
+      "client_state": "Penang",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    },
+    {
+      "projectId": 1051,
+      "job_title": "Next.js Frontend Developer",
+      "job_description": "Develop modern web applications using Next.js and React. Experience with server-side rendering required.",
+      "tags": "['nextjs', 'react', 'typescript', 'frontend', 'ssr']",
+      "client_state": "Klang Valley",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1052,
+      "job_title": "Digital Analytics Specialist",
+      "job_description": "Analyze digital marketing campaigns and provide actionable insights. Experience with Google Analytics 4 required.",
+      "tags": "['analytics', 'google-analytics', 'data-analysis', 'marketing']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1053,
+      "job_title": "E-commerce Specialist",
+      "job_description": "Manage and optimize e-commerce platforms. Experience with Shopify and WooCommerce required.",
+      "tags": "['e-commerce', 'shopify', 'woocommerce', 'digital-marketing']",
+      "client_state": "Johor",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1054,
+      "job_title": "AI Chatbot Developer",
+      "job_description": "Develop intelligent chatbot solutions using NLP. Experience with machine learning frameworks required.",
+      "tags": "['ai', 'nlp', 'chatbot', 'machine-learning', 'python']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1055,
+      "job_title": "Web3 Developer",
+      "job_description": "Develop decentralized applications using blockchain technology. Experience with Ethereum and Web3.js required.",
+      "tags": "['web3', 'blockchain', 'ethereum', 'solidity', 'dapp']",
+      "client_state": "Penang",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1056,
+      "job_title": "Marketing Automation Specialist",
+      "job_description": "Implement and manage marketing automation workflows. Experience with HubSpot or Marketo required.",
+      "tags": "['marketing-automation', 'hubspot', 'email-marketing', 'crm']",
+      "client_state": "Johor",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1057,
+      "job_title": "Cloud Native Developer",
+      "job_description": "Develop cloud-native applications using microservices architecture. Experience with Kubernetes required.",
+      "tags": "['cloud-native', 'kubernetes', 'docker', 'microservices']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1058,
+      "job_title": "Conversion Rate Optimizer",
+      "job_description": "Optimize website conversion rates through A/B testing and analytics. Experience with optimization tools required.",
+      "tags": "['cro', 'ab-testing', 'analytics', 'optimization']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1059,
+      "job_title": "Mobile Game Designer",
+      "job_description": "Design engaging mobile game experiences. Experience with game design principles and Unity required.",
+      "tags": "['game-design', 'unity', 'mobile-games', 'ui-design']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1060,
+      "job_title": "Cybersecurity Consultant",
+      "job_description": "Provide cybersecurity consulting and perform security assessments. Experience with security frameworks required.",
+      "tags": "['cybersecurity', 'security-assessment', 'consulting', 'compliance']",
+      "client_state": "Klang Valley",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1061,
+      "job_title": "Automation Testing Engineer",
+      "job_description": "Develop and maintain automated test suites. Experience with Selenium and TestNG required.",
+      "tags": "['automation-testing', 'selenium', 'testng', 'qa']",
+      "client_state": "Penang",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1062,
+      "job_title": "Digital Content Producer",
+      "job_description": "Create engaging digital content for multiple platforms. Experience with video production and editing required.",
+      "tags": "['content-production', 'video-editing', 'social-media', 'storytelling']",
+      "client_state": "Johor",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1063,
+      "job_title": "Serverless Architecture Developer",
+      "job_description": "Design and implement serverless solutions using AWS Lambda. Experience with cloud services required.",
+      "tags": "['serverless', 'aws-lambda', 'cloud-computing', 'microservices']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1064,
+      "job_title": "Brand Identity Designer",
+      "job_description": "Create comprehensive brand identity systems. Experience with logo design and brand guidelines required.",
+      "tags": "['branding', 'logo-design', 'visual-identity', 'typography']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1065,
+      "job_title": "MLOps Engineer",
+      "job_description": "Implement and maintain machine learning operations pipelines. Experience with ML deployment required.",
+      "tags": "['mlops', 'machine-learning', 'devops', 'python']",
+      "client_state": "Klang Valley",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1066,
+      "job_title": "Performance Marketing Manager",
+      "job_description": "Manage and optimize paid marketing campaigns. Experience with Facebook Ads and Google Ads required.",
+      "tags": "['performance-marketing', 'paid-ads', 'social-media-marketing', 'analytics']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1067,
+      "job_title": "Site Reliability Engineer",
+      "job_description": "Ensure system reliability and performance. Experience with monitoring tools and automation required.",
+      "tags": "['sre', 'devops', 'monitoring', 'automation']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1068,
+      "job_title": "Interactive Designer",
+      "job_description": "Design interactive experiences for web and mobile. Experience with animation and motion design required.",
+      "tags": "['interactive-design', 'animation', 'motion-design', 'web-design']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1069,
+      "job_title": "Data Privacy Specialist",
+      "job_description": "Ensure compliance with data protection regulations. Experience with GDPR and privacy frameworks required.",
+      "tags": "['data-privacy', 'compliance', 'security', 'gdpr']",
+      "client_state": "Johor",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1070,
+      "job_title": "API Integration Specialist",
+      "job_description": "Develop and maintain API integrations. Experience with RESTful APIs and GraphQL required.",
+      "tags": "['api-integration', 'rest', 'graphql', 'backend']",
+      "client_state": "Klang Valley",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1071,
+      "job_title": "Low-Code Platform Developer",
+      "job_description": "Develop applications using low-code platforms. Experience with OutSystems or Mendix required.",
+      "tags": "['low-code', 'outsystems', 'rapid-development', 'enterprise']",
+      "client_state": "Penang",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1072,
+      "job_title": "Digital Transformation Consultant",
+      "job_description": "Guide organizations through digital transformation initiatives. Experience with change management required.",
+      "tags": "['digital-transformation', 'consulting', 'strategy', 'change-management']",
+      "client_state": "Klang Valley",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    },
+    {
+      "projectId": 1073,
+      "job_title": "Voice UI Designer",
+      "job_description": "Design voice user interfaces for smart assistants. Experience with VUI design patterns required.",
+      "tags": "['voice-ui', 'conversation-design', 'ux-design', 'alexa']",
+      "client_state": "Johor",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1074,
+      "job_title": "Quantum Computing Researcher",
+      "job_description": "Research quantum computing applications. Experience with quantum algorithms required.",
+      "tags": "['quantum-computing', 'research', 'algorithms', 'physics']",
+      "client_state": "Klang Valley",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    },
+    {
+      "projectId": 1075,
+      "job_title": "Digital Product Owner",
+      "job_description": "Lead digital product development initiatives. Experience with agile product management required.",
+      "tags": "['product-management', 'agile', 'digital-products', 'strategy']",
+      "client_state": "Penang",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1076,
+      "job_title": "Edge Computing Developer",
+      "job_description": "Develop applications for edge computing environments. Experience with IoT platforms required.",
+      "tags": "['edge-computing', 'iot', 'embedded-systems', 'networking']",
+      "client_state": "Johor",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1077,
+      "job_title": "Augmented Reality Developer",
+      "job_description": "Create AR experiences for mobile applications. Experience with ARKit or ARCore required.",
+      "tags": "['augmented-reality', 'arkit', 'mobile-development', '3d-modeling']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1078,
+      "job_title": "Digital Asset Manager",
+      "job_description": "Manage digital assets and implement DAM solutions. Experience with asset management systems required.",
+      "tags": "['digital-asset-management', 'content-management', 'metadata', 'organization']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1079,
+      "job_title": "Robotic Process Automation Developer",
+      "job_description": "Develop RPA solutions for business processes. Experience with UiPath or Blue Prism required.",
+      "tags": "['rpa', 'automation', 'uipath', 'process-automation']",
+      "client_state": "Johor",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1080,
+      "job_title": "5G Network Specialist",
+      "job_description": "Design and implement 5G network solutions. Experience with network architecture required.",
+      "tags": "['5g', 'networking', 'telecommunications', 'wireless']",
+      "client_state": "Klang Valley",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1081,
+      "job_title": "TikTok Content Creator",
+      "job_description": "Create engaging short-form video content. Experience with viral content creation required.",
+      "tags": "['tiktok', 'social-media', 'video-creation', 'content-strategy']",
+      "client_state": "Penang",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1082,
+      "job_title": "NFT Artist",
+      "job_description": "Create unique digital artworks for NFT marketplaces. Experience with crypto art required.",
+      "tags": "['nft', 'digital-art', 'blockchain', 'crypto']",
+      "client_state": "Klang Valley",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1083,
+      "job_title": "Podcast Producer",
+      "job_description": "Produce and edit podcast content. Experience with audio editing and storytelling required.",
+      "tags": "['podcast', 'audio-editing', 'content-production', 'storytelling']",
+      "client_state": "Johor",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1084,
+      "job_title": "Influencer Marketing Manager",
+      "job_description": "Manage influencer marketing campaigns. Experience with social media partnerships required.",
+      "tags": "['influencer-marketing', 'social-media', 'campaign-management', 'partnerships']",
+      "client_state": "Klang Valley",
+      "min_price": "3500",
+      "max_price": "8000",
+      "avg_price": "5750"
+    },
+    {
+      "projectId": 1085,
+      "job_title": "Virtual Event Producer",
+      "job_description": "Produce and manage virtual events. Experience with streaming platforms required.",
+      "tags": "['virtual-events', 'streaming', 'event-management', 'production']",
+      "client_state": "Penang",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1086,
+      "job_title": "E-learning Content Developer",
+      "job_description": "Create engaging online learning content. Experience with instructional design required.",
+      "tags": "['e-learning', 'instructional-design', 'content-development', 'lms']",
+      "client_state": "Johor",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1087,
+      "job_title": "Metaverse Designer",
+      "job_description": "Design virtual environments for the metaverse. Experience with 3D modeling required.",
+      "tags": "['metaverse', '3d-design', 'virtual-reality', 'unity']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1088,
+      "job_title": "Marketing Copywriter",
+      "job_description": "Write compelling marketing copy. Experience with SEO and content strategy required.",
+      "tags": "['copywriting', 'marketing', 'seo', 'content-strategy']",
+      "client_state": "Penang",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1089,
+      "job_title": "Motion Graphics Designer",
+      "job_description": "Create animated graphics for digital media. Experience with After Effects required.",
+      "tags": "['motion-graphics', 'after-effects', 'animation', 'design']",
+      "client_state": "Johor",
+      "min_price": "3000",
+      "max_price": "7000",
+      "avg_price": "5000"
+    },
+    {
+      "projectId": 1090,
+      "job_title": "Community Manager",
+      "job_description": "Manage and grow online communities. Experience with community engagement required.",
+      "tags": "['community-management', 'social-media', 'engagement', 'moderation']",
+      "client_state": "Klang Valley",
+      "min_price": "2500",
+      "max_price": "6000",
+      "avg_price": "4250"
+    },
+    {
+      "projectId": 1091,
+      "job_title": "Fintech Solutions Architect",
+      "job_description": "Design financial technology solutions. Experience with payment systems and banking APIs required.",
+      "tags": "['fintech', 'architecture', 'payment-systems', 'banking']",
+      "client_state": "Klang Valley",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    },
+    {
+      "projectId": 1092,
+      "job_title": "Sustainable Technology Consultant",
+      "job_description": "Advise on sustainable technology solutions. Experience with green tech and carbon footprint analysis required.",
+      "tags": "['sustainability', 'green-tech', 'consulting', 'environmental-impact']",
+      "client_state": "Penang",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1093,
+      "job_title": "Digital Healthcare Specialist",
+      "job_description": "Develop digital health solutions. Experience with healthcare systems and HIPAA compliance required.",
+      "tags": "['healthcare', 'digital-health', 'compliance', 'telemedicine']",
+      "client_state": "Johor",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1094,
+      "job_title": "Smart City Solutions Developer",
+      "job_description": "Develop IoT solutions for smart cities. Experience with sensor networks and data analytics required.",
+      "tags": "['smart-city', 'iot', 'sensor-networks', 'data-analytics']",
+      "client_state": "Klang Valley",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1095,
+      "job_title": "Digital Ethics Officer",
+      "job_description": "Ensure ethical AI and technology practices. Experience with AI ethics and compliance required.",
+      "tags": "['ai-ethics', 'compliance', 'digital-ethics', 'governance']",
+      "client_state": "Penang",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1096,
+      "job_title": "Quantum Software Developer",
+      "job_description": "Develop quantum computing applications. Experience with quantum programming frameworks required.",
+      "tags": "['quantum-computing', 'quantum-programming', 'physics', 'algorithms']",
+      "client_state": "Klang Valley",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    },
+    {
+      "projectId": 1097,
+      "job_title": "Digital Twin Developer",
+      "job_description": "Create digital twin solutions for industrial systems. Experience with simulation and modeling required.",
+      "tags": "['digital-twin', 'simulation', 'industrial-iot', 'modeling']",
+      "client_state": "Johor",
+      "min_price": "4000",
+      "max_price": "9000",
+      "avg_price": "6500"
+    },
+    {
+      "projectId": 1098,
+      "job_title": "Autonomous Systems Engineer",
+      "job_description": "Develop autonomous system solutions. Experience with robotics and control systems required.",
+      "tags": "['autonomous-systems', 'robotics', 'control-systems', 'ai']",
+      "client_state": "Klang Valley",
+      "min_price": "4500",
+      "max_price": "10000",
+      "avg_price": "7250"
+    },
+    {
+      "projectId": 1099,
+      "job_title": "Brain-Computer Interface Developer",
+      "job_description": "Develop BCI applications and interfaces. Experience with neural signal processing required.",
+      "tags": "['bci', 'neurotechnology', 'signal-processing', 'machine-learning']",
+      "client_state": "Penang",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    },
+    {
+      "projectId": 1100,
+      "job_title": "Space Technology Engineer",
+      "job_description": "Develop solutions for space technology applications. Experience with satellite systems required.",
+      "tags": "['space-tech', 'satellite-systems', 'aerospace', 'engineering']",
+      "client_state": "Klang Valley",
+      "min_price": "5000",
+      "max_price": "12000",
+      "avg_price": "8500"
+    }
+  ]
+}

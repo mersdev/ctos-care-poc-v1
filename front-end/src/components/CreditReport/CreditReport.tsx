@@ -236,8 +236,5 @@ const CreditReport: React.FC = () => {
     </div>
   );
 };
-  );
-};
 
-export default CreditReport;
 export default CreditReport;

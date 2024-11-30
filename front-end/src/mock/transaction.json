@@ -1,371 +1,1323 @@
 {
   "transactions": [
     {
-      "id": "t1000",
-      "date": "2024-03-15",
-      "description": "Sales Executive Salary",
+      "id": "t001",
+      "date": "2024-06-03",
+      "description": "Grab Weekly Earnings",
       "category": "Income",
-      "amount": 3500.0,
+      "amount": 625.0,
       "type": "credit"
     },
     {
-      "id": "t999",
-      "date": "2024-03-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 300.0,
+      "id": "t002",
+      "date": "2024-06-04",
+      "description": "Lunch at Nasi Kandar Pelita",
+      "category": "Food",
+      "amount": 12.5,
       "type": "debit"
     },
     {
-      "id": "t998",
-      "date": "2024-03-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 200.0,
+      "id": "t003",
+      "date": "2024-06-05",
+      "description": "Petrol - Shell",
+      "category": "Transportation",
+      "amount": 80.0,
       "type": "debit"
     },
     {
-      "id": "t997",
-      "date": "2024-03-01",
+      "id": "t004",
+      "date": "2024-06-07",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t005",
+      "date": "2024-06-08",
+      "description": "Dinner - Mamak Stall",
+      "category": "Food",
+      "amount": 15.0,
+      "type": "debit"
+    },
+    {
+      "id": "t006",
+      "date": "2024-06-10",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t007",
+      "date": "2024-06-11",
+      "description": "Car Maintenance - Oil Change",
+      "category": "Vehicle Expense",
+      "amount": 120.0,
+      "type": "debit"
+    },
+    {
+      "id": "t008",
+      "date": "2024-06-14",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t009",
+      "date": "2024-06-15",
+      "description": "Hotlink Prepaid Reload",
+      "category": "Utilities",
+      "amount": 60.0,
+      "type": "debit"
+    },
+    {
+      "id": "t010",
+      "date": "2024-06-17",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t011",
+      "date": "2024-06-18",
+      "description": "Unifi Internet Bill",
+      "category": "Utilities",
+      "amount": 104.0,
+      "type": "debit"
+    },
+    {
+      "id": "t012",
+      "date": "2024-06-20",
+      "description": "Water Bill Payment",
+      "category": "Utilities",
+      "amount": 30.0,
+      "type": "debit"
+    },
+    {
+      "id": "t013",
+      "date": "2024-06-21",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t014",
+      "date": "2024-06-22",
+      "description": "Electric Bill Payment",
+      "category": "Utilities",
+      "amount": 40.0,
+      "type": "debit"
+    },
+    {
+      "id": "t015",
+      "date": "2024-06-24",
+      "description": "Rent Payment - Kuala Lumpur Apartment",
+      "category": "Rent",
+      "amount": 650.0,
+      "type": "debit"
+    },
+    {
+      "id": "t016",
+      "date": "2024-06-25",
       "description": "Car Loan Payment",
       "category": "Loan Payment",
       "amount": 800.0,
       "type": "debit"
     },
     {
-      "id": "t996",
-      "date": "2024-03-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 0.0,
-      "type": "debit"
-    },
-    {
-      "id": "t995",
-      "date": "2024-02-20",
-      "description": "RHB Credit Card Application Fee",
-      "category": "Bank Charges",
-      "amount": 50.0,
-      "type": "debit"
-    },
-    {
-      "id": "t994",
-      "date": "2024-02-15",
-      "description": "Sales Executive Salary",
+      "id": "t017",
+      "date": "2024-06-28",
+      "description": "Grab Weekly Earnings",
       "category": "Income",
-      "amount": 3500.0,
+      "amount": 625.0,
       "type": "credit"
     },
     {
-      "id": "t993",
-      "date": "2024-02-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 0.0,
+      "id": "t018",
+      "date": "2024-06-30",
+      "description": "Birthday Celebration Dinner",
+      "category": "Entertainment",
+      "amount": 85.0,
       "type": "debit"
     },
     {
-      "id": "t992",
-      "date": "2024-02-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 380.0,
+      "id": "t019",
+      "date": "2024-07-01",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t020",
+      "date": "2024-07-02",
+      "description": "Grocery Shopping",
+      "category": "Groceries",
+      "amount": 120.5,
       "type": "debit"
     },
     {
-      "id": "t991",
-      "date": "2024-02-15",
-      "description": "Hong Leong Personal Loan Application",
-      "category": "Bank Charges",
-      "amount": 100.0,
+      "id": "t021",
+      "date": "2024-07-05",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t022",
+      "date": "2024-07-06",
+      "description": "Petrol - Petronas",
+      "category": "Transportation",
+      "amount": 75.0,
       "type": "debit"
     },
     {
-      "id": "t990",
-      "date": "2024-02-01",
+      "id": "t023",
+      "date": "2024-07-08",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t024",
+      "date": "2024-07-10",
+      "description": "Lunch - Local Food Court",
+      "category": "Food",
+      "amount": 10.0,
+      "type": "debit"
+    },
+    {
+      "id": "t025",
+      "date": "2024-07-12",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t026",
+      "date": "2024-07-15",
+      "description": "Hotlink Prepaid Reload",
+      "category": "Utilities",
+      "amount": 60.0,
+      "type": "debit"
+    },
+    {
+      "id": "t027",
+      "date": "2024-07-16",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t028",
+      "date": "2024-07-18",
+      "description": "Unifi Internet Bill",
+      "category": "Utilities",
+      "amount": 104.0,
+      "type": "debit"
+    },
+    {
+      "id": "t029",
+      "date": "2024-07-20",
+      "description": "Water Bill Payment",
+      "category": "Utilities",
+      "amount": 30.0,
+      "type": "debit"
+    },
+    {
+      "id": "t030",
+      "date": "2024-07-21",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t031",
+      "date": "2024-07-22",
+      "description": "Electric Bill Payment",
+      "category": "Utilities",
+      "amount": 40.0,
+      "type": "debit"
+    },
+    {
+      "id": "t032",
+      "date": "2024-07-24",
+      "description": "Rent Payment - Kuala Lumpur Apartment",
+      "category": "Rent",
+      "amount": 650.0,
+      "type": "debit"
+    },
+    {
+      "id": "t033",
+      "date": "2024-07-25",
       "description": "Car Loan Payment",
       "category": "Loan Payment",
-      "amount": 0.0,
+      "amount": 800.0,
       "type": "debit"
     },
     {
-      "id": "t989",
-      "date": "2024-02-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 300.0,
-      "type": "debit"
-    },
-    {
-      "id": "t988",
-      "date": "2024-01-30",
-      "description": "AmBank Credit Card Application Fee",
-      "category": "Bank Charges",
-      "amount": 50.0,
-      "type": "debit"
-    },
-    {
-      "id": "t987",
-      "date": "2024-01-15",
-      "description": "Sales Executive Salary",
+      "id": "t034",
+      "date": "2024-07-28",
+      "description": "Grab Weekly Earnings",
       "category": "Income",
-      "amount": 3500.0,
+      "amount": 625.0,
       "type": "credit"
     },
     {
-      "id": "t986",
-      "date": "2024-01-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 400.0,
+      "id": "t035",
+      "date": "2024-07-30",
+      "description": "Raya Celebration Dinner",
+      "category": "Entertainment",
+      "amount": 120.0,
       "type": "debit"
     },
     {
-      "id": "t985",
-      "date": "2024-01-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 0.0,
-      "type": "debit"
-    },
-    {
-      "id": "t984",
-      "date": "2024-01-01",
-      "description": "Car Loan Payment",
-      "category": "Loan Payment",
-      "amount": 1200.0,
-      "type": "debit"
-    },
-    {
-      "id": "t983",
-      "date": "2024-01-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 600.0,
-      "type": "debit"
-    },
-    {
-      "id": "t982",
-      "date": "2023-12-15",
-      "description": "Sales Executive Salary",
+      "id": "t036",
+      "date": "2024-08-01",
+      "description": "Grab Weekly Earnings",
       "category": "Income",
-      "amount": 3500.0,
+      "amount": 625.0,
       "type": "credit"
     },
     {
-      "id": "t981",
-      "date": "2023-12-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 690.0,
-      "type": "debit"
-    },
-    {
-      "id": "t980",
-      "date": "2023-12-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 200.0,
-      "type": "debit"
-    },
-    {
-      "id": "t979",
-      "date": "2023-12-01",
-      "description": "Car Loan Payment",
-      "category": "Loan Payment",
-      "amount": 1200.0,
-      "type": "debit"
-    },
-    {
-      "id": "t978",
-      "date": "2023-12-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 600.0,
-      "type": "debit"
-    },
-    {
-      "id": "t977",
-      "date": "2023-11-15",
-      "description": "Sales Executive Salary",
-      "category": "Income",
-      "amount": 3500.0,
-      "type": "credit"
-    },
-    {
-      "id": "t976",
-      "date": "2023-11-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
+      "id": "t037",
+      "date": "2024-08-02",
+      "description": "Major Car Repair",
+      "category": "Vehicle Expense",
       "amount": 500.0,
       "type": "debit"
     },
     {
-      "id": "t975",
-      "date": "2023-11-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 300.0,
-      "type": "debit"
-    },
-    {
-      "id": "t974",
-      "date": "2023-11-01",
-      "description": "Car Loan Payment",
-      "category": "Loan Payment",
-      "amount": 1200.0,
-      "type": "debit"
-    },
-    {
-      "id": "t973",
-      "date": "2023-11-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 600.0,
-      "type": "debit"
-    },
-    {
-      "id": "t972",
-      "date": "2023-10-15",
-      "description": "Sales Executive Salary",
+      "id": "t038",
+      "date": "2024-08-05",
+      "description": "Grab Weekly Earnings",
       "category": "Income",
-      "amount": 3500.0,
+      "amount": 625.0,
       "type": "credit"
     },
     {
-      "id": "t971",
-      "date": "2023-10-15",
-      "description": "Maybank Credit Card Late Payment Fee",
-      "category": "Bank Charges",
-      "amount": 50.0,
+      "id": "t039",
+      "date": "2024-08-06",
+      "description": "Grocery Shopping",
+      "category": "Groceries",
+      "amount": 110.0,
       "type": "debit"
     },
     {
-      "id": "t970",
-      "date": "2023-10-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 450.0,
-      "type": "debit"
-    },
-    {
-      "id": "t969",
-      "date": "2023-10-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 250.0,
-      "type": "debit"
-    },
-    {
-      "id": "t968",
-      "date": "2023-10-01",
-      "description": "Car Loan Payment",
-      "category": "Loan Payment",
-      "amount": 1000.0,
-      "type": "debit"
-    },
-    {
-      "id": "t967",
-      "date": "2023-10-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 400.0,
-      "type": "debit"
-    },
-    {
-      "id": "t966",
-      "date": "2023-09-15",
-      "description": "Sales Executive Salary",
+      "id": "t040",
+      "date": "2024-08-08",
+      "description": "Grab Weekly Earnings",
       "category": "Income",
-      "amount": 3500.0,
+      "amount": 625.0,
       "type": "credit"
     },
     {
-      "id": "t965",
-      "date": "2023-09-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 0.0,
+      "id": "t041",
+      "date": "2024-08-10",
+      "description": "Petrol - Shell",
+      "category": "Transportation",
+      "amount": 85.0,
       "type": "debit"
     },
     {
-      "id": "t964",
-      "date": "2023-09-15",
-      "description": "CIMB Credit Card Late Payment Fee",
-      "category": "Bank Charges",
-      "amount": 50.0,
+      "id": "t042",
+      "date": "2024-08-12",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t043",
+      "date": "2024-08-15",
+      "description": "Hotlink Prepaid Reload",
+      "category": "Utilities",
+      "amount": 60.0,
       "type": "debit"
     },
     {
-      "id": "t963",
-      "date": "2023-09-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 0.0,
+      "id": "t044",
+      "date": "2024-08-16",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t045",
+      "date": "2024-08-18",
+      "description": "Unifi Internet Bill",
+      "category": "Utilities",
+      "amount": 104.0,
       "type": "debit"
     },
     {
-      "id": "t962",
-      "date": "2023-09-01",
-      "description": "Car Loan Late Payment Fee",
-      "category": "Bank Charges",
-      "amount": 100.0,
+      "id": "t046",
+      "date": "2024-08-20",
+      "description": "Water Bill Payment",
+      "category": "Utilities",
+      "amount": 30.0,
       "type": "debit"
     },
     {
-      "id": "t961",
-      "date": "2023-09-01",
+      "id": "t047",
+      "date": "2024-08-21",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t048",
+      "date": "2024-08-22",
+      "description": "Electric Bill Payment",
+      "category": "Utilities",
+      "amount": 40.0,
+      "type": "debit"
+    },
+    {
+      "id": "t049",
+      "date": "2024-08-24",
+      "description": "Rent Payment - Kuala Lumpur Apartment",
+      "category": "Rent",
+      "amount": 650.0,
+      "type": "debit"
+    },
+    {
+      "id": "t050",
+      "date": "2024-08-25",
       "description": "Car Loan Payment",
       "category": "Loan Payment",
       "amount": 800.0,
       "type": "debit"
     },
     {
-      "id": "t960",
-      "date": "2023-09-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 300.0,
-      "type": "debit"
-    },
-    {
-      "id": "t959",
-      "date": "2023-08-15",
-      "description": "Sales Executive Salary",
+      "id": "t051",
+      "date": "2024-08-28",
+      "description": "Grab Weekly Earnings",
       "category": "Income",
-      "amount": 3500.0,
+      "amount": 625.0,
       "type": "credit"
     },
     {
-      "id": "t958",
-      "date": "2023-08-15",
-      "description": "Maybank Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 350.0,
+      "id": "t052",
+      "date": "2024-08-30",
+      "description": "Independence Day Celebration Dinner",
+      "category": "Entertainment",
+      "amount": 95.0,
       "type": "debit"
     },
     {
-      "id": "t957",
-      "date": "2023-08-15",
-      "description": "CIMB Credit Card Payment",
-      "category": "Credit Card",
-      "amount": 200.0,
+      "id": "t053",
+      "date": "2024-09-01",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t054",
+      "date": "2024-09-02",
+      "description": "Grocery Shopping",
+      "category": "Groceries",
+      "amount": 125.0,
       "type": "debit"
     },
     {
-      "id": "t956",
-      "date": "2023-08-01",
+      "id": "t055",
+      "date": "2024-09-05",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t056",
+      "date": "2024-09-06",
+      "description": "Petrol - Petronas",
+      "category": "Transportation",
+      "amount": 70.0,
+      "type": "debit"
+    },
+    {
+      "id": "t057",
+      "date": "2024-09-08",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t058",
+      "date": "2024-09-10",
+      "description": "Car Maintenance - Tire Rotation",
+      "category": "Vehicle Expense",
+      "amount": 80.0,
+      "type": "debit"
+    },
+    {
+      "id": "t059",
+      "date": "2024-09-12",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t060",
+      "date": "2024-09-15",
+      "description": "Hotlink Prepaid Reload",
+      "category": "Utilities",
+      "amount": 60.0,
+      "type": "debit"
+    },
+    {
+      "id": "t061",
+      "date": "2024-09-16",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t062",
+      "date": "2024-09-18",
+      "description": "Unifi Internet Bill",
+      "category": "Utilities",
+      "amount": 104.0,
+      "type": "debit"
+    },
+    {
+      "id": "t063",
+      "date": "2024-09-20",
+      "description": "Water Bill Payment",
+      "category": "Utilities",
+      "amount": 30.0,
+      "type": "debit"
+    },
+    {
+      "id": "t064",
+      "date": "2024-09-21",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t065",
+      "date": "2024-09-22",
+      "description": "Electric Bill Payment",
+      "category": "Utilities",
+      "amount": 40.0,
+      "type": "debit"
+    },
+    {
+      "id": "t066",
+      "date": "2024-09-24",
+      "description": "Rent Payment - Kuala Lumpur Apartment",
+      "category": "Rent",
+      "amount": 650.0,
+      "type": "debit"
+    },
+    {
+      "id": "t067",
+      "date": "2024-09-25",
       "description": "Car Loan Payment",
       "category": "Loan Payment",
-      "amount": 900.0,
+      "amount": 800.0,
       "type": "debit"
     },
     {
-      "id": "t955",
-      "date": "2023-08-01",
-      "description": "Personal Loan Payment",
-      "category": "Loan Payment",
-      "amount": 400.0,
+      "id": "t068",
+      "date": "2024-09-26",
+      "description": "Lunch - Mixed Rice Restaurant",
+      "category": "Food",
+      "amount": 13.0,
+      "type": "debit"
+    },
+    {
+      "id": "t069",
+      "date": "2024-09-28",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t070",
+      "date": "2024-09-30",
+      "description": "Malaysia Day Celebration Dinner",
+      "category": "Entertainment",
+      "amount": 90.0,
+      "type": "debit"
+    },
+    {
+      "id": "t071",
+      "date": "2024-10-01",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t072",
+      "date": "2024-10-02",
+      "description": "Petrol - Shell",
+      "category": "Transportation",
+      "amount": 80.0,
+      "type": "debit"
+    },
+    {
+      "id": "t073",
+      "date": "2024-10-03",
+      "description": "Car Service - Regular Maintenance",
+      "category": "Vehicle Expense",
+      "amount": 150.0,
+      "type": "debit"
+    },
+    {
+      "id": "t074",
+      "date": "2024-10-05",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t075",
+      "date": "2024-10-06",
+      "description": "Grocery Shopping - Tesco",
+      "category": "Groceries",
+      "amount": 135.0,
+      "type": "debit"
+    },
+    {
+      "id": "t076",
+      "date": "2024-10-07",
+      "description": "Lunch - Food Court",
+      "category": "Food",
+      "amount": 12.0,
+      "type": "debit"
+    },
+    {
+      "id": "t077",
+      "date": "2024-10-08",
+      "description": "Dinner - Nasi Goreng",
+      "category": "Food",
+      "amount": 8.5,
+      "type": "debit"
+    },
+    {
+      "id": "t078",
+      "date": "2024-10-09",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t079",
+      "date": "2024-10-10",
+      "description": "Lunch - Chicken Rice",
+      "category": "Food",
+      "amount": 9.5,
+      "type": "debit"
+    },
+    {
+      "id": "t080",
+      "date": "2024-10-11",
+      "description": "Petrol - Petronas",
+      "category": "Transportation",
+      "amount": 85.0,
+      "type": "debit"
+    },
+    {
+      "id": "t081",
+      "date": "2024-10-12",
+      "description": "Car Wash",
+      "category": "Vehicle Expense",
+      "amount": 15.0,
+      "type": "debit"
+    },
+    {
+      "id": "t082",
+      "date": "2024-10-13",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t083",
+      "date": "2024-10-15",
+      "description": "Hotlink Prepaid Reload",
+      "category": "Utilities",
+      "amount": 60.0,
+      "type": "debit"
+    },
+    {
+      "id": "t084",
+      "date": "2024-10-16",
+      "description": "Lunch - Mamak Roti Canai",
+      "category": "Food",
+      "amount": 7.5,
+      "type": "debit"
+    },
+    {
+      "id": "t085",
+      "date": "2024-10-17",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t086",
+      "date": "2024-10-18",
+      "description": "Unifi Internet Bill",
+      "category": "Utilities",
+      "amount": 104.0,
+      "type": "debit"
+    },
+    {
+      "id": "t087",
+      "date": "2024-10-19",
+      "description": "Dinner with Friends",
+      "category": "Entertainment",
+      "amount": 45.0,
+      "type": "debit"
+    },
+    {
+      "id": "t088",
+      "date": "2024-10-20",
+      "description": "Water Bill Payment",
+      "category": "Utilities",
+      "amount": 30.0,
+      "type": "debit"
+    },
+    {
+      "id": "t089",
+      "date": "2024-10-21",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t090",
+      "date": "2024-10-22",
+      "description": "Electric Bill Payment",
+      "category": "Utilities",
+      "amount": 40.0,
+      "type": "debit"
+    },
+    {
+      "id": "t091",
+      "date": "2024-10-23",
+      "description": "Breakfast - Kopitiam",
+      "category": "Food",
+      "amount": 6.5,
+      "type": "debit"
+    },
+    {
+      "id": "t092",
+      "date": "2024-10-23",
+      "description": "Vehicle Service",
+      "category": "Vehicle Expense",
+      "amount": 180.0,
+      "type": "debit"
+    },
+    {
+      "id": "t093",
+      "date": "2024-10-24",
+      "description": "Lunch - Mixed Rice",
+      "category": "Food",
+      "amount": 11.0,
+      "type": "debit"
+    },
+    {
+      "id": "t094",
+      "date": "2024-10-24",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t095",
+      "date": "2024-10-25",
+      "description": "Petrol - Shell",
+      "category": "Transportation",
+      "amount": 90.0,
+      "type": "debit"
+    },
+    {
+      "id": "t096",
+      "date": "2024-10-25",
+      "description": "Dinner - Street Food",
+      "category": "Food",
+      "amount": 15.0,
+      "type": "debit"
+    },
+    {
+      "id": "t097",
+      "date": "2024-10-26",
+      "description": "Movie Night",
+      "category": "Entertainment",
+      "amount": 18.0,
+      "type": "debit"
+    },
+    {
+      "id": "t098",
+      "date": "2024-10-27",
+      "description": "Groceries - Giant",
+      "category": "Groceries",
+      "amount": 125.0,
+      "type": "debit"
+    },
+    {
+      "id": "t099",
+      "date": "2024-10-28",
+      "description": "Car Insurance Monthly",
+      "category": "Insurance",
+      "amount": 150.0,
+      "type": "debit"
+    },
+    {
+      "id": "t100",
+      "date": "2024-10-28",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t101",
+      "date": "2024-10-29",
+      "description": "Phone Screen Repair",
+      "category": "Maintenance",
+      "amount": 250.0,
+      "type": "debit"
+    },
+    {
+      "id": "t102",
+      "date": "2024-10-29",
+      "description": "Lunch - Food Truck",
+      "category": "Food",
+      "amount": 13.0,
+      "type": "debit"
+    },
+    {
+      "id": "t103",
+      "date": "2024-10-30",
+      "description": "New Phone Case",
+      "category": "Shopping",
+      "amount": 35.0,
+      "type": "debit"
+    },
+    {
+      "id": "t104",
+      "date": "2024-10-30",
+      "description": "Dinner - Mamak",
+      "category": "Food",
+      "amount": 8.5,
+      "type": "debit"
+    },
+    {
+      "id": "t105",
+      "date": "2024-10-31",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t106",
+      "date": "2024-11-01",
+      "description": "Breakfast - Nasi Lemak",
+      "category": "Food",
+      "amount": 5.5,
+      "type": "debit"
+    },
+    {
+      "id": "t107",
+      "date": "2024-11-01",
+      "description": "Car Wash - Premium",
+      "category": "Vehicle Expense",
+      "amount": 25.0,
+      "type": "debit"
+    },
+    {
+      "id": "t108",
+      "date": "2024-11-02",
+      "description": "Monthly Rent",
+      "category": "Housing",
+      "amount": 800.0,
+      "type": "debit"
+    },
+    {
+      "id": "t109",
+      "date": "2024-11-02",
+      "description": "Lunch - Food Court",
+      "category": "Food",
+      "amount": 12.5,
+      "type": "debit"
+    },
+    {
+      "id": "t110",
+      "date": "2024-11-03",
+      "description": "Petrol - Petronas",
+      "category": "Transportation",
+      "amount": 85.0,
+      "type": "debit"
+    },
+    {
+      "id": "t111",
+      "date": "2024-11-03",
+      "description": "Dinner - Chinese Restaurant",
+      "category": "Food",
+      "amount": 22.0,
+      "type": "debit"
+    },
+    {
+      "id": "t112",
+      "date": "2024-11-04",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t113",
+      "date": "2024-11-04",
+      "description": "New Windshield Wipers",
+      "category": "Vehicle Expense",
+      "amount": 45.0,
+      "type": "debit"
+    },
+    {
+      "id": "t114",
+      "date": "2024-11-05",
+      "description": "Breakfast - Coffee & Toast",
+      "category": "Food",
+      "amount": 7.0,
+      "type": "debit"
+    },
+    {
+      "id": "t115",
+      "date": "2024-11-05",
+      "description": "Phone Bill Payment",
+      "category": "Utilities",
+      "amount": 88.0,
+      "type": "debit"
+    },
+    {
+      "id": "t116",
+      "date": "2024-11-06",
+      "description": "Lunch - Noodles",
+      "category": "Food",
+      "amount": 9.5,
+      "type": "debit"
+    },
+    {
+      "id": "t117",
+      "date": "2024-11-06",
+      "description": "Car Air Freshener",
+      "category": "Vehicle Expense",
+      "amount": 15.0,
+      "type": "debit"
+    },
+    {
+      "id": "t118",
+      "date": "2024-11-07",
+      "description": "Dinner with Family",
+      "category": "Food",
+      "amount": 65.0,
+      "type": "debit"
+    },
+    {
+      "id": "t119",
+      "date": "2024-11-07",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t120",
+      "date": "2024-11-08",
+      "description": "Health Insurance Premium",
+      "category": "Insurance",
+      "amount": 120.0,
+      "type": "debit"
+    },
+    {
+      "id": "t121",
+      "date": "2024-11-08",
+      "description": "Lunch - Mixed Rice",
+      "category": "Food",
+      "amount": 10.5,
+      "type": "debit"
+    },
+    {
+      "id": "t122",
+      "date": "2024-11-09",
+      "description": "Petrol - Shell",
+      "category": "Transportation",
+      "amount": 90.0,
+      "type": "debit"
+    },
+    {
+      "id": "t123",
+      "date": "2024-11-09",
+      "description": "Groceries - Tesco",
+      "category": "Groceries",
+      "amount": 145.0,
+      "type": "debit"
+    },
+    {
+      "id": "t124",
+      "date": "2024-11-10",
+      "description": "Breakfast - Dim Sum",
+      "category": "Food",
+      "amount": 18.0,
+      "type": "debit"
+    },
+    {
+      "id": "t125",
+      "date": "2024-11-10",
+      "description": "Car Battery Check",
+      "category": "Vehicle Expense",
+      "amount": 20.0,
+      "type": "debit"
+    },
+    {
+      "id": "t126",
+      "date": "2024-11-11",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t127",
+      "date": "2024-11-11",
+      "description": "Lunch - Western Food",
+      "category": "Food",
+      "amount": 25.0,
+      "type": "debit"
+    },
+    {
+      "id": "t128",
+      "date": "2024-11-12",
+      "description": "Road Tax Renewal",
+      "category": "Vehicle Expense",
+      "amount": 380.0,
+      "type": "debit"
+    },
+    {
+      "id": "t129",
+      "date": "2024-11-12",
+      "description": "Dinner - Food Court",
+      "category": "Food",
+      "amount": 13.5,
+      "type": "debit"
+    },
+    {
+      "id": "t130",
+      "date": "2024-11-13",
+      "description": "Mobile Phone Screen Protector",
+      "category": "Shopping",
+      "amount": 25.0,
+      "type": "debit"
+    },
+    {
+      "id": "t131",
+      "date": "2024-11-13",
+      "description": "Lunch - Local Restaurant",
+      "category": "Food",
+      "amount": 15.0,
+      "type": "debit"
+    },
+    {
+      "id": "t132",
+      "date": "2024-11-14",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t133",
+      "date": "2024-11-14",
+      "description": "Car Air-con Service",
+      "category": "Vehicle Expense",
+      "amount": 150.0,
+      "type": "debit"
+    },
+    {
+      "id": "t134",
+      "date": "2024-11-15",
+      "description": "Internet Bill",
+      "category": "Utilities",
+      "amount": 129.0,
+      "type": "debit"
+    },
+    {
+      "id": "t135",
+      "date": "2024-11-15",
+      "description": "Dinner - Night Market",
+      "category": "Food",
+      "amount": 16.0,
+      "type": "debit"
+    },
+    {
+      "id": "t136",
+      "date": "2024-11-16",
+      "description": "Breakfast - Roti Canai",
+      "category": "Food",
+      "amount": 6.0,
+      "type": "debit"
+    },
+    {
+      "id": "t137",
+      "date": "2024-11-16",
+      "description": "New Phone Charger",
+      "category": "Shopping",
+      "amount": 35.0,
+      "type": "debit"
+    },
+    {
+      "id": "t138",
+      "date": "2024-11-17",
+      "description": "Petrol - Petronas",
+      "category": "Transportation",
+      "amount": 85.0,
+      "type": "debit"
+    },
+    {
+      "id": "t139",
+      "date": "2024-11-17",
+      "description": "Lunch - Indian Restaurant",
+      "category": "Food",
+      "amount": 16.5,
+      "type": "debit"
+    },
+    {
+      "id": "t140",
+      "date": "2024-11-18",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t141",
+      "date": "2024-11-18",
+      "description": "Car Wash",
+      "category": "Vehicle Expense",
+      "amount": 15.0,
+      "type": "debit"
+    },
+    {
+      "id": "t142",
+      "date": "2024-11-19",
+      "description": "Breakfast - Kopitiam",
+      "category": "Food",
+      "amount": 7.5,
+      "type": "debit"
+    },
+    {
+      "id": "t143",
+      "date": "2024-11-19",
+      "description": "Water Bill",
+      "category": "Utilities",
+      "amount": 35.0,
+      "type": "debit"
+    },
+    {
+      "id": "t144",
+      "date": "2024-11-20",
+      "description": "Lunch - Food Court",
+      "category": "Food",
+      "amount": 12.0,
+      "type": "debit"
+    },
+    {
+      "id": "t145",
+      "date": "2024-11-20",
+      "description": "New Driving Gloves",
+      "category": "Shopping",
+      "amount": 45.0,
+      "type": "debit"
+    },
+    {
+      "id": "t146",
+      "date": "2024-11-21",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t147",
+      "date": "2024-11-21",
+      "description": "Dinner - Chinese Restaurant",
+      "category": "Food",
+      "amount": 20.0,
+      "type": "debit"
+    },
+    {
+      "id": "t148",
+      "date": "2024-11-22",
+      "description": "Electric Bill",
+      "category": "Utilities",
+      "amount": 75.0,
+      "type": "debit"
+    },
+    {
+      "id": "t149",
+      "date": "2024-11-22",
+      "description": "Car Phone Mount",
+      "category": "Vehicle Expense",
+      "amount": 29.0,
+      "type": "debit"
+    },
+    {
+      "id": "t150",
+      "date": "2024-11-23",
+      "description": "Groceries - Giant",
+      "category": "Groceries",
+      "amount": 132.0,
+      "type": "debit"
+    },
+    {
+      "id": "t151",
+      "date": "2024-11-23",
+      "description": "Lunch - Mixed Rice",
+      "category": "Food",
+      "amount": 11.0,
+      "type": "debit"
+    },
+    {
+      "id": "t152",
+      "date": "2024-11-24",
+      "description": "Breakfast - Nasi Lemak",
+      "category": "Food",
+      "amount": 5.5,
+      "type": "debit"
+    },
+    {
+      "id": "t153",
+      "date": "2024-11-24",
+      "description": "Petrol - Shell",
+      "category": "Transportation",
+      "amount": 90.0,
+      "type": "debit"
+    },
+    {
+      "id": "t154",
+      "date": "2024-11-25",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t155",
+      "date": "2024-11-25",
+      "description": "Car Tyre Pressure Check",
+      "category": "Vehicle Expense",
+      "amount": 10.0,
+      "type": "debit"
+    },
+    {
+      "id": "t156",
+      "date": "2024-11-26",
+      "description": "Lunch - Food Court",
+      "category": "Food",
+      "amount": 13.5,
+      "type": "debit"
+    },
+    {
+      "id": "t157",
+      "date": "2024-11-26",
+      "description": "Mobile Data Top-up",
+      "category": "Utilities",
+      "amount": 30.0,
+      "type": "debit"
+    },
+    {
+      "id": "t158",
+      "date": "2024-11-27",
+      "description": "Breakfast - Coffee & Toast",
+      "category": "Food",
+      "amount": 6.5,
+      "type": "debit"
+    },
+    {
+      "id": "t159",
+      "date": "2024-11-27",
+      "description": "Car Air Freshener Refill",
+      "category": "Vehicle Expense",
+      "amount": 12.0,
+      "type": "debit"
+    },
+    {
+      "id": "t160",
+      "date": "2024-11-28",
+      "description": "Grab Weekly Earnings",
+      "category": "Income",
+      "amount": 625.0,
+      "type": "credit"
+    },
+    {
+      "id": "t161",
+      "date": "2024-11-28",
+      "description": "Lunch - Western Food",
+      "category": "Food",
+      "amount": 22.0,
+      "type": "debit"
+    },
+    {
+      "id": "t162",
+      "date": "2024-11-29",
+      "description": "Phone Screen Cleaning Kit",
+      "category": "Shopping",
+      "amount": 15.0,
+      "type": "debit"
+    },
+    {
+      "id": "t163",
+      "date": "2024-11-29",
+      "description": "Dinner - Local Restaurant",
+      "category": "Food",
+      "amount": 17.5,
+      "type": "debit"
+    },
+    {
+      "id": "t164",
+      "date": "2024-11-30",
+      "description": "Monthly Rent",
+      "category": "Housing",
+      "amount": 800.0,
+      "type": "debit"
+    },
+    {
+      "id": "t165",
+      "date": "2024-11-30",
+      "description": "Car Insurance Monthly",
+      "category": "Insurance",
+      "amount": 150.0,
       "type": "debit"
     }
   ]

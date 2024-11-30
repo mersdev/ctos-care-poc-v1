@@ -29,6 +29,7 @@ import {
   IconMessageChatbot,
 } from "@tabler/icons-react";
 import html2canvas from "html2canvas";
+// import Tracker from "../Tracker";
 
 const recommendations = [
   { seq: 1, code: "net_worth", desc: "Net Worth" },
@@ -149,6 +150,16 @@ const CentralizedFinancialDashboard: React.FC = () => {
       status: "Good",
     },
   ];
+
+  // const trackerData = {
+  //   fullData: 2500,
+  //   currentData: 1989,
+  //   breakdown: [
+  //     { name: "food", amount: 256, unit: "g" },
+  //     { name: "car", amount: 152, unit: "g" },
+  //     { name: "entertain", amount: 115, unit: "g" },
+  //   ],
+  // };
 
   const handleDownloadButtonClick = () => {
     const element = document.getElementById("downloadable-area");
@@ -346,6 +357,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+
               <div className=" p-4">
                 {dashboardData.spendingData.map((item, index) => (
                   <div key={item.category}>
@@ -371,6 +383,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
               </div>
             </CardContent>
           </Card>
+          {/* <Tracker data={trackerData} /> */}
         </div>
       </div>
     </div>

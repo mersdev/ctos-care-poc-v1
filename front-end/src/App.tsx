@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard/CentralizedFinancialDashboard";
 import CreditReport from "./components/CreditReport/CreditReport";
@@ -12,6 +17,7 @@ import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import mockData from "./mockData";
 import Chatbox from "./components/Chat/Chatbox";
+import FullTodoList from "./components/Todo/FullTodoList";
 
 const App: React.FC = () => {
   const [reportData] = React.useState(mockData);
@@ -23,7 +29,7 @@ const App: React.FC = () => {
           {/* Public routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          
+
           {/* Protected routes */}
           <Route element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
@@ -64,6 +70,14 @@ const App: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />{" "}
+            <Route
+              path="/todo-list"
+              element={
+                <ProtectedRoute>
+                  <FullTodoList />
                 </ProtectedRoute>
               }
             />

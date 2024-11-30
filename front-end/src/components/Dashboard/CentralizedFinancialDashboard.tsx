@@ -1,11 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bar, BarChart, Line, LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
-import { DashboardService, DashboardData } from '../../services/dashboardService'
-import { useToast } from '@/components/ui/use-toast'
+import React, { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Bar,
+  BarChart,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
+import {
+  DashboardService,
+  DashboardData,
+} from "../../services/dashboardService";
+import { useToast } from "@/components/ui/use-toast";
+import TodoList from "../Todo/TodoList";
+import {
+  IconBasketDollar,
+  IconFileAnalytics,
+  IconBuildingBank,
+  IconPigMoney,
+  IconStars,
+} from "@tabler/icons-react";
+
+const recommendations = [
+  { seq: 1, code: "net_worth", desc: "Net Worth" },
+  { seq: 2, code: "budgeting", desc: "Budgeting" },
+  { seq: 3, code: "debt_mgmt", desc: "Debt Management" },
+  { seq: 4, code: "insurance", desc: "Insurance Coverage" },
+  { seq: 5, code: "long_term", desc: "Long Term Goals" },
+  { seq: 6, code: "income_stability", desc: "Income Stability" },
+  { seq: 7, code: "emergency_fund", desc: "Emergency Fund" },
+  { seq: 8, code: "retirement", desc: "Retirement Savings" },
+  { seq: 9, code: "financial_lit", desc: "Financial Literacy" },
+  { seq: 10, code: "behavior", desc: "Behavioral Aspects" },
+];
+
+const loanData = [
+  {
+    avatar: "V",
+    title: "Visa Platinum",
+    amount: "$1,200.00",
+    monthlyPayment: "$100.00",
+    monthsLeft: "12 months left",
+  },
+  {
+    avatar: "M",
+    title: "Mastercard Gold",
+    amount: "$5,500.00",
+    monthlyPayment: "$458.33",
+    monthsLeft: "12 months left",
+  },
+  {
+    avatar: "A",
+    title: "AMEX Rewards",
+    amount: "$3,250.00",
+    monthlyPayment: "$270.83",
+    monthsLeft: "12 months left",
+  },
+];
 
 const CentralizedFinancialDashboard: React.FC = () => {
-  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
@@ -15,7 +74,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
         const data = await DashboardService.getDashboardData();
         setDashboardData(data);
       } catch (error) {
-        console.error('Error fetching dashboard data:', error);
+        console.error("Error fetching dashboard data:", error);
         toast({
           title: "Error",
           description: "Failed to load dashboard data. Please try again later.",
@@ -45,76 +104,200 @@ const CentralizedFinancialDashboard: React.FC = () => {
       </div>
     );
   }
+  const leftColumn = recommendations.slice(
+    0,
+    Math.ceil(recommendations.length / 2)
+  );
+  const rightColumn = recommendations.slice(
+    Math.ceil(recommendations.length / 2)
+  );
+
+  const cardData = [
+    {
+      id: 1,
+      icon: <IconBuildingBank size={32} className="mb-4 text-violet-700" />,
+      title: "Total Balance",
+      value: `$${dashboardData.totalBalance.toLocaleString()}`,
+      percentage: 20.1,
+    },
+    // {
+    //   id: 2,
+    //   icon: <IconBasketDollar size={32} className="mb-4 text-sky-500" />,
+    //   title: "Total Spending",
+    //   value: `$${dashboardData.totalSavings.toLocaleString()}`,
+    //   percentage: 8.2,
+    // },
+    {
+      id: 3,
+      icon: <IconPigMoney size={32} className="mb-4 text-green-700" />,
+      title: "Total Savings",
+      value: `$${dashboardData.totalSpending.toLocaleString()}`,
+      percentage: 4.5,
+    },
+    {
+      id: 4,
+      icon: <IconStars size={32} className="mb-4 text-yellow-500" />,
+      title: "Credit Score",
+      value: dashboardData.creditScore,
+      percentage: null, // No percentage for Credit Score
+      status: "Good",
+    },
+  ];
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Centralized Financial Dashboard</h1>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
-        <Card>
-          <CardContent className="pt-6">
-            <CardTitle className="text-sm font-medium">Total Balance</CardTitle>
-            <div className="text-2xl font-bold">${dashboardData.totalBalance.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <CardTitle className="text-sm font-medium">Total Spending</CardTitle>
-            <div className="text-2xl font-bold">${dashboardData.totalSpending.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+4.5% from last month</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
-            <div className="text-2xl font-bold">${dashboardData.totalSavings.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+8.2% from last month</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <CardTitle className="text-sm font-medium">Credit Score</CardTitle>
-            <div className="text-2xl font-bold">{dashboardData.creditScore}</div>
-            <p className="text-xs text-muted-foreground">Good</p>
-          </CardContent>
-        </Card>
-      </div>
+    <div className="container mx-auto p-2">
+      <h1 className="text-3xl font-bold mb-6">
+        Centralized Financial Dashboard
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
+        <div className="col-span-10 md:col-span-6">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mb-6">
+            {cardData.map((item) => (
+              <Card key={item.id}>
+                <CardContent className="pt-6 flex-col">
+                  {item.icon}
+                  <p className="text-md text-muted-foreground">{item.title}</p>
+                  <div className="text-2xl font-bold">{item.value}</div>
+                  {item.percentage !== null ? (
+                    <p
+                      className={`text-xs ${
+                        item.percentage > 0
+                          ? "text-green-500"
+                          : item.percentage < 0
+                          ? "text-red-500"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {item.percentage > 0 ? "+" : ""}
+                      {item.percentage}% from last month
+                    </p>
+                  ) : (
+                    <p className="text-xs text-green-500">{item.status}</p>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Monthly Overview</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={350}>
+                  <LineChart data={dashboardData.monthlyData}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="total" stroke="#0ea5e9" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="mt-5">
+            <Card>
+              <CardHeader>
+                <CardTitle>Outstanding Loan</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="divide-y divide-gray-300">
+                  {loanData.map((loan, index) => (
+                    <div
+                      key={index}
+                      className="flex md:items-center  items-start md:flex-row flex-col justify-between py-2"
+                    >
+                      <div className="flex items-center justify-center ml-4 md:ml-4 w-8 h-8 rounded-md bg-black text-white text-lg font-bold">
+                        {loan.avatar}
+                      </div>
+                      <div className="flex ml-4 items-start md:items-center w-full md:gap-2 flex-col md:flex-row justify-between py-4">
+                        <div>
+                          <p className="text-sm font-semibold text-gray-800">
+                            {loan.title} - {loan.amount}
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            Monthly Payment: {loan.monthlyPayment}
+                          </p>
+                        </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Monthly Overview</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={350}>
-              <LineChart data={dashboardData.monthlyData}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="total" stroke="#0ea5e9" />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Spending by Category</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={350}>
-              <BarChart data={dashboardData.spendingData}>
-                <XAxis dataKey="category" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="amount" fill="#0ea5e9" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+                        <div className="text-sm text-gray-500">
+                          {loan.monthsLeft}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+        <div className="col-span-10 md:col-span-4">
+          <div className="w-full">
+            <div className="w-full flex justify-end">
+              <button className="flex items-center text-gray-400 text-sm">
+                DOWNLOAD FULL REPORT <IconFileAnalytics />
+              </button>
+            </div>
+            <div className="bg-[#1a1a1a] mt-1 rounded-xl shadow-md p-4 mb-5">
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-white font-semibold text-lg">
+                  Goal Status
+                </h3>
+              </div>
+              <p className="text-gray-400 text-sm mb-5">In progress</p>
+              <div className="relative w-full h-2 bg-gray-800 rounded-full">
+                <div
+                  className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full"
+                  style={{ width: "50%" }}
+                ></div>
+              </div>
+              <p className="text-gray-400 text-xs mt-2">
+                Estimate goal process 20-30 days
+              </p>
+              <button className="w-full mt-5 py-2 text-sm font-bold text-black bg-gray-300 rounded-lg hover:bg-gray-400 transition">
+                VIEW STATUS
+              </button>
+            </div>
+          </div>
+          <TodoList />
+          <div className="bg-black text-white rounded-lg shadow-lg p-6 mb-6 mt-5">
+            <h3 className="text-lg font-bold">AI-Powered Recommendations</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+              <ul className="list-disc list-inside space-y-2">
+                {leftColumn.map((item: any) => (
+                  <li key={item.code} className="text-sm">
+                    {item.desc}
+                  </li>
+                ))}
+              </ul>
+              <ul className="list-disc list-inside space-y-2">
+                {rightColumn.map((item: any) => (
+                  <li key={item.code} className="text-sm">
+                    {item.desc}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Spending by Category</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={350}>
+                <BarChart data={dashboardData.spendingData}>
+                  <XAxis dataKey="category" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="amount" fill="#0ea5e9" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CentralizedFinancialDashboard
+export default CentralizedFinancialDashboard;

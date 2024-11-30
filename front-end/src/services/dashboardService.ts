@@ -15,6 +15,7 @@ export interface DashboardData {
   spendingData: Array<{
     category: string;
     amount: number;
+    color: string;
   }>;
 }
 
@@ -41,11 +42,11 @@ export class DashboardService {
           { name: "Jun", total: 2000 },
         ],
         spendingData: [
-          { category: "Housing", amount: 1000 },
-          { category: "Food", amount: 500 },
-          { category: "Transportation", amount: 300 },
-          { category: "Utilities", amount: 200 },
-          { category: "Entertainment", amount: 150 },
+          { category: "Housing", amount: 1000,color:"#b6abff" },
+          { category: "Food", amount: 500 ,color:"#baffd2"},
+          { category: "Transportation", amount: 300,color:"#fffddb"},
+          { category: "Utilities", amount: 200 ,color:"#fc5b63"},
+          { category: "Entertainment", amount: 150,color:"#99c99b"},
         ],
       };
     }

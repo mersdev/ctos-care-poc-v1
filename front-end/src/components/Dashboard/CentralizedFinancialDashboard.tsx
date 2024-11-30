@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Cell,
 } from "recharts";
 import {
   DashboardService,
@@ -27,6 +28,7 @@ import {
   IconChartBar,
   IconMessageChatbot,
 } from "@tabler/icons-react";
+import html2canvas from "html2canvas";
 
 const recommendations = [
   { seq: 1, code: "net_worth", desc: "Net Worth" },
@@ -148,13 +150,35 @@ const CentralizedFinancialDashboard: React.FC = () => {
     },
   ];
 
+  const handleDownloadButtonClick = () => {
+    const element = document.getElementById("downloadable-area");
+
+    if (element) {
+      html2canvas(element, {
+        onclone: (clonedDoc: any) => {
+          const clonedElement = clonedDoc.getElementById("downloadable-area");
+          if (clonedElement) {
+            clonedElement.style.padding = "1rem";
+            const buttons = clonedElement.querySelectorAll("button");
+            buttons.forEach((btn: any) => (btn.style.display = "none"));
+          }
+        },
+      }).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = "report.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  };
+
   return (
     <div className="container mx-auto p-2">
       <h1 className="text-3xl font-bold mb-6">
         Centralized Financial Dashboard
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
-        <div className="col-span-10 md:col-span-6">
+        <div className="col-span-10 md:col-span-6" id="downloadable-area">
           <div className="grid gap-5  lg:grid-cols-3 mb-6">
             {cardData.map((item) => (
               <Card key={item.id}>
@@ -245,6 +269,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
           <div className="w-full">
             <div className="w-full flex justify-end">
               <button
+                onClick={handleDownloadButtonClick}
                 // onClick={() => navigate("/todo-list")}
                 className="flex items-center text-sm hover-focus-effect"
               >
@@ -280,7 +305,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
               <span className="leading-none">AI-Powered Recommendations</span>
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5 mt-5">
               <ul className="list-disc list-inside space-y-2">
                 {leftColumn.map((item: any) => (
                   <li key={item.code} className="text-sm">
@@ -306,11 +331,19 @@ const CentralizedFinancialDashboard: React.FC = () => {
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={350}>
-                <BarChart data={dashboardData.spendingData}>
+                <BarChart data={dashboardData.spendingData} barCategoryGap={12}>
                   <XAxis dataKey="category" />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="amount" fill="#0ea5e9" />
+
+                  <Bar
+                    dataKey="amount"
+                    // barSize={50}
+                  >
+                    {dashboardData.spendingData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>

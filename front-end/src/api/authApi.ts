@@ -2,7 +2,7 @@ import axios from "axios";
 import { ProfileRequest, ProfileResponse } from "../types/profile";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3001/api";
+  import.meta.env.VITE_API_URL+ '/api' || "http://localhost:3001/api";
 
 // Configure axios instance with interceptors
 const api = axios.create({

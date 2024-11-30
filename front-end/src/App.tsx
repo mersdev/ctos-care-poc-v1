@@ -15,10 +15,10 @@ import { Register } from "./components/Auth/Register";
 import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import Chatbox from "./components/Chat/Chatbox";
-import FullTodoList from "./components/Todo/FullTodoList";
 import JobMarketTrend from "./components/JobMarketTrend/jobMarketTrend";
 import FtosReport from "./components/FTOSReport/ftosReport";
 import Promo from "./components/Promo/Promo";
+import PaymentGateway from "./components/Payment/PaymentGateway";
 
 const App: React.FC = () => {
   // const [reportData] = React.useState(mockData);
@@ -33,12 +33,29 @@ const App: React.FC = () => {
 
           {/* Protected routes */}
           <Route element={<Layout />}>
+            {/* Keep dashboard as index */}
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route
               path="/dashboard"
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/todo"
+              element={
+                <ProtectedRoute>
+                  <TodoList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment"
+              element={
+                <ProtectedRoute>
+                  <PaymentGateway />
                 </ProtectedRoute>
               }
             />
@@ -59,14 +76,6 @@ const App: React.FC = () => {
               }
             />
             <Route
-              path="/todo"
-              element={
-                <ProtectedRoute>
-                  <TodoList />
-                </ProtectedRoute>
-              }
-            />
-            <Route
               path="/chat"
               element={
                 <ProtectedRoute>
@@ -82,14 +91,6 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               }
             />{" "}
-            <Route
-              path="/todo-list"
-              element={
-                <ProtectedRoute>
-                  <FullTodoList />
-                </ProtectedRoute>
-              }
-            />
             <Route
               path="/promotion"
               element={

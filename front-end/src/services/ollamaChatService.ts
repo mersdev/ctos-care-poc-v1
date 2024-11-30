@@ -11,6 +11,10 @@ import {
   IDVerificationData,
 } from "@/types/ftos";
 
+interface MockData {
+  transactions: typeof transactionData.transactions;
+}
+
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
@@ -19,10 +23,6 @@ interface ChatMessage {
 interface TelegramConfig {
   botToken: string;
   chatId: string;
-}
-
-interface MockData {
-  transactions: typeof transactionData.transactions;
 }
 
 interface User {

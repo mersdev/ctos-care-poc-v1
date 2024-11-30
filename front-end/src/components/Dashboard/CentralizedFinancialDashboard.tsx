@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
 } from "recharts";
 import {
   DashboardService,
@@ -39,30 +40,6 @@ const recommendations = [
   { seq: 8, code: "retirement", desc: "Retirement Savings" },
   { seq: 9, code: "financial_lit", desc: "Financial Literacy" },
   { seq: 10, code: "behavior", desc: "Behavioral Aspects" },
-];
-
-const loanData = [
-  {
-    avatar: "V",
-    title: "Visa Platinum",
-    amount: "$1,200.00",
-    monthlyPayment: "$100.00",
-    monthsLeft: "12 months left",
-  },
-  {
-    avatar: "M",
-    title: "Mastercard Gold",
-    amount: "$5,500.00",
-    monthlyPayment: "$458.33",
-    monthsLeft: "12 months left",
-  },
-  {
-    avatar: "A",
-    title: "AMEX Rewards",
-    amount: "$3,250.00",
-    monthlyPayment: "$270.83",
-    monthsLeft: "12 months left",
-  },
 ];
 
 const CentralizedFinancialDashboard: React.FC = () => {
@@ -196,7 +173,21 @@ const CentralizedFinancialDashboard: React.FC = () => {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="total" stroke="#0ea5e9" />
+                    <Legend />
+                    <Line
+                      type="monotone"
+                      dataKey="earning"
+                      stroke="#0ea5e9"
+                      name="Monthly Earnings"
+                      strokeWidth={2}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="spending"
+                      stroke="#f43f5e"
+                      name="Monthly Spending"
+                      strokeWidth={2}
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -212,7 +203,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <div className="md:divide-y md:divide-gray-300">
-                  {loanData.map((loan, index) => (
+                  {dashboardData.loanData.map((loan, index) => (
                     <div
                       key={index}
                       className="flex md:items-center items-start md:flex-row flex-col justify-between py-2"
@@ -231,7 +222,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
                         </div>
 
                         <div className="text-sm text-gray-500">
-                          {loan.monthsLeft}
+                          {loan.monthsLeft} month(s) left
                         </div>
                       </div>
                     </div>

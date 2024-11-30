@@ -47,14 +47,11 @@ const Tracker = ({ data }: { data: trackerData }) => {
         <PieChart width={200} height={200}>
           <Pie
             data={pieData}
+            startAngle={180} // Start at 180 degrees
+            endAngle={0} // End at 0 degrees
+            innerRadius={70}
+            outerRadius={100}
             dataKey="value"
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={80}
-            startAngle={90}
-            endAngle={-270} // This ensures a clockwise progress
-            paddingAngle={5}
           >
             <Cell key="Consumed" fill="#ef4444" /> {/* Red */}
             <Cell key="Remaining" fill="#d1d5db" /> {/* Grey */}

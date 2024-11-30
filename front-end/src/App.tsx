@@ -16,6 +16,7 @@ import { Register } from "./components/Auth/Register";
 import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import Chatbox from "./components/Chat/Chatbox";
+import FullTodoList from "./components/Todo/FullTodoList";
 
 const App: React.FC = () => {
   // const [reportData] = React.useState(mockData);
@@ -68,6 +69,14 @@ const App: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />{" "}
+            <Route
+              path="/todo-list"
+              element={
+                <ProtectedRoute>
+                  <FullTodoList />
                 </ProtectedRoute>
               }
             />

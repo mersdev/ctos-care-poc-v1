@@ -7,6 +7,7 @@ export interface DashboardData {
   totalSpending: number;
   totalSavings: number;
   creditScore: number;
+  totalGoal: number;
   monthlyData: Array<{
     name: string;
     total: number;
@@ -30,6 +31,7 @@ export class DashboardService {
         totalSpending: 3352.40,
         totalSavings: 1879.49,
         creditScore: 742,
+        totalGoal:4,
         monthlyData: [
           { name: "Jan", total: 1000 },
           { name: "Feb", total: 1200 },

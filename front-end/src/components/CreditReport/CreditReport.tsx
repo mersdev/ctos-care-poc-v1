@@ -218,6 +218,9 @@ const CreditReport: React.FC = () => {
             <DirectorshipsBusinessInterests
               interests={data.directorshipsBusinessInterests}
             />
+            <DirectorshipsBusinessInterests
+              interests={data.directorshipsBusinessInterests}
+            />
           </TabsContent>
 
           <TabsContent value="other">
@@ -233,5 +236,8 @@ const CreditReport: React.FC = () => {
     </div>
   );
 };
+  );
+};
 
+export default CreditReport;
 export default CreditReport;

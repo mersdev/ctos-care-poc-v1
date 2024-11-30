@@ -28,6 +28,34 @@ interface NavbarProps {
   setIsSidebarOpen: (isOpen: boolean) => void;
 }
 
+export const navItems = [
+  {
+    label: "Dashboard",
+    icon: <LayoutDashboard className="h-4 w-4" />,
+    path: "/dashboard",
+  },
+  {
+    label: "Credit Report",
+    icon: <CreditCard className="h-4 w-4" />,
+    path: "/credit-report",
+  },
+  {
+    label: "Chat",
+    icon: <MessageSquare className="h-4 w-4" />,
+    path: "/chat",
+  },
+  {
+    label: "Todo",
+    icon: <ListTodo className="h-4 w-4" />,
+    path: "/todo",
+  },
+  {
+    label: "Promotion",
+    icon: <Gift className="h-4 w-4" />,
+    path: "/promotion",
+  },
+];
+
 const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -83,36 +111,8 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
     );
   };
 
-  const navItems = [
-    {
-      label: "Dashboard",
-      icon: <LayoutDashboard className="h-4 w-4" />,
-      path: "/dashboard",
-    },
-    {
-      label: "Credit Report",
-      icon: <CreditCard className="h-4 w-4" />,
-      path: "/credit-report",
-    },
-    {
-      label: "Chat",
-      icon: <MessageSquare className="h-4 w-4" />,
-      path: "/chat",
-    },
-    {
-      label: "Todo",
-      icon: <ListTodo className="h-4 w-4" />,
-      path: "/todo",
-    },
-    {
-      label: "Promotion",
-      icon: <Gift className="h-4 w-4" />,
-      path: "/promotion",
-    },
-  ];
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-[2000px] mx-auto">
         <div className="flex h-16 items-center px-4 md:px-6">
           <Button

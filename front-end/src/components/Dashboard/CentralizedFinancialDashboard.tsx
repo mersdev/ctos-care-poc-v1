@@ -148,24 +148,6 @@ const CentralizedFinancialDashboard: React.FC = () => {
     },
   ];
 
-  const cardData2 = [
-    {
-      id: 1,
-      icon: <IconBuildingBank size={32} className="mb-4 text-violet-700" />,
-      title: "Total Balance",
-      value: `$${dashboardData.totalBalance.toLocaleString()}`,
-      percentage: 20.1,
-    },
-    {
-      id: 4,
-      icon: <IconStars size={32} className="mb-4 text-yellow-500" />,
-      title: "Credit Score",
-      value: dashboardData.creditScore,
-      percentage: null, // No percentage for Credit Score
-      status: "Good",
-    },
-  ];
-
   return (
     <div className="container mx-auto p-2">
       <h1 className="text-3xl font-bold mb-6">

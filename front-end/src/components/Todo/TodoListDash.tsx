@@ -76,9 +76,6 @@ const TodoListDash: React.FC = () => {
 
   return (
     <div className="bg-transparent">
-      {/* <h1 className="text-3xl font-bold mb-6">
-        CTOS Score Improvement Todo List
-      </h1> */}
       <h3 className="text-lg font-bold flex gap-2 items-start md:items-center justify-start text-gray-800 mb-4 mt-8">
         <IconChecklist className="flex-shrink-0" />
         <span className="leading-none">

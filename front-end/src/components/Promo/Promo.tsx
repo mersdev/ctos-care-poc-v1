@@ -110,7 +110,7 @@ const cardData: CardData[] = [
     annualFee: "RM 195",
     rewardRate: "5% cashback everyday, 12% cashback on specific categories",
     flashDeal: "RM5,000 or RM400 Touch 'n Go eWallet Credits",
-    featured: true,
+    featured: false,
     buttonLabel: "Apply Now",
     imageUrl: "/path/to/image3.jpg",
     fees: [
@@ -153,6 +153,7 @@ const filters = [
 
 const Promo: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [selectedIncome, setSelectedIncome] = useState<string>("");
   const [openDropdowns, setOpenDropdowns] = useState<Record<number, string>>(
     {}
   );
@@ -172,9 +173,32 @@ const Promo: React.FC = () => {
     );
   };
 
+  const parseIncome = (income: string) =>
+    parseInt(income.replace(/[^0-9]/g, ""), 10);
+
+  const filteredData = cardData.filter((card) => {
+    const cardIncome = parseIncome(card.minIncome);
+
+    const incomeMatch =
+      (selectedIncome === "below-2000" && cardIncome < 2000) ||
+      (selectedIncome === "2000-5000" &&
+        cardIncome >= 2000 &&
+        cardIncome <= 5000) ||
+      (selectedIncome === "5000-above" && cardIncome > 5000) ||
+      selectedIncome === "";
+
+    const filterMatch =
+      selectedFilters.length === 0 ||
+      selectedFilters.some((filter) => card.title.includes(filter));
+
+    return incomeMatch && filterMatch;
+  });
+
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-2">
+      <h1 className="text-3xl font-bold mb-4">Best Credit Cards For You</h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {/* Filters Section */}
         <div className="md:col-span-1">
           <h3 className="font-bold text-lg mb-4">Filter by</h3>
           <div className="space-y-4">
@@ -182,11 +206,10 @@ const Promo: React.FC = () => {
               <label className="block font-semibold mb-2">Annual Income</label>
               <select
                 className="w-full border border-gray-300 rounded-md p-2"
-                defaultValue=""
+                value={selectedIncome}
+                onChange={(e) => setSelectedIncome(e.target.value)}
               >
-                <option value="" disabled>
-                  Select Annual Income
-                </option>
+                <option value="">Select Annual Income</option>
                 <option value="below-2000">Below RM 2,000</option>
                 <option value="2000-5000">RM 2,000 - RM 5,000</option>
                 <option value="5000-above">Above RM 5,000</option>
@@ -215,88 +238,96 @@ const Promo: React.FC = () => {
         </div>
 
         <div className="md:col-span-3 grid gap-6">
-          {cardData.map((card) => (
-            <div
-              key={card.id}
-              className="relative p-4 border rounded-lg bg-white"
-            >
-              {card.featured && (
-                <div className="absolute top-0 right-0 bg-green-500 text-white text-xs px-2 py-1 rounded-bl-lg">
-                  Featured
-                </div>
-              )}
-
-              <div className="bg-yellow-500 text-white text-sm px-4 py-1 rounded font-semibold mb-2 flex items-center gap-2">
-                Flash Deal: {card.flashDeal}{" "}
-                <IconInfoCircle size={16} className="inline-block" />
-              </div>
-
-              <h2 className="text-xl font-bold text-gray-800">{card.title}</h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
-                <div>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Min Income:</span>{" "}
-                    {card.minIncome}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Interest Rate:</span>{" "}
-                    {card.interestRate}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Annual Fee:</span>{" "}
-                    {card.annualFee}
-                  </p>
-                </div>
-              </div>
-
-              <div className="text-gray-600 mb-4">
-                <span className="font-semibold">Rewards Rate:</span>{" "}
-                {card.rewardRate}
-              </div>
-
-              {/* Dropdowns */}
-              <div className="mb-4">
-                {["Fees & Charges", "Requirements"].map((section) => (
-                  <div key={section}>
-                    <button
-                      className="flex items-center justify-between w-full pb-2 mb-2 text-left font-semibold text-gray-700"
-                      onClick={() => toggleDropdown(card.id, section)}
-                    >
-                      {section}
-                      {openDropdowns[card.id] === section ? (
-                        <IconChevronUp size={18} />
-                      ) : (
-                        <IconChevronDown size={18} />
-                      )}
-                    </button>
-                    {openDropdowns[card.id] === section && (
-                      <ul className="pl-4 pb-4">
-                        {(section === "Fees & Charges"
-                          ? card.fees.map((fee) => fee.description)
-                          : card.requirements.map(
-                              (requirement) => requirement.description
-                            )
-                        ).map((item, index) => (
-                          <li key={index} className="text-sm text-gray-600">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+          {filteredData.length > 0 ? (
+            filteredData.map((card) => (
+              <div
+                key={card.id}
+                className="relative p-4 border rounded-lg bg-white"
+              >
+                {card.featured && (
+                  <div className="absolute top-0 right-0 bg-green-500 text-white text-xs px-2 py-1 rounded-bl-lg">
+                    Featured
                   </div>
-                ))}
-              </div>
+                )}
 
-              <div className="flex justify-end">
-                <Button>{card.buttonLabel}</Button>
+                <div className="bg-yellow-500 text-white text-sm px-4 py-1 rounded font-semibold mb-2 flex items-center gap-2">
+                  Flash Deal: {card.flashDeal}{" "}
+                  <IconInfoCircle size={16} className="inline-block" />
+                </div>
+
+                <h2 className="text-xl font-bold text-gray-800">
+                  {card.title}
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+                  <div>
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Min Income:</span>{" "}
+                      {card.minIncome}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Interest Rate:</span>{" "}
+                      {card.interestRate}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Annual Fee:</span>{" "}
+                      {card.annualFee}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="text-gray-600 mb-4">
+                  <span className="font-semibold">Rewards Rate:</span>{" "}
+                  {card.rewardRate}
+                </div>
+
+                {/* Dropdowns */}
+                <div className="mb-4">
+                  {["Fees & Charges", "Requirements"].map((section) => (
+                    <div key={section}>
+                      <button
+                        className="flex items-center justify-between w-full pb-2 mb-2 text-left font-semibold text-gray-700"
+                        onClick={() => toggleDropdown(card.id, section)}
+                      >
+                        {section}
+                        {openDropdowns[card.id] === section ? (
+                          <IconChevronUp size={18} />
+                        ) : (
+                          <IconChevronDown size={18} />
+                        )}
+                      </button>
+                      {openDropdowns[card.id] === section && (
+                        <ul className="pl-4 pb-4">
+                          {(section === "Fees & Charges"
+                            ? card.fees.map((fee) => fee.description)
+                            : card.requirements.map(
+                                (requirement) => requirement.description
+                              )
+                          ).map((item, index) => (
+                            <li key={index} className="text-sm text-gray-600">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex justify-end">
+                  <Button>{card.buttonLabel}</Button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-center text-gray-500">
+              No credit cards suit your criteria.
+            </p>
+          )}
         </div>
       </div>
     </div>

@@ -332,7 +332,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
             <CardContent>
               <ResponsiveContainer width="100%" height={350}>
                 <BarChart data={dashboardData.spendingData} barCategoryGap={12}>
-                  <XAxis dataKey="category" />
+                  <XAxis dataKey="category" tick={{ fill: "white" }} />
                   <YAxis />
                   <Tooltip />
 
@@ -346,6 +346,29 @@ const CentralizedFinancialDashboard: React.FC = () => {
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+              <div className=" p-4">
+                {dashboardData.spendingData.map((item, index) => (
+                  <div key={item.category}>
+                    <div className="flex justify-between items-center py-2">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="inline-block w-2 h-2 rounded-full"
+                          style={{ backgroundColor: item.color }}
+                        ></span>
+                        <span className="text-xs text-gray-700">
+                          {item.category}
+                        </span>
+                      </div>
+                      <span className="text-xs font-bold text-gray-900">
+                        {item.amount}
+                      </span>
+                    </div>
+                    {index !== dashboardData.spendingData.length - 1 && (
+                      <hr className="border-t border-gray-200" />
+                    )}
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </div>

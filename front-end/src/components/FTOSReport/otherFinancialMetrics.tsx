@@ -54,21 +54,11 @@ export default function OtherFinancialMetrics({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <h3 className="text-lg font-semibold">Industry Growth Rate</h3>
-              <p className="text-2xl font-bold">
-                {economicIndicators.industryGrowth}% annually
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">
-                Professional Development Skills
-              </h3>
-              <p className="text-2xl font-bold">
-                ${professionalDevelopment.skillsGrowth}{" "}
-              </p>
-            </div>
+          <div>
+            <h3 className="text-lg font-semibold">Industry Growth Rate</h3>
+            <p className="text-2xl font-bold">
+              {economicIndicators.industryGrowth}% annually
+            </p>
           </div>
         </CardContent>
       </Card>

@@ -25,17 +25,26 @@ interface FutureProjectionsProps {
 }
 
 export default function FutureProjections({ metrics }: FutureProjectionsProps) {
-  const { projected_income_6m, growth_rate_6m, confidence_score, risk_factors, opportunities } = metrics;
+  const {
+    projected_income_6m,
+    growth_rate_6m,
+    confidence_score,
+    risk_factors,
+    opportunities,
+  } = metrics;
 
   // Generate 6-month projection data
-  const projectionData: ProjectionData[] = Array.from({ length: 6 }).map((_, i) => {
-    const monthDate = new Date();
-    monthDate.setMonth(monthDate.getMonth() + i);
-    return {
-      month: monthDate.toLocaleString('default', { month: 'short' }),
-      projected: projected_income_6m * Math.pow(1 + growth_rate_6m, i/12)
-    };
-  });
+  const projectionData: ProjectionData[] = Array.from({ length: 6 }).map(
+    (_, i) => {
+      const monthDate = new Date();
+      monthDate.setMonth(monthDate.getMonth() + i);
+      return {
+        month: monthDate.toLocaleString("default", { month: "short" }),
+        projected:
+          projected_income_6m[i] * Math.pow(1 + growth_rate_6m[i], i / 12),
+      };
+    }
+  );
 
   const getConfidenceLabel = (score: number) => {
     if (score >= 0.8) return { label: "Very High", color: "text-green-600" };
@@ -58,17 +67,24 @@ export default function FutureProjections({ metrics }: FutureProjectionsProps) {
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2 mb-6">
             <div>
-              <h3 className="text-lg font-semibold">Projected Monthly Income</h3>
-              <p className="text-2xl font-bold">${projected_income_6m.toFixed(2)}</p>
+              <h3 className="text-lg font-semibold">
+                Projected Monthly Income
+              </h3>
+              <p className="text-2xl font-bold">
+                ${projected_income_6m[5].toFixed(2)}
+              </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold">Monthly Growth Rate</h3>
-              <p className="text-2xl font-bold">{(growth_rate_6m * 100).toFixed(1)}%</p>
+              <p className="text-2xl font-bold">
+                {(growth_rate_6m[5] * 100).toFixed(1)}%
+              </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold">Confidence Score</h3>
               <p className={`text-2xl font-bold ${confidenceStatus.color}`}>
-                {confidenceStatus.label} ({(confidence_score * 100).toFixed(0)}%)
+                {confidenceStatus.label} ({(confidence_score * 100).toFixed(0)}
+                %)
               </p>
             </div>
           </div>
@@ -78,7 +94,9 @@ export default function FutureProjections({ metrics }: FutureProjectionsProps) {
               <LineChart data={projectionData}>
                 <XAxis dataKey="month" />
                 <YAxis />
-                <Tooltip formatter={(value) => `$${Number(value).toFixed(2)}`} />
+                <Tooltip
+                  formatter={(value) => `$${Number(value).toFixed(2)}`}
+                />
                 <Line
                   type="monotone"
                   dataKey="projected"
@@ -102,16 +120,22 @@ export default function FutureProjections({ metrics }: FutureProjectionsProps) {
               <h3 className="text-lg font-semibold mb-2">Risk Factors</h3>
               <ul className="list-disc pl-5 space-y-1">
                 {risk_factors.map((risk, index) => (
-                  <li key={index} className="text-red-600">{risk}</li>
+                  <li key={index} className="text-red-600">
+                    {risk}
+                  </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-2">Growth Opportunities</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                Growth Opportunities
+              </h3>
               <ul className="list-disc pl-5 space-y-1">
                 {opportunities.map((opportunity, index) => (
-                  <li key={index} className="text-green-600">{opportunity}</li>
+                  <li key={index} className="text-green-600">
+                    {opportunity}
+                  </li>
                 ))}
               </ul>
             </div>

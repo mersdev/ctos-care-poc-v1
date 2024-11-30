@@ -1,9 +1,15 @@
 import axios from "axios";
-import { CreditReportData } from "@/types/creditReport";
-import { fetchCreditReportData } from "@/api/creditReportApi";
-import companyData from "../mock/company.json";
-import tradeData from "../mock/trade.json";
 import transactionData from "../mock/transaction.json";
+import {
+  CreditMetrics,
+  FTOSAnalysis,
+  IncomeMetrics,
+  OtherMetrics,
+  ProjectionMetrics,
+  CashFlowMetrics,
+  BehavioralMetrics,
+  IDVerificationData,
+} from "@/types/ftos";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -16,8 +22,6 @@ interface TelegramConfig {
 }
 
 interface MockData {
-  companies: typeof companyData.companies;
-  tradeReferees: typeof tradeData.trade_referees;
   transactions: typeof transactionData.transactions;
 }
 
@@ -43,18 +47,13 @@ export class OllamaChatService {
   ];
 
   private messages: ChatMessage[] = [];
-  private creditData: CreditReportData | null = null;
-  private mockData: MockData;
+  private storedData: FTOSAnalysis | null = null;
   private telegramConfig: TelegramConfig | null = null;
   private user: User | null = null;
+  private mockData: MockData | null = null;
 
   constructor(user?: User | null) {
     this.user = user || null;
-    this.mockData = {
-      companies: companyData.companies,
-      tradeReferees: tradeData.trade_referees,
-      transactions: transactionData.transactions,
-    };
     // Initialize Telegram config from environment variables
     this.telegramConfig = {
       botToken: OllamaChatService.TELEGRAM_BOT_TOKEN,
@@ -64,14 +63,58 @@ export class OllamaChatService {
 
   async initialize(): Promise<void> {
     try {
-      this.creditData = await fetchCreditReportData();
+      const incomeMetrics = JSON.parse(
+        localStorage.getItem("ftos_income_metrics") || "{}"
+      ) as IncomeMetrics;
+      const creditMetrics = JSON.parse(
+        localStorage.getItem("ftos_credit_metrics") || "{}"
+      ) as CreditMetrics;
+      const cashFlowMetrics = JSON.parse(
+        localStorage.getItem("ftos_cashflow_metrics") || "{}"
+      ) as CashFlowMetrics;
+      const projectionMetrics = JSON.parse(
+        localStorage.getItem("ftos_projection_metrics") || "{}"
+      ) as ProjectionMetrics;
+      const behavioralMetrics = JSON.parse(
+        localStorage.getItem("ftos_behavioral_metrics") || "{}"
+      ) as BehavioralMetrics;
+      const otherMetrics = JSON.parse(
+        localStorage.getItem("ftos_other_metrics") || "{}"
+      ) as OtherMetrics;
+      const idVerification = JSON.parse(
+        localStorage.getItem("ftos_id_verification") || "{}"
+      ) as IDVerificationData;
+
+      this.storedData = {
+        income_metrics: incomeMetrics,
+        credit_metrics: creditMetrics,
+        cash_flow_metrics: cashFlowMetrics,
+        projection_metrics: projectionMetrics,
+        behavioral_metrics: behavioralMetrics,
+        other_metrics: otherMetrics,
+        id_verification: idVerification,
+      };
+
+      this.mockData = {
+        transactions: transactionData.transactions,
+      };
+
+      if (
+        Object.keys(this.storedData.income_metrics).length === 0 &&
+        Object.keys(this.storedData.credit_metrics).length === 0 &&
+        Object.keys(this.storedData.cash_flow_metrics).length === 0
+      ) {
+        console.warn("No FTOS Analysis data found in localStorage");
+        this.storedData = null;
+      }
     } catch (error) {
-      console.error("Failed to initialize credit data:", error);
+      console.error("Failed to initialize FTOS data from localStorage:", error);
+      this.storedData = null;
       throw error;
     }
   }
 
-  private async sendTelegramMessage(message: string): Promise<void> {
+  async sendTelegramMessage(message: string): Promise<void> {
     if (!this.telegramConfig) {
       console.warn("Telegram configuration not provided");
       return;
@@ -154,75 +197,81 @@ export class OllamaChatService {
   }
 
   private buildContext(): string {
-    if (!this.creditData) {
-      return `Hello! I'm your CTOS Credit Assistant, ready to help you understand your credit profile and financial standing. I can help you with:
-      - Understanding your CTOS Score and its components
-      - Explaining your credit history and payment patterns
-      - Providing insights about your business interests
-      - Offering tips for credit improvement
+    if (!this.storedData) {
+      return `Hello! I'm your Financial Health Assistant, ready to help you understand your financial profile and standing. I can help you with:
+      - Understanding your Income and Credit metrics
+      - Analyzing your Cash Flow patterns
+      - Reviewing your Behavioral metrics
+      - Providing financial projections and insights
       
 How can I assist you today?`;
     }
 
-    const recentTransactions = this.mockData.transactions
-      .slice(0, 5)
-      .map(
-        (t) =>
-          `${t.date}: ${t.description} (${
-            t.type === "credit" ? "+" : "-"
-          }RM ${t.amount.toFixed(2)})`
-      )
-      .join("\n");
+    const {
+      income_metrics,
+      credit_metrics,
+      cash_flow_metrics,
+      projection_metrics,
+    } = this.storedData;
 
-    const companies = this.mockData.companies
-      .map(
-        (c) =>
-          `${c.name} (Position: ${c.position}, Shareholding: ${c.shareholding}%, Since: ${c.appoint_date})`
-      )
-      .join("\n");
+    const recentTransactions =
+      this.mockData?.transactions
+        ?.slice(0, 5)
+        ?.map(
+          (t) =>
+            `${t.date}: ${t.description} (${
+              t.type === "credit" ? "+" : "-"
+            }RM ${t.amount.toFixed(2)})`
+        )
+        ?.join("\n") || "No recent transactions available";
 
-    const ctosScore = this.creditData.ctosScore?.score || "N/A";
+    const creditScore = credit_metrics.score || "N/A";
     const scoreAnalysis =
-      ctosScore !== "N/A"
-        ? Number(ctosScore) >= 700
+      creditScore !== "N/A"
+        ? creditScore >= 700
           ? "excellent"
-          : Number(ctosScore) >= 650
+          : creditScore >= 650
           ? "good"
-          : Number(ctosScore) >= 600
+          : creditScore >= 600
           ? "fair"
           : "needs attention"
         : "unavailable";
 
-    return `# CTOS Credit Assistant
+    return `Hello! I'm your dedicated Financial Health Assistant, here to help you understand and manage your financial profile. I have access to your latest financial information and can provide personalized insights.
 
-I'm your dedicated CTOS Credit Assistant, here to help you understand and manage your credit profile. I have access to your latest financial information and can provide personalized insights.
+## Income Overview
+- 💰 Monthly Average: RM${income_metrics.monthly_average.toFixed(2)}
+- 📈 Growth Rate: ${income_metrics.growth_rate}%
+- 🎯 Stability Score: ${income_metrics.stability_score}
 
-## Credit Overview
-- 📊 CTOS Score: ${ctosScore} (${scoreAnalysis})
-- 🏦 Banking Payment History: ${
-      this.creditData.bankingPaymentHistory ? "Available" : "Not available"
-    }
-- ⚖️ Legal Status: ${
-      this.creditData.legalCases
-        ? `${this.creditData.legalCases.asPlaintiff.length} case(s) as plaintiff, ${this.creditData.legalCases.asDefendant.length} case(s) as defendant`
-        : "No active legal cases"
-    }
+## Credit Profile
+- 📊 Credit Score: ${creditScore} (${scoreAnalysis})
+- 💳 Payment History: ${credit_metrics.payment_history}
+- 📉 Credit Utilization: ${credit_metrics.credit_utilization}
 
-## Business Interests
-${companies}
+## Cash Flow Analysis
+- 💵 Monthly Net Flow: RM${cash_flow_metrics.monthly_net_flow.toFixed(2)}
+- 📊 Volatility: ${cash_flow_metrics.volatility}
+- 💰 Emergency Fund: ${cash_flow_metrics.emergency_fund_months} months coverage
 
-## Recent Financial Activity
+## Financial Projections
+- 📈 6-Month Growth Rate: ${projection_metrics.growth_rate_6m[0]}%
+- ⭐ Confidence Score: ${projection_metrics.confidence_score}
+${
+  projection_metrics.risk_factors.length > 0
+    ? `- ⚠️ Risk Factors: ${projection_metrics.risk_factors.join(", ")}`
+    : ""
+}
+
+## Recent Transactions
 ${recentTransactions}
 
-## Trade References
-📋 ${this.mockData.tradeReferees.length} verified trade reference(s)
-
 ## How I Can Help
-- Understand your credit score and its components
-- Analyze your recent financial activities
-- Review your business interests and trade relationships
-- Provide personalized credit improvement recommendations
-- Answer questions about your credit report
+- Analyze your income patterns and stability
+- Review your credit profile and suggest improvements
+- Provide cash flow insights and recommendations
+- Share financial projections and growth opportunities
+- Answer questions about your financial health
 
 How may I assist you today?`;
   }

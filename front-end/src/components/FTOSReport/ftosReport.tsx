@@ -27,74 +27,100 @@ export default function FtosReport() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [incomeMetrics, setIncomeMetrics] = useState<IncomeMetrics>(() => {
-    const saved = localStorage.getItem('ftos_income_metrics');
-    return saved ? JSON.parse(saved) : {} as IncomeMetrics;
+    const saved = localStorage.getItem("ftos_income_metrics");
+    return saved ? JSON.parse(saved) : ({} as IncomeMetrics);
   });
   const [creditMetrics, setCreditMetrics] = useState<CreditMetrics>(() => {
-    const saved = localStorage.getItem('ftos_credit_metrics');
-    return saved ? JSON.parse(saved) : {} as CreditMetrics;
+    const saved = localStorage.getItem("ftos_credit_metrics");
+    return saved ? JSON.parse(saved) : ({} as CreditMetrics);
   });
-  const [cashFlowMetrics, setCashFlowMetrics] = useState<CashFlowMetrics>(() => {
-    const saved = localStorage.getItem('ftos_cashflow_metrics');
-    return saved ? JSON.parse(saved) : {} as CashFlowMetrics;
-  });
-  const [projectionMetrics, setProjectionMetrics] = useState<ProjectionMetrics>(() => {
-    const saved = localStorage.getItem('ftos_projection_metrics');
-    return saved ? JSON.parse(saved) : {} as ProjectionMetrics;
-  });
-  const [behavioralMetrics, setBehavioralMetrics] = useState<BehavioralMetrics>(() => {
-    const saved = localStorage.getItem('ftos_behavioral_metrics');
-    return saved ? JSON.parse(saved) : {} as BehavioralMetrics;
-  });
+  const [cashFlowMetrics, setCashFlowMetrics] = useState<CashFlowMetrics>(
+    () => {
+      const saved = localStorage.getItem("ftos_cashflow_metrics");
+      return saved ? JSON.parse(saved) : ({} as CashFlowMetrics);
+    }
+  );
+  const [projectionMetrics, setProjectionMetrics] = useState<ProjectionMetrics>(
+    () => {
+      const saved = localStorage.getItem("ftos_projection_metrics");
+      return saved ? JSON.parse(saved) : ({} as ProjectionMetrics);
+    }
+  );
+  const [behavioralMetrics, setBehavioralMetrics] = useState<BehavioralMetrics>(
+    () => {
+      const saved = localStorage.getItem("ftos_behavioral_metrics");
+      return saved ? JSON.parse(saved) : ({} as BehavioralMetrics);
+    }
+  );
   const [otherMetrics, setOtherMetrics] = useState<OtherMetrics>(() => {
-    const saved = localStorage.getItem('ftos_other_metrics');
-    return saved ? JSON.parse(saved) : {} as OtherMetrics;
+    const saved = localStorage.getItem("ftos_other_metrics");
+    return saved ? JSON.parse(saved) : ({} as OtherMetrics);
   });
-  const [idVerification, setIdVerification] = useState<IDVerificationData>(() => {
-    const saved = localStorage.getItem('ftos_id_verification');
-    return saved ? JSON.parse(saved) : {} as IDVerificationData;
-  });
+  const [idVerification, setIdVerification] = useState<IDVerificationData>(
+    () => {
+      const saved = localStorage.getItem("ftos_id_verification");
+      return saved ? JSON.parse(saved) : ({} as IDVerificationData);
+    }
+  );
 
   // Save to localStorage whenever metrics change
   useEffect(() => {
     if (Object.keys(incomeMetrics).length > 0) {
-      localStorage.setItem('ftos_income_metrics', JSON.stringify(incomeMetrics));
+      localStorage.setItem(
+        "ftos_income_metrics",
+        JSON.stringify(incomeMetrics)
+      );
     }
   }, [incomeMetrics]);
 
   useEffect(() => {
     if (Object.keys(creditMetrics).length > 0) {
-      localStorage.setItem('ftos_credit_metrics', JSON.stringify(creditMetrics));
+      localStorage.setItem(
+        "ftos_credit_metrics",
+        JSON.stringify(creditMetrics)
+      );
     }
   }, [creditMetrics]);
 
   useEffect(() => {
     if (Object.keys(cashFlowMetrics).length > 0) {
-      localStorage.setItem('ftos_cashflow_metrics', JSON.stringify(cashFlowMetrics));
+      localStorage.setItem(
+        "ftos_cashflow_metrics",
+        JSON.stringify(cashFlowMetrics)
+      );
     }
   }, [cashFlowMetrics]);
 
   useEffect(() => {
     if (Object.keys(projectionMetrics).length > 0) {
-      localStorage.setItem('ftos_projection_metrics', JSON.stringify(projectionMetrics));
+      localStorage.setItem(
+        "ftos_projection_metrics",
+        JSON.stringify(projectionMetrics)
+      );
     }
   }, [projectionMetrics]);
 
   useEffect(() => {
     if (Object.keys(behavioralMetrics).length > 0) {
-      localStorage.setItem('ftos_behavioral_metrics', JSON.stringify(behavioralMetrics));
+      localStorage.setItem(
+        "ftos_behavioral_metrics",
+        JSON.stringify(behavioralMetrics)
+      );
     }
   }, [behavioralMetrics]);
 
   useEffect(() => {
     if (Object.keys(otherMetrics).length > 0) {
-      localStorage.setItem('ftos_other_metrics', JSON.stringify(otherMetrics));
+      localStorage.setItem("ftos_other_metrics", JSON.stringify(otherMetrics));
     }
   }, [otherMetrics]);
 
   useEffect(() => {
     if (Object.keys(idVerification).length > 0) {
-      localStorage.setItem('ftos_id_verification', JSON.stringify(idVerification));
+      localStorage.setItem(
+        "ftos_id_verification",
+        JSON.stringify(idVerification)
+      );
     }
   }, [idVerification]);
 
@@ -103,11 +129,11 @@ export default function FtosReport() {
 
     // Check if we have all required data in localStorage
     const hasAllData = [
-      'ftos_income_metrics',
-      'ftos_credit_metrics',
-      'ftos_cashflow_metrics',
-      'ftos_projection_metrics'
-    ].every(key => {
+      "ftos_income_metrics",
+      "ftos_credit_metrics",
+      "ftos_cashflow_metrics",
+      "ftos_projection_metrics",
+    ].every((key) => {
       const data = localStorage.getItem(key);
       return data && Object.keys(JSON.parse(data)).length > 0;
     });
@@ -136,11 +162,13 @@ export default function FtosReport() {
       setCashFlowMetrics(cashFlow);
 
       // Projection Metrics
-      const projection = await OllamaFTOSReportService.createProjectionMetrics();
+      const projection =
+        await OllamaFTOSReportService.createProjectionMetrics();
       setProjectionMetrics(projection);
 
       // Behavioral Metrics
-      const behavioral = await OllamaFTOSReportService.createBehavioralMetrics();
+      const behavioral =
+        await OllamaFTOSReportService.createBehavioralMetrics();
       setBehavioralMetrics(behavioral);
 
       // Other Metrics

@@ -20,6 +20,115 @@ const ollamaApi = axios.create({
 });
 
 export class OllamaFTOSReportService {
+  private static cleanJsonString(str: string): string {
+    try {
+      // Remove any text before the first '[' or '{'
+      const startBracket = str.indexOf('[');
+      const startBrace = str.indexOf('{');
+      const startIndex = startBracket !== -1 && startBrace !== -1 
+        ? Math.min(startBracket, startBrace)
+        : Math.max(startBracket, startBrace);
+      
+      if (startIndex === -1) return str;
+      str = str.substring(startIndex);
+
+      // Remove any text after the matching closing bracket/brace
+      let depth = 0;
+      let endIndex = -1;
+      const chars = str.split('');
+      
+      for (let i = 0; i < chars.length; i++) {
+        if (chars[i] === '[' || chars[i] === '{') depth++;
+        if (chars[i] === ']' || chars[i] === '}') depth--;
+        if (depth === 0) {
+          endIndex = i;
+          break;
+        }
+      }
+
+      if (endIndex !== -1) {
+        str = str.substring(0, endIndex + 1);
+      }
+
+      // Remove escaped characters and fix common JSON issues
+      str = str
+        .replace(/\\n/g, ' ')          // Replace escaped newlines
+        .replace(/\\r/g, ' ')          // Replace escaped carriage returns
+        .replace(/\\t/g, ' ')          // Replace escaped tabs
+        .replace(/\\\\/g, '\\')        // Fix double escaped backslashes
+        .replace(/\\"/g, '"')          // Fix escaped quotes
+        .replace(/"{/g, '{')           // Remove quotes around objects
+        .replace(/}"/g, '}')           // Remove quotes around objects
+        .replace(/"\[/g, '[')          // Remove quotes around arrays
+        .replace(/\]"/g, ']')          // Remove quotes around arrays
+        .replace(/([{,]\s*)(\w+):/g, '$1"$2":') // Add quotes to unquoted keys
+        .replace(/\s+/g, ' ')          // Replace multiple spaces with single space
+        .trim();                       // Trim whitespace
+
+      return str;
+    } catch (error) {
+      console.error("Error cleaning JSON string:", error);
+      return str;
+    }
+  }
+
+  private static parseOllamaResponse(response: any): any {
+    try {
+      // First, check if response.data is an object with a 'response' field
+      const rawResponse = response.data?.response || response.data;
+      console.log("Raw Response:", rawResponse);
+
+      if (typeof rawResponse !== 'string') {
+        return rawResponse;
+      }
+
+      // Clean the response string
+      const cleanedResponse = this.cleanJsonString(rawResponse);
+      console.log("Cleaned Response:", cleanedResponse);
+
+      // Try to parse as is first
+      try {
+        return JSON.parse(cleanedResponse);
+      } catch (parseError) {
+        console.log("Initial parse failed, trying to extract JSON pattern");
+        
+        // Try to extract JSON array or object pattern
+        const arrayMatch = cleanedResponse.match(/\[([\s\S]*?)\]/);
+        const objectMatch = cleanedResponse.match(/\{([\s\S]*?)\}/);
+        
+        if (arrayMatch) {
+          const arrayStr = `[${arrayMatch[1]}]`;
+          console.log("Extracted array:", arrayStr);
+          return JSON.parse(arrayStr);
+        }
+        
+        if (objectMatch) {
+          const objectStr = `{${objectMatch[1]}}`;
+          console.log("Extracted object:", objectStr);
+          return JSON.parse(objectStr);
+        }
+
+        // If no JSON structure found, try to create an array from the response
+        const lines = cleanedResponse
+          .split(/[.,\n]/)
+          .map(line => line.trim())
+          .filter(line => line.length > 0)
+          .map(line => `"${line.replace(/"/g, '\\"')}"`);
+
+        if (lines.length > 0) {
+          const arrayStr = `[${lines.join(',')}]`;
+          console.log("Created array from lines:", arrayStr);
+          return JSON.parse(arrayStr);
+        }
+
+        throw new Error('No valid JSON structure found in response');
+      }
+    } catch (error) {
+      console.error("Error parsing response:", error);
+      throw error;
+    }
+  }
+
   static async createIncomeMetrics(): Promise<IncomeMetrics> {
     const data = await fetchTransactions();
 
@@ -145,21 +254,34 @@ Example format:
       stream: false,
     });
 
-    // Ensure recommendations is an array of strings
+    console.log("Credit Metrics - Raw Ollama Response:", response.data);
+
     let recommendations: string[] = [];
     try {
-      const parsedResponse =
-        typeof response.data === "string"
-          ? JSON.parse(response.data)
-          : response.data;
-      recommendations = Array.isArray(parsedResponse) ? parsedResponse : [];
+      const parsedResponse = this.parseOllamaResponse(response);
+      console.log("Credit Metrics - Parsed Response:", parsedResponse);
+
+      // Ensure we have an array of strings
+      if (Array.isArray(parsedResponse)) {
+        recommendations = parsedResponse.map(
+          (item: unknown) => item?.toString().trim() || ""
+        );
+      } else {
+        throw new Error("Response is not an array");
+      }
+
+      console.log("Credit Metrics - Final Recommendations:", recommendations);
     } catch (error) {
-      console.error("Error parsing recommendations:", error);
+      console.error("Error parsing credit recommendations:", error);
       recommendations = [
         "Set up automatic payments to improve payment history",
         "Consider reducing credit utilization to below 30%",
         "Build credit history by maintaining regular credit activity",
       ];
+      console.log(
+        "Credit Metrics - Using fallback recommendations:",
+        recommendations
+      );
     }
 
     return {
@@ -299,14 +421,76 @@ Example format:
       stream: false,
     });
 
-    const analysis = response.data;
+    console.log("Projection Metrics - Raw Ollama Response:", response.data);
+
+    let risk_factors: string[] = [];
+    let opportunities: string[] = [];
+    let confidence_score = 70;
+
+    try {
+      const parsedResponse = this.parseOllamaResponse(response);
+      console.log("Projection Metrics - Parsed Response:", parsedResponse);
+
+      // Handle both array and object responses
+      if (Array.isArray(parsedResponse)) {
+        // If it's an array, split it between risk factors and opportunities
+        const midPoint = Math.floor(parsedResponse.length / 2);
+        risk_factors = parsedResponse
+          .slice(0, midPoint)
+          .map((item: unknown) => item?.toString().trim() || "");
+        opportunities = parsedResponse
+          .slice(midPoint)
+          .map((item: unknown) => item?.toString().trim() || "");
+      } else if (
+        typeof parsedResponse === "object" &&
+        parsedResponse !== null
+      ) {
+        // If it's an object, extract the fields
+        risk_factors = Array.isArray(parsedResponse.risk_factors)
+          ? parsedResponse.risk_factors.map(
+              (item: unknown) => item?.toString().trim() || ""
+            )
+          : [];
+        opportunities = Array.isArray(parsedResponse.opportunities)
+          ? parsedResponse.opportunities.map(
+              (item: unknown) => item?.toString().trim() || ""
+            )
+          : [];
+        confidence_score = parsedResponse.confidence_score || 70;
+      } else {
+        throw new Error("Response is neither an array nor an object");
+      }
+
+      console.log("Projection Metrics - Final Analysis:", {
+        risk_factors,
+        opportunities,
+        confidence_score,
+      });
+    } catch (error) {
+      console.error("Error parsing projection analysis:", error);
+      risk_factors = [
+        "Market volatility",
+        "Industry changes",
+        "Economic conditions",
+      ];
+      opportunities = [
+        "Skill development",
+        "Market expansion",
+        "Network growth",
+      ];
+      console.log("Projection Metrics - Using fallback analysis:", {
+        risk_factors,
+        opportunities,
+        confidence_score,
+      });
+    }
 
     return {
       projected_income_6m,
       growth_rate_6m,
-      confidence_score: analysis.confidence_score,
-      risk_factors: analysis.risk_factors,
-      opportunities: analysis.opportunities,
+      confidence_score,
+      risk_factors,
+      opportunities,
     };
   }
 
@@ -360,45 +544,89 @@ Example format:
     // Generate insights using Ollama
     const response = await ollamaApi.post("/api/generate", {
       model: "llama3",
-      prompt: `Analyze the following monthly spending data and generate insights:
-  ${JSON.stringify(spendingData, null, 2)}
-  
-  Generate two types of insights:
-  1. Spending patterns (e.g., seasonal trends, spending habits)
-  2. Financial stress indicators (e.g., increasing non-essential spending, irregular patterns)
-  
-  Format the response as a JSON object with these exact keys:
-  {
-    "patterns": string[],
-    "stressIndicators": string[]
-  }`,
+      prompt: `Analyze the spending patterns and generate behavioral insights:
+
+Spending Data:
+${JSON.stringify(spendingData, null, 2)}
+
+Generate:
+1. Key spending patterns (3-5 observations)
+2. Financial stress indicators (2-3 points)
+
+Return as a JSON object with these exact keys:
+{
+  "patterns": string[],
+  "stressIndicators": string[]
+}`,
       stream: false,
     });
+
+    console.log("Behavioral Metrics - Raw Ollama Response:", response.data);
+
+    let patterns: string[] = [];
+    let stressIndicators: string[] = [];
+
+    try {
+      const parsedResponse = this.parseOllamaResponse(response);
+      console.log("Behavioral Metrics - Parsed Response:", parsedResponse);
+
+      // Handle both array and object responses
+      if (Array.isArray(parsedResponse)) {
+        // If it's an array, split it between patterns and stress indicators
+        const midPoint = Math.floor(parsedResponse.length / 2);
+        patterns = parsedResponse
+          .slice(0, midPoint)
+          .map((item: unknown) => item?.toString().trim() || "");
+        stressIndicators = parsedResponse
+          .slice(midPoint)
+          .map((item: unknown) => item?.toString().trim() || "");
+      } else if (
+        typeof parsedResponse === "object" &&
+        parsedResponse !== null
+      ) {
+        // If it's an object, extract the fields
+        patterns = Array.isArray(parsedResponse.patterns)
+          ? parsedResponse.patterns.map(
+              (item: unknown) => item?.toString().trim() || ""
+            )
+          : [];
+        stressIndicators = Array.isArray(parsedResponse.stressIndicators)
+          ? parsedResponse.stressIndicators.map(
+              (item: unknown) => item?.toString().trim() || ""
+            )
+          : [];
+      } else {
+        throw new Error("Response is neither an array nor an object");
+      }
+
+      console.log("Behavioral Metrics - Final Insights:", {
+        patterns,
+        stressIndicators,
+      });
+    } catch (error) {
+      console.error("Error parsing behavioral insights:", error);
+      patterns = [
+        "Consistent essential spending",
+        "Variable discretionary spending",
+        "Monthly budget adherence",
+      ];
+      stressIndicators = [
+        "High essential to discretionary ratio",
+        "Increasing debt levels",
+      ];
+      console.log("Behavioral Metrics - Using fallback insights:", {
+        patterns,
+        stressIndicators,
+      });
+    }
 
     return {
       spendingData,
       insights: {
-        patterns: response.data.patterns,
-        stressIndicators: response.data.stressIndicators,
+        patterns,
+        stressIndicators,
       },
     };
-  }
-
-  private static async searchOccupationInfo(
-    occupation: string
-  ): Promise<string> {
-    try {
-      const response = await axios.get("https://api.duckduckgo.com/", {
-        params: {
-          q: `${occupation} related with Malaysian Government Policy`,
-          format: "json",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error searching company info:", error);
-      return "";
-    }
   }
 
   static async createOtherMetrics(): Promise<OtherMetrics> {
@@ -434,15 +662,86 @@ Format the response as a JSON object with these exact keys:
 }`,
       stream: false,
     });
+
+    console.log("Other Metrics - Raw Ollama Response:", response.data);
+
+    let policyImpact: string[] = [];
+    let industryGrowth = 0.5;
+    let economicCorrelation = 0.2;
+
+    try {
+      const parsedResponse = this.parseOllamaResponse(response);
+      console.log("Other Metrics - Parsed Response:", parsedResponse);
+
+      // Handle both array and object responses
+      if (Array.isArray(parsedResponse)) {
+        policyImpact = parsedResponse.map(
+          (item: unknown) => item?.toString().trim() || ""
+        );
+      } else if (
+        typeof parsedResponse === "object" &&
+        parsedResponse !== null
+      ) {
+        industryGrowth = parsedResponse.industryGrowth || 0.5;
+        economicCorrelation = parsedResponse.economicCorrelation || 0.2;
+        policyImpact = Array.isArray(parsedResponse.policyImpact)
+          ? parsedResponse.policyImpact.map(
+              (item: unknown) => item?.toString().trim() || ""
+            )
+          : [
+              "Industry growth rate is moderate",
+              "Economic correlation is low",
+              "Policy impact is minimal",
+            ];
+      } else {
+        throw new Error("Response is neither an array nor an object");
+      }
+
+      console.log("Other Metrics - Final Analysis:", {
+        industryGrowth,
+        economicCorrelation,
+        policyImpact,
+      });
+    } catch (error) {
+      console.error("Error parsing other metrics:", error);
+      policyImpact = [
+        "Industry growth rate is moderate",
+        "Economic correlation is low",
+        "Policy impact is minimal",
+      ];
+      console.log("Other Metrics - Using fallback values:", {
+        industryGrowth,
+        economicCorrelation,
+        policyImpact,
+      });
+    }
+
     return {
       economicIndicators: {
-        industryGrowth: response.data.industryGrowth,
-        economicCorrelation: response.data.economicCorrelation,
-        policyImpact: response.data.policyImpact,
+        industryGrowth,
+        economicCorrelation,
+        policyImpact,
       },
       professionalDevelopment: {
         skillsGrowth: profileData.trainings.map((training) => training.name),
       },
     };
+  }
+
+  private static async searchOccupationInfo(
+    occupation: string
+  ): Promise<string> {
+    try {
+      const response = await axios.get("https://api.duckduckgo.com/", {
+        params: {
+          q: `${occupation} related with Malaysian Government Policy`,
+          format: "json",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error searching company info:", error);
+      return "";
+    }
   }
 }

@@ -18,6 +18,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import mockData from "./mockData";
 import Chatbox from "./components/Chat/Chatbox";
 import FullTodoList from "./components/Todo/FullTodoList";
+import Promo from "./components/Promo/Promo";
 
 const App: React.FC = () => {
   const [reportData] = React.useState(mockData);
@@ -78,6 +79,14 @@ const App: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <FullTodoList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/promotion"
+              element={
+                <ProtectedRoute>
+                  <Promo />
                 </ProtectedRoute>
               }
             />

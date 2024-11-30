@@ -9,6 +9,7 @@ import {
   ListTodo,
   User,
   LogOut,
+  Gift,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -77,7 +78,9 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
   };
 
   const clearNotification = (id: number) => {
-    setNotifications(notifications.filter((notification) => notification.id !== id));
+    setNotifications(
+      notifications.filter((notification) => notification.id !== id)
+    );
   };
 
   const navItems = [
@@ -100,6 +103,11 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
       label: "Todo",
       icon: <ListTodo className="h-4 w-4" />,
       path: "/todo",
+    },
+    {
+      label: "Promotion",
+      icon: <Gift className="h-4 w-4" />,
+      path: "/promotion",
     },
   ];
 
@@ -167,16 +175,22 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
                       {notifications.map((notification) => (
                         <div
                           key={notification.id}
-                          className={`p-2 rounded-lg ${
+                          className={`p-2 rounded-lg cursor-pointer ${
                             notification.read ? "bg-gray-50" : "bg-blue-50"
                           }`}
                         >
                           <div className="flex justify-between items-start">
                             <div className="flex-1">
-                              <h4 className="text-sm font-medium">{notification.title}</h4>
-                              <p className="text-xs text-gray-500">{notification.message}</p>
+                              <h4 className="text-sm font-medium">
+                                {notification.title}
+                              </h4>
+                              <p className="text-xs text-gray-500">
+                                {notification.message}
+                              </p>
                               <span className="text-xs text-gray-400">
-                                {new Date(notification.timestamp).toLocaleString()}
+                                {new Date(
+                                  notification.timestamp
+                                ).toLocaleString()}
                               </span>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -195,9 +209,13 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
                                 variant="ghost"
                                 size="icon"
                                 className="h-6 w-6 text-red-500 hover:text-red-600"
-                                onClick={() => clearNotification(notification.id)}
+                                onClick={() =>
+                                  clearNotification(notification.id)
+                                }
                               >
-                                <span className="sr-only">Remove notification</span>
+                                <span className="sr-only">
+                                  Remove notification
+                                </span>
                                 <X className="h-4 w-4" />
                               </Button>
                             </div>
@@ -228,7 +246,10 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600">
+                <DropdownMenuItem
+                  onClick={handleSignOut}
+                  className="cursor-pointer text-red-600"
+                >
                   <LogOut className="mr-2 h-4 w-4" />
                   Sign out
                 </DropdownMenuItem>

@@ -108,7 +108,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <span>Full Name</span>
               </label>
               <Input
-                value={profileData.name}
+                value={profileData.name || ""}
                 onChange={handleInputChange("name")}
                 disabled={true}
                 placeholder="Tan Chee Kiang"
@@ -121,7 +121,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <span>Email</span>
               </label>
               <Input
-                value={profileData.email}
+                value={profileData.email || ""}
                 onChange={handleInputChange("email")}
                 disabled={true}
                 placeholder="Enter your email"
@@ -134,7 +134,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <span>Phone Number</span>
               </label>
               <Input
-                value={profileData.phone}
+                value={profileData.phone || ""}
                 onChange={handleInputChange("phone")}
                 disabled={!isEditing}
                 placeholder="Enter your phone number"
@@ -147,7 +147,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <span>Identity Card Number</span>
               </label>
               <Input
-                value={profileData.identity_card_number}
+                value={profileData.identity_card_number || ""}
                 onChange={handleInputChange("identity_card_number")}
                 disabled={true}
                 placeholder="850122-07-4533"
@@ -160,7 +160,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <span>Date of Birth</span>
               </label>
               <Input
-                value={profileData.date_of_birth}
+                value={profileData.date_of_birth || ""}
                 onChange={handleInputChange("date_of_birth")}
                 disabled={true}
                 placeholder="DD-MM-YYYY"
@@ -173,7 +173,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <span>Nationality</span>
               </label>
               <Input
-                value={profileData.nationality}
+                value={profileData.nationality || ""}
                 onChange={handleInputChange("nationality")}
                 disabled={true}
                 placeholder="Malaysia"
@@ -186,7 +186,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <span>Address</span>
               </label>
               <Input
-                value={profileData.address}
+                value={profileData.address || ""}
                 onChange={handleInputChange("address")}
                 disabled={true}
                 placeholder="11, Jalan Dato Onn, Kuala Lumpur, 50480 Kuala Lumpur, Wilayah Persekutuan"

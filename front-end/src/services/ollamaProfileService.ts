@@ -27,18 +27,22 @@ const cleanMarkdownText = (text: string): string => {
 };
 
 const extractJsonFromText = (text: string): Record<string, string> => {
+  console.info('[OllamaProfileService] Starting JSON extraction from text');
   try {
     // Clean the text first
     const cleanedText = cleanMarkdownText(text);
 
     // Try to parse the text directly first
     try {
+      console.info('[OllamaProfileService] Attempting direct JSON parsing');
       const parsed = JSON.parse(cleanedText);
       if (parsed.identityCardNumber) {
         parsed.dateOfBirth = extractDOBFromIC(parsed.identityCardNumber);
       }
+      console.info('[OllamaProfileService] Direct JSON parsing successful');
       return parsed;
     } catch (e) {
+      console.info('[OllamaProfileService] Direct JSON parsing failed, attempting alternative parsing');
       // If direct parsing fails, try to find a JSON object in the text
       const jsonMatch = cleanedText.match(/\{[\s\S]*?\}/);
       if (jsonMatch) {
@@ -46,10 +50,12 @@ const extractJsonFromText = (text: string): Record<string, string> => {
         if (parsed.identityCardNumber) {
           parsed.dateOfBirth = extractDOBFromIC(parsed.identityCardNumber);
         }
+        console.info('[OllamaProfileService] JSON object found and parsed successfully');
         return parsed;
       }
     }
 
+    console.info('[OllamaProfileService] Attempting to parse from markdown-style text');
     // If no JSON found, try to parse from markdown-style text
     const parsedData: Record<string, string> = {};
     const lines = cleanedText.split("\n");
@@ -85,12 +91,14 @@ const extractJsonFromText = (text: string): Record<string, string> => {
     }
 
     if (Object.keys(parsedData).length > 0) {
+      console.info('[OllamaProfileService] Successfully parsed data from markdown-style text');
       return parsedData;
     }
 
+    console.error('[OllamaProfileService] No valid data found in response');
     throw new Error("No valid data found in response");
   } catch (error) {
-    console.error("Failed to extract data from text:", error);
+    console.error('[OllamaProfileService] Failed to extract data from text:', error);
     return {};
   }
 };
@@ -221,10 +229,15 @@ const compressBase64Image = async (base64String: string): Promise<string> => {
 export const extractInfoFromImage = async (
   imageBase64: string
 ): Promise<ExtractedInfo> => {
+  console.info('[OllamaProfileService] Starting image information extraction');
   try {
+    console.info('[OllamaProfileService] Step 1: Sanitizing image');
     const sanitizedImage = sanitizeBase64Image(imageBase64);
+    
+    console.info('[OllamaProfileService] Step 2: Compressing image');
     const compressedImage = await compressBase64Image(sanitizedImage);
 
+    console.info('[OllamaProfileService] Step 3: Sending request to vision model');
     // Use llama3.2-vision for vision tasks
     const visionResponse = await ollamaApi.post("/api/generate", {
       model: "llama3.2-vision",
@@ -245,15 +258,19 @@ export const extractInfoFromImage = async (
     });
 
     if (!visionResponse.data || !visionResponse.data.response) {
+      console.error('[OllamaProfileService] Invalid response from vision model');
       throw new Error("Invalid response from vision model");
     }
 
+    console.info('[OllamaProfileService] Step 4: Processing vision model response');
     const extractedText = visionResponse.data.response;
 
     // Try to parse the response
+    console.info('[OllamaProfileService] Step 5: Parsing extracted text');
     const parsedInfo = extractJsonFromText(extractedText);
 
     // Validate and clean the extracted data
+    console.info('[OllamaProfileService] Step 6: Validating and cleaning extracted data');
     const result: ExtractedInfo = {
       full_name: parsedInfo.fullName?.trim() || "",
       identity_card_number: parsedInfo.identityCardNumber?.trim() || "",
@@ -264,14 +281,25 @@ export const extractInfoFromImage = async (
       nationality: parsedInfo.nationality?.trim() || "",
     };
 
+    // Log extracted fields
+    console.info('[OllamaProfileService] Extracted information:', {
+      hasName: !!result.full_name,
+      hasIC: !!result.identity_card_number,
+      hasDOB: !!result.date_of_birth,
+      hasAddress: !!result.address,
+      hasNationality: !!result.nationality
+    });
+
     // Validate the extracted information
     if (Object.values(result).every((value) => !value)) {
+      console.error('[OllamaProfileService] No information could be extracted from the image');
       throw new Error("No information could be extracted from the image");
     }
 
+    console.info('[OllamaProfileService] Successfully extracted information from image');
     return result;
   } catch (error) {
-    console.error("Error extracting information from image:", error);
+    console.error('[OllamaProfileService] Error extracting information from image:', error);
     throw error;
   }
 };

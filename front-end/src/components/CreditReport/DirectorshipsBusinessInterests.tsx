@@ -8,21 +8,10 @@ import {
   TableRow,
   TableHead as TableHeaderCell,
 } from "@/components/ui/table"
-
-interface BusinessInterest {
-  name: string
-  status: string
-  natureOfBusiness: string
-  incorporationDate: string
-  ccmDate: string
-  position: string
-  appointedDate: string
-  address: string
-  paidUpShares: string
-}
+import { DirectorshipBusinessInterest } from '@/types/creditReport'
 
 interface DirectorshipsBusinessInterestsProps {
-  interests?: BusinessInterest[]
+  interests?: DirectorshipBusinessInterest[]
 }
 
 const DirectorshipsBusinessInterests: React.FC<DirectorshipsBusinessInterestsProps> = ({ 
@@ -58,7 +47,9 @@ const DirectorshipsBusinessInterests: React.FC<DirectorshipsBusinessInterestsPro
             ))}
             {interests.length === 0 && (
               <TableRow>
-                <TableCell colSpan={6} className="text-center">No business interests found</TableCell>
+                <TableCell colSpan={6} className="text-center text-muted-foreground">
+                  No directorships or business interests found.
+                </TableCell>
               </TableRow>
             )}
           </TableBody>

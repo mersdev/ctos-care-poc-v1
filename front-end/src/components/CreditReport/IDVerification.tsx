@@ -14,7 +14,6 @@ interface IDVerificationProps {
 }
 
 const IDVerification: React.FC<IDVerificationProps> = ({ data = {} }) => {
-  console.log(data);
   const {
     name = "Not Available",
     icNo = "Not Available",

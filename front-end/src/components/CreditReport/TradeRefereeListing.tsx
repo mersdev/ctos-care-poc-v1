@@ -1,11 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-interface TradeReferee {
-  company: string;
-  rating: string;
-  details: string;
-}
+import { TradeReferee } from '@/types/creditReport';
 
 interface TradeRefereeListingProps {
   data?: TradeReferee[];
@@ -33,7 +28,7 @@ const TradeRefereeListing: React.FC<TradeRefereeListingProps> = ({ data = [] }) 
       <CardContent>
         <div className="space-y-4">
           {data.map((referee, index) => (
-            <div key={index} className="border-b pb-4 last:border-b-0">
+            <div key={index} className="border rounded-lg p-4">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="font-semibold text-lg">{referee.company}</h3>
                 <span className={`px-2 py-1 rounded text-sm ${

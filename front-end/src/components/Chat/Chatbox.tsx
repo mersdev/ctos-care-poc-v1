@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { TelegramService } from "@/services/telegramService";
 
 interface Message {
   id: number;
@@ -14,6 +15,7 @@ const Chatbox: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const escalateTerms = ['complain', 'PIC', 'help'];
 
   useEffect(() => {
     // Simulating a welcome message from the chatbot
@@ -40,15 +42,36 @@ const Chatbox: React.FC = () => {
       setMessages((prevMessages) => [...prevMessages, userMessage]);
       setInput("");
 
-      // Simulating bot response
-      setTimeout(() => {
-        const botResponse: Message = {
-          id: Date.now() + 1,
-          text: "Thank you for your message. I'm processing your request and will get back to you shortly.",
-          sender: "bot",
-        };
-        setMessages((prevMessages) => [...prevMessages, botResponse]);
-      }, 1000);
+      if (escalateTerms.some((term) => input.toLowerCase().includes(term))) {
+        // Escalate to human support
+        setTimeout(() => {
+          const botResponse: Message = {
+            id: Date.now() + 1,
+            text: "We will prioritize your request and ensure that you are promptly connected with a CTOS officer for further assistance. Kindly wait while our customer service team assists you.",
+            sender: "bot",
+          };
+          setMessages((prevMessages) => [...prevMessages, botResponse]);
+        }, 1000);
+
+        const ticketSupportMessage= `TicketId: ${Date.now() + 1}\nUsername: Rowan Sebastian Atkinson\nMessage: ${input}`;
+        
+
+        // Send message to telegram customer service
+      TelegramService.sendTelegramMessage(ticketSupportMessage);
+
+      } else {
+        // Simulating bot response
+        setTimeout(() => {
+          const botResponse: Message = {
+            id: Date.now() + 1,
+            text: "Thank you for your message. I'm processing your request and will get back to you shortly.",
+            sender: "bot",
+          };
+          setMessages((prevMessages) => [...prevMessages, botResponse]);
+        }, 1000);
+      }
+
+     
     }
   };
 

@@ -5,8 +5,9 @@ import { Loader2 } from "lucide-react";
 import { profileApi } from "@/api/authApi";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { ProfileData, ProfileRequest } from "@/types/profile";
-import { extractInfoFromImage } from "@/services/ollamaService";
+import { extractInfoFromImage } from "@/services/ollamaProfileService";
 import { KeyManagementService } from "@/services/keyManagementService";
+import { AxiosError } from "axios";
 import PersonalInformation from "./PersonalInformation";
 import ConsentForm from "./ConsentForm";
 
@@ -20,6 +21,21 @@ const defaultConsents: Consents = {
   tradeReferees: true,
 };
 
+const defaultProfileData: ProfileData = {
+  email: "",
+  encrypted_data: "",
+  encryption_enabled: true,
+  consents: defaultConsents,
+  name: "",
+  identity_card_number: "",
+  date_of_birth: "",
+  address: "",
+  nationality: "",
+  phone: "",
+  id: "",
+  public_key: "",
+};
+
 const Profile: React.FC = () => {
   const [searchParams] = useSearchParams();
   const isSetup = searchParams.get("setup") === "true";
@@ -28,16 +44,8 @@ const Profile: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
   const { user } = useAuthContext();
   const [profileData, setProfileData] = useState<ProfileData>({
+    ...defaultProfileData,
     email: user?.email || "",
-    encrypted_data: "",
-    encryption_enabled: true,
-    consents: defaultConsents,
-    name: "",
-    identity_card_number: "",
-    date_of_birth: "",
-    address: "",
-    nationality: "",
-    phone: "",
   });
 
   const navigate = useNavigate();
@@ -95,20 +103,20 @@ const Profile: React.FC = () => {
           setIsEditing(false);
         } else {
           setProfileData({
+            ...defaultProfileData,
             email: user?.email || "",
-            encrypted_data: "",
-            encryption_enabled: true,
-            consents: defaultConsents,
           });
           setIsEditing(isSetup);
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
+        if (error instanceof AxiosError && error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+        }
         setProfileData({
+          ...defaultProfileData,
           email: user?.email || "",
-          encrypted_data: "",
-          encryption_enabled: true,
-          consents: defaultConsents,
         });
         setIsEditing(isSetup);
       }
@@ -122,7 +130,10 @@ const Profile: React.FC = () => {
   ) => {
     try {
       const file = event.target.files?.[0];
-      if (!file) return;
+      if (!file) {
+        console.error("No file selected");
+        return;
+      }
 
       if (!file.type.startsWith("image/")) {
         console.error("Invalid file type:", file.type);
@@ -140,37 +151,41 @@ const Profile: React.FC = () => {
           }
 
           const extractedInfo = await extractInfoFromImage(base64Image);
+
+          // Validate extracted information
+          if (!extractedInfo.full_name && !extractedInfo.identity_card_number) {
+            throw new Error(
+              "Could not extract required information from image"
+            );
+          }
+
+          // Update profile data with extracted information
           setProfileData((prev) => ({
             ...prev,
-            name: extractedInfo.full_name,
-            identity_card_number: extractedInfo.identity_card_number,
-            date_of_birth: extractedInfo.date_of_birth,
-            address: extractedInfo.address,
-            nationality: extractedInfo.nationality,
-            // Store the original data as encrypted_data for submission
-            encrypted_data: JSON.stringify({
-              name: extractedInfo.full_name,
-              identity_card_number: extractedInfo.identity_card_number,
-              date_of_birth: extractedInfo.date_of_birth,
-              address: extractedInfo.address,
-              nationality: extractedInfo.nationality,
-            }),
+            name: extractedInfo.full_name || prev.name,
+            identity_card_number:
+              extractedInfo.identity_card_number || prev.identity_card_number,
+            date_of_birth: extractedInfo.date_of_birth || prev.date_of_birth,
+            address: extractedInfo.address || prev.address,
+            nationality: extractedInfo.nationality || prev.nationality,
           }));
         } catch (error) {
           console.error("Error processing image:", error);
-        } finally {
-          setIsProcessing(false);
+          // Re-throw the error to be handled by the outer catch block
+          throw error;
         }
       };
 
       reader.onerror = (error) => {
         console.error("Error reading file:", error);
-        setIsProcessing(false);
+        throw error;
       };
 
       reader.readAsDataURL(file);
     } catch (error) {
       console.error("Error in handleImageUpload:", error);
+      // TODO: Add proper error notification to user here
+    } finally {
       setIsProcessing(false);
     }
   };
@@ -203,6 +218,7 @@ const Profile: React.FC = () => {
         consents: profileData.consents || defaultConsents,
       };
 
+      console.log("Profile ID:", profileData.id);
       // Create or update the profile
       const updatedProfile = await (profileData.id
         ? profileApi.updateProfile(profileRequest)
@@ -221,6 +237,10 @@ const Profile: React.FC = () => {
       }
     } catch (error) {
       console.error("Error saving profile:", error);
+      if (error instanceof AxiosError && error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+      }
     } finally {
       setIsSaving(false);
     }

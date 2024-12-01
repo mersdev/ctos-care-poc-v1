@@ -9,12 +9,30 @@ export const profileController = {
         .from("profiles")
         .select("*")
         .eq("user_id", req.user.id)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
-      res.json(data);
+      
+      if (!data) {
+        // Return empty profile if none exists
+        return res.json({
+          email: req.user.email,
+          encrypted_data: "",
+          encryption_enabled: true,
+          consents: {
+            banks: [],
+            ssm: true,
+            courtRecords: true,
+            bankruptcySearch: true,
+            registrationOfBusiness: true,
+          }
+        });
+      }
+      
+      return res.json(data);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      console.error("Profile fetch error:", error);
+      return res.status(500).json({ error: error.message });
     }
   },
 
@@ -33,9 +51,9 @@ export const profileController = {
         .single();
 
       if (error) throw error;
-      res.status(201).json(data);
+      return res.status(201).json(data);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   },
 
@@ -53,9 +71,9 @@ export const profileController = {
         .single();
 
       if (error) throw error;
-      res.json(data);
+      return res.json(data);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   },
 
@@ -67,9 +85,9 @@ export const profileController = {
         .eq("user_id", req.user.id);
 
       if (error) throw error;
-      res.status(204).send();
+      return res.status(204).send();
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   },
 };

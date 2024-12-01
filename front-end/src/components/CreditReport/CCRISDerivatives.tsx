@@ -1,40 +1,46 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 interface CCRISDerivativesProps {
-  data: {
-    earliestKnownFacility: string
-    securedFacilities: string[]
-    unsecuredFacilities: string[]
-  }
+  data?: {
+    items: Array<{
+      type: string;
+      details: string;
+    }>;
+  };
 }
 
 const CCRISDerivatives: React.FC<CCRISDerivativesProps> = ({ data }) => {
+  if (!data?.items?.length) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>CCRIS Derivatives</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">No CCRIS derivatives available.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
-    <section className="bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-semibold mb-4">CCRIS Derivatives</h2>
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-xl font-semibold">Earliest Known Facility</h3>
-          <p>{data.earliestKnownFacility}</p>
+    <Card>
+      <CardHeader>
+        <CardTitle>CCRIS Derivatives</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {data.items.map((item, index) => (
+            <div key={index} className="border-b pb-4 last:border-b-0">
+              <h3 className="font-semibold text-lg">{item.type}</h3>
+              <p className="text-muted-foreground">{item.details}</p>
+            </div>
+          ))}
         </div>
-        <div>
-          <h3 className="text-xl font-semibold">Secured Facilities</h3>
-          <ul className="list-disc list-inside">
-            {data.securedFacilities.map((facility, index) => (
-              <li key={index}>{facility}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h3 className="text-xl font-semibold">Unsecured Facilities</h3>
-          <ul className="list-disc list-inside">
-            {data.unsecuredFacilities.map((facility, index) => (
-              <li key={index}>{facility}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  )
-}
+      </CardContent>
+    </Card>
+  );
+};
 
-export default CCRISDerivatives
-
+export default CCRISDerivatives;

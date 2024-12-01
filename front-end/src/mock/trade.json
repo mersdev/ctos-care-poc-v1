@@ -1,0 +1,16 @@
+{
+  "trade_referees": [
+    {
+      "name": "TECH SOLUTIONS SDN BHD",
+      "incorporation_date": "15/03/2020",
+      "nature_of_business": "CLOUD COMPUTING AND SOFTWARE DEVELOPMENT SERVICES",
+      "address": "UNIT 25-3, LEVEL 25, Q SENTRAL, JALAN STESEN SENTRAL 2, KL SENTRAL, 50470 KUALA LUMPUR"
+    },
+    {
+      "name": "DIGITAL INNOVATIONS MSC",
+      "incorporation_date": "01/06/2021",
+      "nature_of_business": "IT CONSULTING AND SOFTWARE SOLUTIONS",
+      "address": "LEVEL 15, MENARA TKSS, JALAN PUDU, 55100 KUALA LUMPUR"
+    }
+  ]
+}

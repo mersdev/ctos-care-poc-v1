@@ -1,0 +1,412 @@
+{
+  "loans": [
+    {
+      "loan_name": "Bank Rakyat Easy Instalment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM1k",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Bank-Rakyat-Easy-Instalment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The Bank Rakyat Easy Instalment Plan is a loan program offered by Bank Rakyat that allows customers to make easy and flexible repayments. The program provides competitive interest rates and no hidden fees, making it an attractive option for those looking to manage their debt.",
+        "advantages": [
+          "**Competitive Interest Rate**: The Bank Rakyat Easy Instalment Plan offers a competitive interest rate, which can help borrowers save money on the total amount of interest paid over the life of the loan.",
+          "**Flexible Repayment Terms**: The program allows for flexible repayment terms, giving customers more control over their monthly payments and helping them manage their debt more effectively.",
+          "**No Hidden Fees**: Unlike some other loan programs, the Bank Rakyat Easy Instalment Plan has no hidden fees, making it easier for borrowers to understand and budget for their repayments."
+        ]
+      }
+    },
+    {
+      "loan_name": "Bank Rakyat Flexi Easy Payment",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM1k",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Bank-Rakyat-Flexi-Easy-Payment.html"
+      },
+      "analysis": {
+        "summary": "The Bank Rakyat Flexi Easy Payment loan program offers a flexible payment plan with zero interest rates for certain loan types. The program has a minimum purchase amount requirement and allows for flexible repayment terms.",
+        "advantages": [
+          "**Zero Interest Rate**: The program offers zero interest rates on some loan types, making it an attractive option for those looking to minimize their borrowing costs.",
+          "**Flexible Repayment Terms**: The program provides flexibility in repayment terms, allowing borrowers to choose a payment plan that suits their financial situation and preferences.",
+          "**Low Minimum Purchase Amount Requirement**: The program has a relatively low minimum purchase amount requirement, making it accessible to a wider range of customers."
+        ]
+      }
+    },
+    {
+      "loan_name": "HSBC Card Instalment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/HSBC-Card-Instalment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The HSBC Card Instalment Plan is a credit card installment plan offered by HSBC that allows customers to convert their outstanding credit card balances into affordable monthly instalments. The program offers flexible repayment terms, competitive interest rates, and the convenience of managing multiple debts in one place.",
+        "advantages": [
+          "**Flexible Repayment Terms**: Customers can choose from various repayment term options, including 3, 6, or 12 months, allowing them to tailor their payments to fit their financial situation.",
+          "**Competitive Interest Rates**: The program offers competitive interest rates compared to other credit card installment plans, making it an attractive option for customers looking to consolidate debt and save on interest charges.",
+          "**Streamlined Debt Management**: By consolidating multiple debts into one instalment plan, customers can simplify their financial management and enjoy the benefits of a single repayment schedule, reducing stress and increasing control over their finances."
+        ]
+      }
+    },
+    {
+      "loan_name": "Standard Chartered FlexiPay Plus",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Standard-Chartered-FlexiPay-Plus.html"
+      },
+      "analysis": {
+        "summary": "Standard Chartered FlexiPay Plus is a personal loan program that offers flexible repayment terms and competitive interest rates. The program allows borrowers to repay their loans in installments, with no prepayment penalties or fees. The loan amount ranges from RM1,000 to RM50,000.",
+        "advantages": [
+          "**Flexible Repayment Terms**: FlexiPay Plus offers a range of repayment options, allowing borrowers to choose the term that best suits their financial situation.",
+          "**No Prepayment Penalties**: Borrowers can repay their loans without incurring any prepayment penalties or fees, giving them greater control over their debt.",
+          "**Competitive Interest Rates**: FlexiPay Plus offers competitive interest rates compared to other personal loan programs, making it an attractive option for borrowers seeking affordable financing."
+        ]
+      }
+    },
+    {
+      "loan_name": "Bank Islam RSVP Program",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM1k",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Bank-Islam-RSVP-Program.html"
+      },
+      "analysis": {
+        "summary": "The Bank Islam RSVP Program is a personal financing option that allows customers to borrow up to RM50,000 with flexible repayment terms. The program is designed for individuals who want to consolidate their debts or finance specific expenses.",
+        "advantages": [
+          "**Flexible Repayment Terms**: The program offers flexible repayment terms, allowing borrowers to choose from a range of options including daily, monthly, and annual repayments.",
+          "**Low Interest Rate**: Bank Islam RSVP Program has a competitive interest rate, which can help borrowers save money on their loan costs.",
+          "**No Early Settlement Fee**: Unlike some other personal financing options, the Bank Islam RSVP Program does not charge an early settlement fee if the borrower decides to settle the loan before the end of the repayment period."
+        ]
+      }
+    },
+    {
+      "loan_name": "Bank Islam Installment Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM150",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Bank-Islam-Installment-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The Bank Islam Installment Payment Plan is a personal financing option that allows individuals to borrow up to RM150 with flexible repayment terms ranging from 6-36 months. The loan features a flat interest rate of 0% per annum, making it an attractive option for those seeking affordable credit.",
+        "advantages": [
+          "**Low Interest Rate**: With a flat rate of 0%, borrowers can enjoy minimal interest charges on their outstanding balance.",
+          "**Flexible Repayment Terms**: The installment plan offers flexible repayment terms ranging from 6-36 months, allowing borrowers to choose a schedule that suits their financial situation.",
+          "**Accessible Credit Limit**: The credit limit is set at RM150, making it an accessible financing option for individuals with limited or no credit history."
+        ]
+      }
+    },
+    {
+      "loan_name": "AEON Cards 0% Instalment Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "RM30",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/AEON-Cards-0-Instalment-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The AEON Cards 0% Instalment Payment Plan is a credit card loan program that offers 0% interest for a specified period of time. The plan allows customers to spread their payments over a set period, typically ranging from 6-36 months, with no interest charged during the promotional period.",
+        "advantages": [
+          "**Zero Interest Rate**: The program offers 0% interest rate during the promotional period, allowing customers to avoid paying interest charges on their debt.",
+          "**Flexible Payment Terms**: Customers can choose a payment term that suits their financial situation, ranging from 6-36 months, giving them more control over their debt repayment.",
+          "**No Hidden Fees**: The program does not charge any hidden fees or penalties, making it a transparent and cost-effective credit card loan option."
+        ]
+      }
+    },
+    {
+      "loan_name": "Public Bank Flexipay Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM1k",
+        "early_termination_fee": "RM100",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Public-Bank-Flexipay-Plan.html"
+      },
+      "analysis": {
+        "summary": "The Public Bank Flexipay Plan is a personal loan plan that offers flexible repayment terms and competitive interest rates. Borrowers can repay the loan in installments over a period of up to 5 years, with the option to make additional payments or settle the loan early without penalty.",
+        "advantages": [
+          "Flexible Repayment Terms: The Flexipay Plan allows borrowers to choose their own repayment schedule, with options to pay monthly, quarterly, or annually.",
+          "Competitive Interest Rates: The plan offers competitive interest rates that are lower than those of some other personal loan plans on the market.",
+          "No Early Settlement Penalty: Borrowers who want to settle their loan early can do so without incurring any penalties or fees."
+        ]
+      }
+    },
+    {
+      "loan_name": "BSN Instalment-Pay",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/BSN-Instalment-Pay.html"
+      },
+      "analysis": {
+        "summary": "BSN Instalment-Pay is a loan program offered by BSN that allows customers to make installment payments for purchases made with their credit cards. The program provides flexible payment options and competitive interest rates, making it an attractive option for those looking to spread out the cost of their purchases over time.",
+        "advantages": [
+          "**Flexible Payment Options**: BSN Instalment-Pay offers a range of repayment periods, allowing customers to choose a plan that fits their budget and financial situation.",
+          "**Competitive Interest Rates**: The program provides competitive interest rates compared to other installment payment plans in the market, making it an attractive option for those looking to borrow money.",
+          "**Convenience**: With BSN Instalment-Pay, customers can make one payment per month, rather than multiple payments on their credit card bill, providing a convenient and manageable way to pay off debt."
+        ]
+      }
+    },
+    {
+      "loan_name": "OCBC Easy Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM1k",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/OCBC-Easy-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The OCBC Easy Payment Plan is a flexible payment plan offered by OCBC Bank that allows customers to convert their purchases into easy monthly installments. With no interest charges and no hidden fees, this program provides a convenient way to manage expenses.",
+        "advantages": [
+          "Flexible Repayment Terms: The OCBC Easy Payment Plan offers flexible repayment terms, allowing customers to choose their own payment schedule based on their financial situation.",
+          "No Interest Charges or Hidden Fees: This plan does not charge interest or have any hidden fees, making it a cost-effective option for managing expenses.",
+          "Convenient Payments: With the OCBC Easy Payment Plan, customers can make convenient monthly payments that fit their budget, providing peace of mind and reduced financial stress."
+        ]
+      }
+    },
+    {
+      "loan_name": "RHB Smart Instalment",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/RHB-Smart-Instalment.html"
+      },
+      "analysis": {
+        "summary": "RHB Smart Instalment is a personal loan offered by RHB Bank that allows borrowers to enjoy flexible repayment terms, zero upfront fees, and competitive interest rates.",
+        "advantages": [
+          "**Flexible Repayment Terms**: The loan offers a range of repayment periods from 12 to 60 months, allowing borrowers to choose a plan that suits their financial situation.",
+          "**Zero Upfront Fees**: There are no processing or administrative fees associated with the loan, making it more affordable for borrowers.",
+          "**Competitive Interest Rates**: RHB Smart Instalment offers competitive interest rates compared to other personal loans in the market."
+        ]
+      }
+    },
+    {
+      "loan_name": "UOB Easi-Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/UOB-Easi-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The UOB Easi-Payment Plan is a credit facility offered by United Overseas Bank (UOB) that allows customers to make flexible payments over an extended period. The plan is designed for individuals who want to manage their expenses and cash flow more effectively.",
+        "advantages": [
+          "**Flexible repayment terms**: The UOB Easi-Payment Plan offers repayment periods ranging from 6 months to 5 years, allowing customers to choose a schedule that suits their financial situation.",
+          "**No interest charged during the promotion period**: If the customer repays at least 80% of the outstanding balance within the specified time frame (typically 12-18 months), no interest will be charged on the remaining amount.",
+          "**No early repayment fees**: The plan does not charge any penalties or fees for early repayment, giving customers the flexibility to settle their debts quickly without incurring additional costs."
+        ]
+      }
+    },
+    {
+      "loan_name": "UOB Lady’s LuxePay Easi Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM2k",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/UOB-Lady-s-LuxePay-Easi-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The UOB Lady's LuxePay Easi Payment Plan is a flexible payment plan offered by United Overseas Bank (UOB) that allows customers to split their purchases into equal installments. The plan has no interest charges and no hidden fees, making it an attractive option for those looking to manage their expenses.",
+        "advantages": [
+          "**Flexible Payments**: The Easi Payment Plan allows customers to split their purchases into equal installments, providing flexibility in managing their expenses.",
+          "**No Interest Charges**: Unlike other payment plans, the UOB Lady's LuxePay Easi Payment Plan does not charge interest on the outstanding balance, making it a cost-effective option.",
+          "**No Hidden Fees**: The plan has no hidden fees or charges, ensuring that customers know exactly how much they need to pay each month, without any surprises."
+        ]
+      }
+    },
+    {
+      "loan_name": "CIMB 0% Easy Pay",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM1k",
+        "early_termination_fee": "RM50",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/CIMB-0-Easy-Pay.html"
+      },
+      "analysis": {
+        "summary": "CIMB 0% Easy Pay is a loan program offered by CIMB Bank that provides borrowers with flexible payment options and zero interest rates for a specific period. The program allows borrowers to enjoy interest-free repayment periods, reducing their financial burden during the promotional period.",
+        "advantages": [
+          "Zero Interest Rate: CIMB 0% Easy Pay offers a zero-interest rate for the promotional period, providing borrowers with significant savings on their loan repayments.",
+          "Flexible Payment Options: The program allows borrowers to choose from various payment options, including fixed monthly payments, flexible repayment schedules, and lump-sum payments, giving them greater control over their financial obligations.",
+          "Promotional Period: CIMB 0% Easy Pay provides a promotional period during which borrowers can enjoy zero interest rates, allowing them to focus on other financial priorities or pay off debt more quickly."
+        ]
+      }
+    },
+    {
+      "loan_name": "UOB Instalment Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/UOB-Instalment-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "",
+        "advantages": [
+          "**Flexible Repayment Terms**: The UOB Instalment Payment Plan offers flexible repayment terms, allowing customers to choose from a range of payment periods that suit their financial needs.",
+          "**Low Interest Rate**: The loan program has a low interest rate compared to other installment plans in the market, making it an attractive option for those looking to finance purchases or pay off debts.",
+          "**No Early Repayment Penalty**: Unlike some other installment plans, the UOB Instalment Payment Plan does not charge early repayment penalties, giving customers more control over their debt and financial planning."
+        ]
+      }
+    },
+    {
+      "loan_name": "RHB Dial-An-Instalment",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM300",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/RHB-Dial-An-Instalment.html"
+      },
+      "analysis": {
+        "summary": "RHB Dial-An-Instalment is a loan program offered by RHB Bank that allows customers to pay their loans in installments. The program provides flexible payment terms and can be used for various purposes such as financing purchases, debt consolidation, or personal expenses.",
+        "advantages": [
+          "**Flexible Payment Terms**: RHB Dial-An-Instalment offers installment payments with flexible tenures and frequencies, allowing borrowers to choose a payment schedule that suits their financial situation.",
+          "**Convenience**: The program provides a convenient way for customers to pay off their debts in manageable installments, reducing the risk of default or missed payments.",
+          "**Access to Credit**: RHB Dial-An-Instalment provides access to credit for customers who may not have sufficient funds or credit history to qualify for other loan options, promoting financial inclusion and empowerment."
+        ]
+      }
+    },
+    {
+      "loan_name": "Maybankard EzyPay",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM1k",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Maybankard-EzyPay.html"
+      },
+      "analysis": {
+        "summary": "Maybankard EzyPay is a personal loan program offered by Maybank that allows customers to apply for credit with flexible repayment terms. The loan is designed for individuals who need quick access to funds and want to manage their debt in a convenient way.",
+        "advantages": [
+          "**Flexible Repayment Terms**: Maybankard EzyPay offers borrowers the flexibility to choose from various repayment periods, ranging from 12 to 60 months, allowing them to tailor their payments to suit their financial situation.",
+          "**Easy Application Process**: The loan application process is straightforward and can be completed online or through a mobile app, making it convenient for customers to apply for credit at any time and from anywhere.",
+          "**Competitive Interest Rates**: Maybankard EzyPay offers competitive interest rates compared to other personal loans in the market, providing borrowers with an affordable way to manage their debt and achieve financial stability."
+        ]
+      }
+    },
+    {
+      "loan_name": "BSN EasyPay",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/BSN-EasyPay.html"
+      },
+      "analysis": {
+        "summary": "BSN EasyPay is a flexible installment plan offered by Bank Simpanan Nasional (BSN) that allows customers to convert their purchases into affordable monthly installments with no interest charges. The program has a tenure of up to 36 months, and there is no early termination fee.",
+        "advantages": [
+          "**Zero Interest Rate**: BSN EasyPay offers a zero-interest rate, making it an attractive option for those who want to avoid paying high interest rates on their purchases.",
+          "**Flexible Tenure**: The program allows customers to choose a tenure of up to 36 months, giving them the flexibility to spread out their payments over a period that suits their financial situation.",
+          "**No Early Termination Fee**: Unlike some other installment plans, BSN EasyPay does not charge an early termination fee, making it easier for customers to adjust their payment schedule if needed."
+        ]
+      }
+    },
+    {
+      "loan_name": "AmBank Easy Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/AmBank-Easy-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The AmBank Easy Payment Plan is a loan program offered by AmBank that allows customers to make installment payments for purchases or expenses over a period of time. The program has no interest charges and no fees, making it an attractive option for those who need to finance large expenses.",
+        "advantages": [
+          "**No Interest Charges**: The AmBank Easy Payment Plan does not charge any interest on the loan amount, making it a cost-effective option for borrowers.",
+          "**Flexible Payment Terms**: The program offers flexible payment terms that can be tailored to individual needs, allowing customers to choose a repayment period that suits them.",
+          "**No Fees**: The AmBank Easy Payment Plan has no fees associated with it, including no setup fees, monthly fees, or late payment fees, making it an attractive option for those who want to avoid additional costs."
+        ]
+      }
+    },
+    {
+      "loan_name": "AffinBank EiPlan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "RM50",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/AffinBank-EiPlan.html"
+      },
+      "analysis": {
+        "summary": "The AffinBank EiPlan is a personal loan offered by Affin Bank that allows borrowers to pay their debts flexibly. The loan program has a fixed interest rate and a tenor of up to 7 years, with no early settlement fees. Borrowers can enjoy the convenience of making payments at any time without incurring penalties.",
+        "advantages": [
+          "Flexibility: The AffinBank EiPlan offers flexible repayment terms that allow borrowers to make payments at any time without incurring penalties.",
+          "No Early Settlement Fees: Unlike other personal loan programs, the AffinBank EiPlan does not charge early settlement fees, giving borrowers more freedom to manage their finances.",
+          "Fixed Interest Rate: The loan program has a fixed interest rate, which means that borrowers can budget and plan their repayments with certainty, reducing financial stress."
+        ]
+      }
+    },
+    {
+      "loan_name": "AEON Cards Flexi Payment Plan",
+      "details": {
+        "interest_rate": "from 0% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "RM50",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/AEON-Cards-Flexi-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The AEON Cards Flexi Payment Plan is a loan program offered by AEON Credit Bureau that allows cardholders to make flexible payments on their outstanding balances. The program provides a convenient and manageable way for cardholders to settle their debts over an extended period.",
+        "advantages": [
+          "**Flexible Repayment Terms**: The program offers a range of repayment terms, allowing cardholders to choose a plan that suits their financial situation.",
+          "**No Additional Interest Charges**: By switching to the Flexi Payment Plan, cardholders can avoid additional interest charges and fees associated with late payments.",
+          "**Convenience and Simplification**: The program simplifies the payment process by consolidating multiple debts into one manageable repayment plan, reducing the risk of missed payments or late fees."
+        ]
+      }
+    },
+    {
+      "loan_name": "Hong Leong Flexi Payment Plan",
+      "details": {
+        "interest_rate": "from 0.88% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Hong-Leong-Flexi-Payment-Plan.html"
+      },
+      "analysis": {
+        "summary": "The Hong Leong Flexi Payment Plan is a personal loan offered by Hong Leong Bank that allows borrowers to make flexible payments over a period of time. The loan offers competitive interest rates and repayment terms, making it suitable for individuals who need financing for various purposes.",
+        "advantages": [
+          "**Flexible Repayment Terms**: The loan offers flexible payment options, allowing borrowers to make payments based on their financial situation. This feature can be particularly useful for individuals who have irregular income or expenses.",
+          "**Competitive Interest Rates**: The Hong Leong Flexi Payment Plan offers competitive interest rates, which can help borrowers save money compared to other loan options with higher interest rates.",
+          "**No Early Repayment Penalties**: The loan does not charge early repayment penalties, giving borrowers the flexibility to pay off their loans earlier if they have extra funds available."
+        ]
+      }
+    },
+    {
+      "loan_name": "AmBank AmFlexi-Pay",
+      "details": {
+        "interest_rate": "from 3% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "RM50",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/AmBank-AmFlexi-Pay.html"
+      },
+      "analysis": {
+        "summary": "The AmBank AmFlexi-Pay is a personal loan program offered by AmBank that provides flexible repayment options and competitive interest rates. The loan amount ranges from RM500 to RM50,000, with a tenure of up to 72 months. Borrowers can choose between fixed and floating interest rate options.",
+        "advantages": [
+          "**Flexible Repayment Options**: AmFlexi-Pay offers flexible repayment tenures ranging from 12 to 72 months, allowing borrowers to adjust their repayment schedule according to their financial needs.",
+          "**Competitive Interest Rates**: The loan program provides competitive interest rates, with the lowest fixed rate starting at 3% p.a. and the floating rate tied to the base lending rate of AmBank.",
+          "**No Early Settlement Penalty**: Unlike some other personal loan programs, AmFlexi-Pay does not charge an early settlement penalty, giving borrowers more flexibility to settle their loans earlier if they have the means."
+        ]
+      }
+    },
+    {
+      "loan_name": "Maybankard EzyPay PLUS",
+      "details": {
+        "interest_rate": "from 9% p.a.",
+        "minimum_amount": "RM500",
+        "early_termination_fee": "No Fee",
+        "url": "https://ringgitplus.com/en/easy-payment-plan/Maybankard-EzyPay-PLUS.html"
+      },
+      "analysis": {
+        "summary": "The Maybankard EzyPay PLUS is a flexible payment plan that allows individuals to split their purchases into affordable monthly instalments for up to 24 months. The product offers unrestricted merchant selection and no early termination fee, making it an attractive option for those who need to make large purchases or pay off debts.",
+        "advantages": [
+          "**Flexible Tenure Options**: The loan offers tenure options ranging from 6 to 24 months, allowing borrowers to choose a repayment period that suits their financial situation.",
+          "**No Early Termination Fee**: Unlike other loans, the Maybankard EzyPay PLUS does not charge an early termination fee, providing borrowers with more flexibility and control over their repayments.",
+          "**Unrestricted Merchant Selection**: Borrowers can use the loan to make purchases from any merchant, giving them greater freedom to spend their money as they see fit."
+        ]
+      }
+    }
+  ]
+}

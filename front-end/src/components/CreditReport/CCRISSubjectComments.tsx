@@ -1,23 +1,31 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 interface CCRISSubjectCommentsProps {
-  data: string[]
+  data?: {
+    comments: string[];
+  };
 }
 
 const CCRISSubjectComments: React.FC<CCRISSubjectCommentsProps> = ({ data }) => {
   return (
-    <section className="bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-semibold mb-4">CCRIS Subject Comments</h2>
-      {data.length > 0 ? (
-        <ul className="list-disc list-inside">
-          {data.map((comment, index) => (
-            <li key={index}>{comment}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No CCRIS subject comments available.</p>
-      )}
-    </section>
-  )
-}
+    <Card>
+      <CardHeader>
+        <CardTitle>CCRIS Subject Comments</CardTitle>
+      </CardHeader>
+      <CardContent>
+        {data?.comments?.length ? (
+          <ul className="list-disc list-inside space-y-2">
+            {data.comments.map((comment, index) => (
+              <li key={index} className="text-muted-foreground">{comment}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-muted-foreground">No CCRIS subject comments available.</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
 
-export default CCRISSubjectComments
-
+export default CCRISSubjectComments;

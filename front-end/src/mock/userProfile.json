@@ -1,0 +1,68 @@
+{
+  "personal_info": {
+    "name": "Ahmad bin Ismail",
+    "license_no": "GRB123456789",
+    "identity_no": "941030-12-3456",
+    "phone_number": "+60 12-345-6789",
+    "email": "ahmad.ismail@email.com",
+    "occupation": "Driver",
+    "address": "Taman Melati, Setapak, 53100 Kuala Lumpur",
+    "personal_summary": "Experienced Grab driver with over 3 years of service, maintaining a 4.8-star rating. Known for excellent customer service and safe driving practices. Actively pursuing financial literacy and professional development to provide better service and secure financial future."
+  },
+  "trainings": [
+    {
+      "id": 1,
+      "name": "Basic Financial Literacy Workshop",
+      "date_start": "15-01-2024",
+      "date_end": "15-01-2024",
+      "provider": "AKPK",
+      "type": "financial"
+    },
+    {
+      "id": 2,
+      "name": "Defensive Driving Course",
+      "date_start": "20-02-2024",
+      "date_end": "21-02-2024",
+      "provider": "Grab Academy",
+      "type": "professional"
+    },
+    {
+      "id": 3,
+      "name": "Introduction to Stock Market",
+      "date_start": "10-03-2024",
+      "date_end": "10-03-2024",
+      "provider": "Bursa Malaysia",
+      "type": "financial"
+    },
+    {
+      "id": 4,
+      "name": "Customer Service Excellence",
+      "date_start": "05-04-2024",
+      "date_end": "05-04-2024",
+      "provider": "Grab Academy",
+      "type": "professional"
+    },
+    {
+      "id": 5,
+      "name": "Digital Payment Safety",
+      "date_start": "20-04-2024",
+      "date_end": "20-04-2024",
+      "provider": "Bank Negara Malaysia",
+      "type": "financial"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Professional Driver's License",
+      "issuer": "JPJ Malaysia",
+      "date_issued": "01-01-2021",
+      "valid_until": "31-12-2026"
+    },
+    {
+      "name": "Public Service Vehicle License",
+      "issuer": "APAD",
+      "date_issued": "01-01-2021",
+      "valid_until": "31-12-2024"
+    }
+  ]
+}

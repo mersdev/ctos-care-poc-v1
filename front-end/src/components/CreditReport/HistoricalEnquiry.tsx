@@ -1,25 +1,59 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface Enquiry {
+  date: string;
+  enquirer: string;
+  purpose: string;
+}
+
 interface HistoricalEnquiryProps {
-  data: {
-    financial: number
-    nonFinancial: number
-    lawyer: number
-    others: number
+  data?: Enquiry[];
+}
+
+const HistoricalEnquiry: React.FC<HistoricalEnquiryProps> = ({ data = [] }) => {
+  if (!data.length) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Historical Enquiries</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">No historical enquiries found.</p>
+        </CardContent>
+      </Card>
+    );
   }
-}
 
-const HistoricalEnquiry: React.FC<HistoricalEnquiryProps> = ({ data }) => {
   return (
-    <section className="bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-semibold mb-4">Historical Enquiry</h2>
-      <div className="grid grid-cols-2 gap-4">
-        <p><strong>Financial:</strong> {data.financial}</p>
-        <p><strong>Non-Financial:</strong> {data.nonFinancial}</p>
-        <p><strong>Lawyer:</strong> {data.lawyer}</p>
-        <p><strong>Others:</strong> {data.others}</p>
-      </div>
-    </section>
-  )
-}
+    <Card>
+      <CardHeader>
+        <CardTitle>Historical Enquiries</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left py-2">Date</th>
+                <th className="text-left py-2">Enquirer</th>
+                <th className="text-left py-2">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((enquiry, index) => (
+                <tr key={index} className="border-b last:border-b-0">
+                  <td className="py-2">{enquiry.date}</td>
+                  <td className="py-2">{enquiry.enquirer}</td>
+                  <td className="py-2">{enquiry.purpose}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
-export default HistoricalEnquiry
-
+export default HistoricalEnquiry;

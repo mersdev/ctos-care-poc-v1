@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CreditCard, Loan, Transaction } from '@/types/api';
+import { CreditCard, Loan } from '@/types/api';
 import { OllamaPromotionService } from '@/services/ollamaPromotionService';
 import { fetchTransactions } from '@/api/promotionApi';
 import { Card } from "@/components/ui/card";
@@ -21,6 +21,8 @@ const Promo: React.FC<PromoProps> = ({ creditScore, monthlyIncome }) => {
   const [creditCards, setCreditCards] = useState<CreditCard[]>([]);
 
   useEffect(() => {
+    let isSubscribed = true;
+
     const initializePromo = async () => {
       try {
         setLoading(true);
@@ -32,6 +34,9 @@ const Promo: React.FC<PromoProps> = ({ creditScore, monthlyIncome }) => {
 
         // Fetch transactions
         const transactionData = await fetchTransactions();
+
+        // Only update state if component is still mounted
+        if (!isSubscribed) return;
 
         // Get recommendations
         const [loanRecs, cardRecs] = await Promise.all([
@@ -47,17 +52,26 @@ const Promo: React.FC<PromoProps> = ({ creditScore, monthlyIncome }) => {
           }),
         ]);
 
+        if (!isSubscribed) return;
+
         setLoans(loanRecs);
         setCreditCards(cardRecs);
       } catch (err) {
+        if (!isSubscribed) return;
         console.error('Error initializing promo:', err);
         setError('Failed to load recommendations. Please try again later.');
       } finally {
+        if (!isSubscribed) return;
         setLoading(false);
       }
     };
 
     initializePromo();
+
+    // Cleanup function
+    return () => {
+      isSubscribed = false;
+    };
   }, [creditScore, monthlyIncome]);
 
   if (loading) {

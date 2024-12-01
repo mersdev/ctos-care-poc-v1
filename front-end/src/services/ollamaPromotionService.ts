@@ -80,17 +80,30 @@ export class OllamaPromotionService {
       const responseText = response.data.response;
       console.log("[OllamaPromotionService] Raw Response:", responseText);
 
-      // Extract array of names from the response
-      const arrayMatch = responseText.match(
-        /"(loan_name|card_name)":\s*\[(.*?)\]/s
-      );
-      if (!arrayMatch) return null;
+      try {
+        // Try to parse the response as JSON first
+        const parsedResponse = JSON.parse(responseText);
+        if (parsedResponse && Array.isArray(parsedResponse.loan_name || parsedResponse.card_name)) {
+          return {
+            recommendations: parsedResponse.loan_name || parsedResponse.card_name
+          };
+        }
+      } catch (parseError) {
+        console.log("[OllamaPromotionService] JSON parse failed, trying regex fallback");
+      }
 
-      const [_, key, namesString] = arrayMatch;
+      // Fallback to regex pattern matching
+      const arrayMatch = responseText.match(/["'](?:loan_name|card_name)["']\s*:\s*\[(.*?)\]/s);
+      if (!arrayMatch) {
+        console.log("[OllamaPromotionService] No array match found in response");
+        return null;
+      }
+
+      const namesString = arrayMatch[1];
       const names = namesString
-        .split(",")
-        .map((name) => name.trim().replace(/^"|"$/g, ""))
-        .filter((name) => name.length > 0);
+        .split(',')
+        .map(name => name.trim().replace(/^["']|["']$/g, ''))
+        .filter(name => name.length > 0);
 
       return { recommendations: names };
     } catch (error) {

@@ -29,7 +29,7 @@ import {
   IconChartBar,
   IconMessageChatbot,
 } from "@tabler/icons-react";
-import html2canvas from "html2canvas";
+import html2canvas from 'html2canvas';
 // import Tracker from "../Tracker";
 
 const recommendations = [

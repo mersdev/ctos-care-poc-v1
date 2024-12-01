@@ -120,21 +120,27 @@ export class OllamaChatService {
       return;
     }
 
-    const { botToken, chatId } = this.telegramConfig;
-    // Format chat ID to ensure it starts with -100 for supergroups
+    const { botToken } = this.telegramConfig;
     const url = `${OllamaChatService.TELEGRAM_API}${botToken}/sendMessage`;
 
     try {
       console.log("Attempting to send Telegram message:", {
         url: url,
-        chatId: chatId,
+        chatId: -1002319055220,
         messageLength: message.length,
       });
 
+      // Sanitize the message to ensure HTML tags are valid
+      const sanitizedMessage = message
+        .replace(/<(?!\/?(b|i|u|s|strike|code|pre|a|span)(?=>|\s.*>))\/?.*?>/g, '') // Only allow specific HTML tags
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
       const response = await axios.post(url, {
-        chat_id: chatId,
-        text: message,
-        parse_mode: "html",
+        chat_id: -1002319055220,
+        text: sanitizedMessage,
+        parse_mode: "HTML",
       });
 
       if (response.data.ok) {
@@ -149,44 +155,8 @@ export class OllamaChatService {
         );
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const errorResponse = error.response?.data;
-        console.error("Telegram API Error Details:", {
-          status: error.response?.status,
-          statusText: error.response?.statusText,
-          errorCode: errorResponse?.error_code,
-          errorDescription: errorResponse?.description,
-          requestData: {
-            originalChatId: chatId,
-            messageLength: message.length,
-            url: url,
-          },
-          headers: error.response?.headers,
-          config: {
-            method: error.config?.method,
-            baseURL: error.config?.baseURL,
-            headers: error.config?.headers,
-          },
-        });
-
-        // Specific error handling based on Telegram API error codes
-        if (errorResponse?.error_code === 401) {
-          console.error("Bot token is invalid");
-        } else if (errorResponse?.error_code === 400) {
-          console.error(
-            "Bad request - check chat_id and message format. Note: For supergroups, chat_id should start with -100"
-          );
-        } else if (errorResponse?.error_code === 403) {
-          console.error("Bot was blocked by the user or group");
-        } else if (errorResponse?.error_code === 429) {
-          console.error("Too Many Requests - rate limit exceeded");
-        }
-      } else {
-        console.error("Non-Axios error occurred:", {
-          error: error,
-          message: error instanceof Error ? error.message : "Unknown error",
-        });
-      }
+      console.error("Failed to send Telegram message:", error);
+      throw error;
     }
   }
 

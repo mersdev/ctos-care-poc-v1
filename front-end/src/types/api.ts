@@ -48,3 +48,32 @@ export interface Trading {
   current_price: number;
   type: string;
 }
+
+export interface Loan {
+  loan_name: string;
+  details: {
+    interest_rate: string;
+    minimum_amount: string;
+    early_termination_fee: string;
+    url: string;
+  };
+  analysis: {
+    summary: string;
+    advantages: string[];
+  };
+}
+
+export interface CreditCard {
+  card_name: string;
+  details: {
+    minimum_income: string;
+    annual_fee: string;
+    cashback: string;
+    url: string;
+    image_url: string;
+  };
+  analysis: {
+    summary: string;
+    advantages: string[];
+  };
+}

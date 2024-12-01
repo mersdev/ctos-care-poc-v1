@@ -118,7 +118,7 @@ const Chatbox: React.FC = () => {
     <div className="h-[90vh] max-h-[90vh] p-4 flex flex-col overflow-hidden">
       <Card className="flex-1 flex flex-col min-h-0 shadow-lg">
         <CardHeader className="flex-none border-b">
-          <CardTitle>Chat with CTOS Report Assistant</CardTitle>
+          <CardTitle>Chat with FCRIS Report Assistant</CardTitle>
         </CardHeader>
         <CardContent className="flex-1 flex flex-col min-h-0 p-4 gap-4">
           <ScrollArea className="flex-1 pr-4 min-h-0">

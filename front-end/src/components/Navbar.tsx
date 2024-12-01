@@ -132,9 +132,9 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
             <Link
               to="/"
               className="flex items-center space-x-2"
-              aria-label="CTOS Care"
+              aria-label="FCRIS Care"
             >
-              <span className="font-bold">CTOS Care</span>
+              <span className="font-bold">FCRIS Care</span>
             </Link>
           </div>
 

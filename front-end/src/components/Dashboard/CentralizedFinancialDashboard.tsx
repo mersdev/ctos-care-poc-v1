@@ -10,6 +10,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  Cell,
 } from "recharts";
 import {
   DashboardService,
@@ -28,6 +29,8 @@ import {
   IconChartBar,
   IconMessageChatbot,
 } from "@tabler/icons-react";
+import html2canvas from "html2canvas";
+// import Tracker from "../Tracker";
 
 const recommendations = [
   { seq: 1, code: "net_worth", desc: "Net Worth" },
@@ -125,13 +128,45 @@ const CentralizedFinancialDashboard: React.FC = () => {
     },
   ];
 
+  // const trackerData = {
+  //   fullData: 2500,
+  //   currentData: 1989,
+  //   breakdown: [
+  //     { name: "food", amount: 256, unit: "g" },
+  //     { name: "car", amount: 152, unit: "g" },
+  //     { name: "entertain", amount: 115, unit: "g" },
+  //   ],
+  // };
+
+  const handleDownloadButtonClick = () => {
+    const element = document.getElementById("downloadable-area");
+
+    if (element) {
+      html2canvas(element, {
+        onclone: (clonedDoc: any) => {
+          const clonedElement = clonedDoc.getElementById("downloadable-area");
+          if (clonedElement) {
+            clonedElement.style.padding = "1rem";
+            const buttons = clonedElement.querySelectorAll("button");
+            buttons.forEach((btn: any) => (btn.style.display = "none"));
+          }
+        },
+      }).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = "report.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  };
+
   return (
     <div className="container mx-auto p-2">
       <h1 className="text-3xl font-bold mb-6">
         Centralized Financial Dashboard
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
-        <div className="col-span-10 md:col-span-6">
+        <div className="col-span-10 md:col-span-6" id="downloadable-area">
           <div className="grid gap-5  lg:grid-cols-3 mb-6">
             {cardData.map((item) => (
               <Card key={item.id}>
@@ -236,6 +271,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
           <div className="w-full">
             <div className="w-full flex justify-end">
               <button
+                onClick={handleDownloadButtonClick}
                 // onClick={() => navigate("/todo-list")}
                 className="flex items-center text-sm hover-focus-effect"
               >
@@ -271,7 +307,7 @@ const CentralizedFinancialDashboard: React.FC = () => {
               <span className="leading-none">AI-Powered Recommendations</span>
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5 mt-5">
               <ul className="list-disc list-inside space-y-2">
                 {leftColumn.map((item: any) => (
                   <li key={item.code} className="text-sm">
@@ -297,15 +333,48 @@ const CentralizedFinancialDashboard: React.FC = () => {
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={350}>
-                <BarChart data={dashboardData.spendingData}>
-                  <XAxis dataKey="category" />
+                <BarChart data={dashboardData.spendingData} barCategoryGap={12}>
+                  <XAxis dataKey="category" tick={{ fill: "white" }} />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="amount" fill="#0ea5e9" />
+
+                  <Bar
+                    dataKey="amount"
+                    // barSize={50}
+                  >
+                    {dashboardData.spendingData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
+
+              <div className=" p-4">
+                {dashboardData.spendingData.map((item, index) => (
+                  <div key={item.category}>
+                    <div className="flex justify-between items-center py-2">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="inline-block w-2 h-2 rounded-full"
+                          style={{ backgroundColor: item.color }}
+                        ></span>
+                        <span className="text-xs text-gray-700">
+                          {item.category}
+                        </span>
+                      </div>
+                      <span className="text-xs font-bold text-gray-900">
+                        {item.amount}
+                      </span>
+                    </div>
+                    {index !== dashboardData.spendingData.length - 1 && (
+                      <hr className="border-t border-gray-200" />
+                    )}
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
+          {/* <Tracker data={trackerData} /> */}
         </div>
       </div>
     </div>
